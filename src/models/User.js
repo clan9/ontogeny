@@ -31,6 +31,10 @@ const userSchema = new Schema(
       minlength: 6,
       trim: true,
     },
+    startDate: {
+      type: Date,
+      required: true,
+    },
     tokens: [
       {
         token: {
