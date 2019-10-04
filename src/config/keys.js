@@ -1,9 +1,12 @@
 // figure out which set of keys to return
+const prodKeys = require('./prod');
+const testKeys = require('./test');
+const devKeys = require('./dev');
 
-if (process.env.NODE_ENV === "production") {
-  module.exports = require("./prod");
-} else if (process.env.NODE_ENV === "test") {
-  module.exports = require("./test");
+if (process.env.NODE_ENV === 'production') {
+  module.exports = prodKeys;
+} else if (process.env.NODE_ENV === 'test') {
+  module.exports = testKeys;
 } else {
-  module.exports = require("./dev");
+  module.exports = devKeys;
 }
