@@ -22,11 +22,11 @@ const incomeSchema = new Schema({
     default: Date.now(),
   },
   owner: {
-    type: mongoose.Schema.Types.ObjectId(),
+    type: mongoose.Types.ObjectId,
     required: true,
     ref: "Users",
   },
 });
 
-const Income = new mongoose.Model("Income", incomeSchema);
+const Income = mongoose.model("Income", incomeSchema);
 module.exports = Income;

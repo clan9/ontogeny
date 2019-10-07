@@ -22,11 +22,11 @@ const expenseSchema = new Schema({
     default: Date.now(),
   },
   owner: {
-    type: mongoose.Schema.Types.ObjectId(),
+    type: mongoose.Types.ObjectId,
     required: true,
     ref: "Users",
   },
 });
 
-const Expenses = new mongoose.Model("Expenses", expenseSchema);
+const Expenses = mongoose.model("Expenses", expenseSchema);
 module.exports = Expenses;

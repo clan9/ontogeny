@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const { Schema } = mongoose;
 const Expenses = require("./Expenses");
 const Income = require("./Income");
+const keys = require("../config/keys");
 
 const userSchema = new Schema(
   {
@@ -30,10 +31,6 @@ const userSchema = new Schema(
       required: true,
       minlength: 6,
       trim: true,
-    },
-    startDate: {
-      type: Date,
-      required: true,
     },
     tokens: [
       {
@@ -74,7 +71,7 @@ userSchema.methods.toJSON = function () {
 
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id.toString() }, process.env.secret, {
+  const token = jwt.sign({ _id: user._id.toString() }, keys.secret, {
     expiresIn: "8h",
   });
 
@@ -82,9 +79,6 @@ userSchema.methods.generateAuthToken = async function () {
   await user.save();
   return token;
 };
-
-// Create User model
-const User = new mongoose.Model("Users", userSchema);
 
 // userSchema.statics are methods used on the model
 userSchema.statics.findByCredentials = async (email, password) => {
@@ -110,9 +104,15 @@ userSchema.pre("save", async function (next) {
   const user = this;
 
   if (user.isModified("password")) {
-    user.password = await bcrypt.hash(user.password, 8);
+    try {
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(user.password, salt);
+      user.password = hash;
+      next();
+    } catch (error) {
+      next(error);
+    }
   }
-
   next();
 });
 
@@ -124,4 +124,6 @@ userSchema.pre("remove", async function (next) {
   next();
 });
 
+// Create User model
+const User = mongoose.model("Users", userSchema);
 module.exports = User;
