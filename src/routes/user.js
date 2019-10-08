@@ -1,5 +1,6 @@
 const express = require("express");
 const requireAuth = require("../middleware/requireAuth");
+const requireAdmin = require("../middleware/requireAdmin");
 const UserController = require("../controllers/user");
 
 const router = express.Router();
@@ -34,5 +35,15 @@ router.get("/listExpenses", requireAuth, UserController.getUserExpenses);
 // @desc    list all incomes for a user
 // @access  Private
 router.get("/listIncomes", requireAuth, UserController.getUserIncomes);
+
+// @route   PATCH /api/user/toggleAdmin
+// @desc    toggle Admin access for a user
+// @access  Private
+router.patch(
+  "/toggleAdmin",
+  requireAuth,
+  requireAdmin,
+  UserController.toggleIsAdmin,
+);
 
 module.exports = router;

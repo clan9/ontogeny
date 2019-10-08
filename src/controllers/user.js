@@ -65,3 +65,20 @@ exports.getUserIncomes = async (req, res) => {
     res.status(500).send();
   }
 };
+
+exports.toggleIsAdmin = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).send();
+    }
+
+    user.isAdmin = !user.isAdmin;
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    res.status(500).send();
+  }
+};
