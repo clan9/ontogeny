@@ -1,5 +1,6 @@
 const express = require("express");
 const requireAuth = require("../middleware/requireAuth");
+const requireAdmin = require("../middleware/requireAdmin");
 const IncomeController = require("../controllers/income");
 
 const router = express.Router();
@@ -23,5 +24,10 @@ router.get("/:id", requireAuth, IncomeController.getIncome);
 // @desc    delete an income
 // @access  Private
 router.delete("/:id", requireAuth, IncomeController.deleteIncome);
+
+// @route   POST /api/income/all *** GET A '500' ERROR WHEN USING GET METHOD??? ***
+// @desc    list expenses for all users
+// @access  Private & Admin
+router.post("/all", requireAuth, requireAdmin, IncomeController.listAllIncomes);
 
 module.exports = router;

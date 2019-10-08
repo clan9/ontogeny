@@ -1,5 +1,6 @@
 const express = require("express");
 const requireAuth = require("../middleware/requireAuth");
+const requireAdmin = require("../middleware/requireAdmin");
 const ExpensesController = require("../controllers/expenses");
 
 const router = express.Router();
@@ -23,5 +24,15 @@ router.get("/:id", requireAuth, ExpensesController.getExpense);
 // @desc    delete an expense
 // @access  Private
 router.delete("/:id", requireAuth, ExpensesController.deleteExpense);
+
+// @route   POST /api/expenses/all *** GET A '500' ERROR WHEN USING GET METHOD??? ***
+// @desc    list expenses for all users
+// @access  Private & Admin
+router.post(
+  "/all",
+  requireAuth,
+  requireAdmin,
+  ExpensesController.listAllExpenses,
+);
 
 module.exports = router;

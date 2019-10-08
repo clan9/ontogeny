@@ -38,12 +38,14 @@ router.get("/listIncomes", requireAuth, UserController.getUserIncomes);
 
 // @route   PATCH /api/user/toggleAdmin
 // @desc    toggle Admin access for a user
-// @access  Private
+// @access  Private & Admin
 router.patch(
   "/toggleAdmin",
   requireAuth,
   requireAdmin,
   UserController.toggleIsAdmin,
 );
+
+// router.get('/allExpenses', UserController.getAllUsersExpenses);
 
 module.exports = router;

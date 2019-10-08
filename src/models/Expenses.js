@@ -26,6 +26,10 @@ const expenseSchema = new Schema({
     required: true,
     ref: "Users",
   },
+  ownerName: {
+    type: String,
+    required: true,
+  },
 });
 
 const Expenses = mongoose.model("Expenses", expenseSchema);

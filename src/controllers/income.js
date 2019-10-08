@@ -1,9 +1,13 @@
 const Income = require("../models/Income");
+const User = require("../models/User");
 
 exports.addIncome = async (req, res) => {
+  const user = await User.findById(req.user._id);
+
   const income = new Income({
     ...req.body,
     owner: req.user._id,
+    ownerName: user.name,
   });
 
   try {
@@ -63,6 +67,20 @@ exports.deleteIncome = async (req, res) => {
 
     await income.remove();
     res.json(income);
+  } catch (error) {
+    res.status(500).send();
+  }
+};
+
+exports.listAllIncomes = async (req, res) => {
+  try {
+    const incomes = await Income.find();
+
+    if (!incomes) {
+      return res.status(404).send();
+    }
+
+    res.json(incomes);
   } catch (error) {
     res.status(500).send();
   }

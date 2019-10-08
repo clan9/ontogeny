@@ -1,9 +1,13 @@
 const Expenses = require("../models/Expenses");
+const User = require("../models/User");
 
 exports.addExpense = async (req, res) => {
+  const user = await User.findById(req.user._id);
+
   const expense = new Expenses({
     ...req.body,
     owner: req.user._id,
+    ownerName: user.name,
   });
 
   try {
@@ -63,6 +67,20 @@ exports.deleteExpense = async (req, res) => {
 
     await expense.remove();
     res.json(expense);
+  } catch (error) {
+    res.status(500).send();
+  }
+};
+
+exports.listAllExpenses = async (req, res) => {
+  try {
+    const expenses = await Expenses.find();
+
+    if (!expenses) {
+      return res.status(404).send();
+    }
+
+    res.json(expenses);
   } catch (error) {
     res.status(500).send();
   }

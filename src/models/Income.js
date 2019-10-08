@@ -26,6 +26,10 @@ const incomeSchema = new Schema({
     required: true,
     ref: "Users",
   },
+  ownerName: {
+    type: String,
+    required: true,
+  },
 });
 
 const Income = mongoose.model("Income", incomeSchema);
