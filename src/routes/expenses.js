@@ -5,6 +5,21 @@ const ExpensesController = require("../controllers/expenses");
 
 const router = express.Router();
 
+// @route   GET /api/expenses/all
+// @desc    list expenses for all users
+// @access  Private & Admin
+router.get(
+  "/all",
+  requireAuth,
+  requireAdmin,
+  ExpensesController.listAllExpenses,
+);
+
+// @route   GET /api/expenses/:id
+// @desc    get an expense
+// @access  Private
+router.get("/:id", requireAuth, ExpensesController.getExpense);
+
 // @route   POST /api/expenses
 // @desc    add an expense
 // @access  Private
@@ -15,24 +30,9 @@ router.post("/", requireAuth, ExpensesController.addExpense);
 // @access  Private
 router.patch("/:id", requireAuth, ExpensesController.editExpense);
 
-// @route   GET /api/expenses/:id
-// @desc    get an expense
-// @access  Private
-router.get("/:id", requireAuth, ExpensesController.getExpense);
-
 // @route   DELETE /api/expenses/:id
 // @desc    delete an expense
 // @access  Private
 router.delete("/:id", requireAuth, ExpensesController.deleteExpense);
-
-// @route   POST /api/expenses/all *** GET A '500' ERROR WHEN USING GET METHOD??? ***
-// @desc    list expenses for all users
-// @access  Private & Admin
-router.post(
-  "/all",
-  requireAuth,
-  requireAdmin,
-  ExpensesController.listAllExpenses,
-);
 
 module.exports = router;
