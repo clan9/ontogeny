@@ -28,7 +28,7 @@ describe("User routes tests", () => {
     const user = await User.findById(response.body.user._id);
     expect(user).not.toBeNull();
 
-    // Assertions password has not been saved as plaintext
+    // Assert password has not been saved as plaintext
     expect(user.password).not.toBe("grumpyCat");
   });
 
