@@ -46,6 +46,9 @@ router.patch(
   UserController.toggleIsAdmin,
 );
 
-// router.get('/allExpenses', UserController.getAllUsersExpenses);
+// @route   DELETE /api/user
+// @desc    delete a user (and remove expenses & incomes)
+// @access  Private
+router.delete("/", requireAuth, UserController.deleteUser);
 
 module.exports = router;

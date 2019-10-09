@@ -1,7 +1,15 @@
 const request = require("supertest");
 const app = require("../src/app");
 const User = require("../src/models/User");
-const { userOne, userTwo, setupDatabase } = require("./fixtures/db");
+const Expenses = require("../src/models/Expenses");
+const Income = require("../src/models/Income");
+const {
+  userOne,
+  userOneId,
+  userTwo,
+  userTwoId,
+  setupDatabase,
+} = require("./fixtures/db");
 
 describe("User routes tests", () => {
   beforeEach(setupDatabase);
@@ -103,7 +111,7 @@ describe("User routes tests", () => {
   });
 
   it("Should toggle the isAdmin property for another user when user who is submitting request has admin priviledges", async () => {
-    const response = await request(app)
+    await request(app)
       .patch("/api/user/toggleAdmin")
       .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
       .send({
@@ -112,7 +120,8 @@ describe("User routes tests", () => {
       .expect(200);
 
     // Assert that the user is now an Admin user
-    expect(response.body.isAdmin).toBe(true);
+    const user = await User.findOne({ email: userTwo.email });
+    expect(user.isAdmin).toBe(true);
   });
 
   it("Should NOT toggle the isAdmin property for another user when user who is submitting request does NOT HAVE admin priviledges", async () => {
@@ -134,6 +143,10 @@ describe("User routes tests", () => {
 
     // Assert logout message received
     expect(response.body.msg).toBe("Logged out");
+
+    // Assert that token was removed from user instance tokens array
+    const user = await User.findById(userOneId);
+    expect(user.tokens.length).toBe(1);
   });
 
   it("Should logout a user on all devices", async () => {
@@ -145,5 +158,36 @@ describe("User routes tests", () => {
 
     // Assert logout message received
     expect(response.body.msg).toBe("You are now logged out on all devices");
+
+    // Assert that all auth tokens removed from the instance tokens arrray
+    const user = await User.findById(userOneId);
+    expect(user.tokens.length).toBe(0);
+  });
+
+  it("Should delete a user, along with their expenses and incomes", async () => {
+    await request(app)
+      .delete("/api/user")
+      .set("Authorization", `Bearer ${userTwo.tokens[0].token}`)
+      .send()
+      .expect(200);
+
+    // Assert correct user was deleted from sb
+    const user = await User.findById(userTwoId);
+    expect(user).toBeNull();
+
+    // Assert users expenses were removed
+    const expenses = await Expenses.find({ ownerName: "Lee" });
+    expect(expenses).toEqual([]);
+
+    // Assert user incomes were removed
+    const incomes = await Income.find({ ownerName: "Lee" });
+    expect(incomes).toEqual([]);
+  });
+
+  it("Should NOT delete a user with no auth token", async () => {
+    await request(app)
+      .delete("/api/user")
+      .send()
+      .expect(401);
   });
 });

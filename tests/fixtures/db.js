@@ -16,6 +16,9 @@ const userOne = {
     {
       token: jwt.sign({ _id: userOneId }, keys.secret),
     },
+    {
+      token: "random rubbish to differentiate this token from first one!",
+    },
   ],
 };
 
@@ -29,6 +32,9 @@ const userTwo = {
   tokens: [
     {
       token: jwt.sign({ _id: userTwoId }, keys.secret),
+    },
+    {
+      token: "random rubbish to differentiate this token from first one!",
     },
   ],
 };
