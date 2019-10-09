@@ -24,6 +24,28 @@ describe("User routes tests", () => {
     expect(user.password).not.toBe("grumpyCat");
   });
 
+  it("Should NOT sign up a new user with invalid email", async () => {
+    await request(app)
+      .post("/api/user/signup")
+      .send({
+        name: "Jess",
+        email: "Jess123",
+        password: "grumpyCat",
+      })
+      .expect(400);
+  });
+
+  it("Should NOT sign up a new user with invalid password", async () => {
+    await request(app)
+      .post("/api/user/signup")
+      .send({
+        name: "Jess",
+        email: "jess@test.com",
+        password: "grump",
+      })
+      .expect(400);
+  });
+
   it("Should log in an existing user", async () => {
     await request(app)
       .post("/api/user/signin")
@@ -34,7 +56,7 @@ describe("User routes tests", () => {
       .expect(200);
   });
 
-  it("Should not login an existing user", async () => {
+  it("Should not login a non-existing user", async () => {
     await request(app)
       .post("/api/user/signin")
       .send({
@@ -55,6 +77,13 @@ describe("User routes tests", () => {
     expect(response.body.length).toBe(2);
   });
 
+  it("Should not list expenses for unauthorized user", async () => {
+    await request(app)
+      .get("/api/user/listExpenses")
+      .send()
+      .expect(401);
+  });
+
   it("Should list incomes for a user", async () => {
     const response = await request(app)
       .get("/api/user/listIncomes")
@@ -64,6 +93,13 @@ describe("User routes tests", () => {
 
     // Check length of returned incomes array
     expect(response.body.length).toBe(2);
+  });
+
+  it("Should not list incomes for unauthorized user", async () => {
+    await request(app)
+      .get("/api/user/listIncomes")
+      .send()
+      .expect(401);
   });
 
   it("Should toggle the isAdmin property for another user when user who is submitting request has admin priviledges", async () => {
