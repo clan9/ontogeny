@@ -14,11 +14,6 @@
   "jest": {
     "testEnvironment": "node"
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "CI=true npm test"
-    }
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -38,5 +38,19 @@ describe("User action creator and reducer", () => {
     expect(newState.user).toEqual(expectedState);
   });
 
-  test("should sign in an existing user", () => {});
+  test("should sign in an existing user", async () => {
+    const store = testStore();
+    const user = { name: "Simon", email: "test@test.com" };
+    const token = "testToken";
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: { user, token }
+      });
+    });
+
+    // await store.dispatch();
+  });
 });
