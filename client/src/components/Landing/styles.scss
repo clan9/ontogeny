@@ -1,0 +1,37 @@
+@import "../../styles/main.scss";
+
+.landing {
+  background-color: $blue-light;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    color: $blue-dark;
+    font-weight: 300;
+  }
+
+  &__actions {
+    background-color: $blue-mid;
+    padding: 2em;
+
+    &__button {
+      background-color: $grey-light;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1.4rem;
+      margin: 0 1em;
+      outline: none;
+      padding: 0.5em;
+    }
+
+    &__button--admin {
+      background-color: $blue-dark;
+      color: $grey-light;
+    }
+  }
+}
