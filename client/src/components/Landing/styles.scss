@@ -11,6 +11,7 @@
   &__title {
     color: $blue-dark;
     font-weight: 300;
+    margin-bottom: 1em;
   }
 
   &__actions {
@@ -21,17 +22,30 @@
       background-color: $grey-light;
       border: none;
       border-radius: 3px;
+      box-shadow: 0 4px 4px rgba($blue-dark, 0.6);
+      color: $blue-dark;
       cursor: pointer;
       font-family: inherit;
       font-size: 1.4rem;
       margin: 0 1em;
       outline: none;
       padding: 0.5em;
+      text-decoration: none;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: darken($grey-light, 10%);
+      }
     }
 
     &__button--admin {
       background-color: $blue-dark;
       color: $grey-light;
+
+      &:hover {
+        background-color: darken($grey-light, 10%);
+        color: $blue-dark;
+      }
     }
   }
 }

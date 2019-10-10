@@ -1,0 +1,6 @@
+export const actionTypes = {
+  REGISTER_USER: "REGISTER_USER",
+  SIGN_IN: "SIGN_IN",
+  ADMIN_SIGN_IN: "ADMIN_SIGN_IN",
+  LOG_IN_ERROR: "LOG_IN_ERROR"
+};

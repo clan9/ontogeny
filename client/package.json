@@ -24,6 +24,11 @@
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:5000",
+  "husky": {
+    "hooks": {
+      "pre-push": "CI=true npm test"
+    }
+  },
   "eslintConfig": {
     "extends": "react-app"
   },

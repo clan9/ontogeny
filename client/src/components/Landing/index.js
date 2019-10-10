@@ -1,5 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import "./styles.scss";
 
 const Landing = props => {
@@ -9,23 +10,32 @@ const Landing = props => {
         Welcome!
       </h1>
       <div className="landing__actions">
-        <button className="landing__actions__button" data-test="signup">
+        <Link
+          className="landing__actions__button"
+          data-test="signup"
+          to="/signup"
+        >
           Sign Up!
-        </button>
-        <button className="landing__actions__button" data-test="signin">
+        </Link>
+        <Link
+          className="landing__actions__button"
+          data-test="signin"
+          to="/signin"
+        >
           Sign In
-        </button>
-        <button
+        </Link>
+        <Link
           className="landing__actions__button landing__actions__button--admin"
           data-test="admin"
+          to="/signinAdmin"
         >
           Admin
-        </button>
+        </Link>
       </div>
     </div>
   );
 };
 
-Landing.propTypes = {};
+// Landing.propTypes = {};
 
 export default Landing;
