@@ -14,14 +14,12 @@ describe("User action creator and reducer", () => {
   describe("Successful registration/signin", () => {
     let store;
     let token;
-    let history;
     let user;
     let expectedState;
 
     beforeEach(() => {
       store = testStore();
       token = "testToken";
-      history = { push: jest.fn() };
       user = { name: "Simon", email: "test@test.com" };
       expectedState = {
         user,
@@ -44,7 +42,6 @@ describe("User action creator and reducer", () => {
       await store.dispatch(registerUser({}, history));
       const newState = store.getState();
       expect(newState.user).toEqual(expectedState);
-      expect(history.push.mock.calls.length).toBe(1);
     });
 
     test("should sign in an existing user", async () => {
@@ -59,18 +56,15 @@ describe("User action creator and reducer", () => {
       await store.dispatch(signIn({}, history));
       const newState = store.getState();
       expect(newState.user).toEqual(expectedState);
-      expect(history.push.mock.calls.length).toBe(1);
     });
   });
 
   describe("Logout user on single/multiple devices", () => {
     let store;
-    let history;
     let expectedState;
 
     beforeEach(() => {
       store = testStore();
-      history = { push: jest.fn() };
       expectedState = {
         token: null,
         isAuthenticated: false,
@@ -94,7 +88,6 @@ describe("User action creator and reducer", () => {
       await store.dispatch(logout(history));
       const newState = await store.getState();
       expect(newState.user).toEqual(expectedState);
-      expect(history.push.mock.calls.length).toBe(1);
     });
   });
 });

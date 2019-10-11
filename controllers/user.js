@@ -13,7 +13,6 @@ exports.signin = async (req, res) => {
 
 exports.signup = async (req, res) => {
   const { name, email, password } = req.body;
-
   try {
     const user = await new User({ name, email, password });
     await user.save();
