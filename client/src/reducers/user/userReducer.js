@@ -12,6 +12,7 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case actionTypes.REGISTER_USER:
+    case actionTypes.SIGN_IN:
       localStorage.setItem("authToken", payload.token);
       return {
         ...state,
@@ -27,6 +28,13 @@ export default (state = initialState, action) => {
         token: null,
         loading: false,
         error: payload
+      };
+    case actionTypes.LOG_OUT:
+      localStorage.removeItem("authToken");
+      return {
+        ...initialState,
+        token: null,
+        loading: false
       };
     default:
       return state;

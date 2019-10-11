@@ -1,6 +1,6 @@
 const request = require("supertest");
-const app = require("../src/app");
-const Income = require("../src/models/Income");
+const app = require("../app");
+const Income = require("../models/Income");
 const {
   userOne,
   userTwo,

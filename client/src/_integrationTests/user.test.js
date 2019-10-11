@@ -1,6 +1,6 @@
 import moxios from "moxios";
 import { testStore } from "../utils/testUtils";
-import { registerUser } from "../actions/user/user";
+import { registerUser, signIn, logout } from "../actions/user/user";
 
 describe("User action creator and reducer", () => {
   beforeEach(() => {
@@ -11,46 +11,90 @@ describe("User action creator and reducer", () => {
     moxios.uninstall();
   });
 
-  test("should add a newly registered user to the state", async () => {
-    const store = testStore();
-    const user = { name: "Simon", email: "test@test.com" };
-    const token = "testToken";
+  describe("Successful registration/signin", () => {
+    let store;
+    let token;
+    let history;
+    let user;
+    let expectedState;
 
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.respondWith({
-        status: 201,
-        response: { user, token }
-      });
+    beforeEach(() => {
+      store = testStore();
+      token = "testToken";
+      history = { push: jest.fn() };
+      user = { name: "Simon", email: "test@test.com" };
+      expectedState = {
+        user,
+        token,
+        isAuthenticated: true,
+        loading: false,
+        error: ""
+      };
     });
 
-    await store.dispatch(registerUser());
-    const newState = store.getState();
+    test("should add a newly registered user to the state", async () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 201,
+          response: { user, token }
+        });
+      });
 
-    const expectedState = {
-      user,
-      token,
-      isAuthenticated: true,
-      loading: false,
-      error: ""
-    };
+      await store.dispatch(registerUser({}, history));
+      const newState = store.getState();
+      expect(newState.user).toEqual(expectedState);
+      expect(history.push.mock.calls.length).toBe(1);
+    });
 
-    expect(newState.user).toEqual(expectedState);
+    test("should sign in an existing user", async () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: { user, token }
+        });
+      });
+
+      await store.dispatch(signIn({}, history));
+      const newState = store.getState();
+      expect(newState.user).toEqual(expectedState);
+      expect(history.push.mock.calls.length).toBe(1);
+    });
   });
 
-  test("should sign in an existing user", async () => {
-    const store = testStore();
-    const user = { name: "Simon", email: "test@test.com" };
-    const token = "testToken";
+  describe("Logout user on single/multiple devices", () => {
+    let store;
+    let history;
+    let expectedState;
 
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.respondWith({
-        status: 200,
-        response: { user, token }
-      });
+    beforeEach(() => {
+      store = testStore();
+      history = { push: jest.fn() };
+      expectedState = {
+        token: null,
+        isAuthenticated: false,
+        loading: false,
+        user: null,
+        error: ""
+      };
     });
 
-    // await store.dispatch();
+    test("should logout user and update state", async () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: {
+            msg: "Logged out"
+          }
+        });
+      });
+
+      await store.dispatch(logout(history));
+      const newState = await store.getState();
+      expect(newState.user).toEqual(expectedState);
+      expect(history.push.mock.calls.length).toBe(1);
+    });
   });
 });

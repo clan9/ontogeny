@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const User = require("../../src/models/User");
-const Expenses = require("../../src/models/Expenses");
-const Income = require("../../src/models/Income");
-const keys = require("../../src/config/keys");
+const User = require("../../models/User");
+const Expenses = require("../../models/Expenses");
+const Income = require("../../models/Income");
+const keys = require("../../config/keys");
 
 const userOneId = new mongoose.Types.ObjectId();
 const userOne = {
@@ -14,12 +14,12 @@ const userOne = {
   isAdmin: true,
   tokens: [
     {
-      token: jwt.sign({ _id: userOneId }, keys.secret),
+      token: jwt.sign({ _id: userOneId }, keys.secret)
     },
     {
-      token: "random rubbish to differentiate this token from first one!",
-    },
-  ],
+      token: "random rubbish to differentiate this token from first one!"
+    }
+  ]
 };
 
 const userTwoId = new mongoose.Types.ObjectId();
@@ -31,12 +31,12 @@ const userTwo = {
   isAdmin: false,
   tokens: [
     {
-      token: jwt.sign({ _id: userTwoId }, keys.secret),
+      token: jwt.sign({ _id: userTwoId }, keys.secret)
     },
     {
-      token: "random rubbish to differentiate this token from first one!",
-    },
-  ],
+      token: "random rubbish to differentiate this token from first one!"
+    }
+  ]
 };
 
 const expenseOne = {
@@ -46,7 +46,7 @@ const expenseOne = {
   amount: 123,
   date: Date.now(),
   owner: userOneId,
-  ownerName: "Simon",
+  ownerName: "Simon"
 };
 
 const expenseTwo = {
@@ -56,7 +56,7 @@ const expenseTwo = {
   amount: 234,
   date: Date.now(),
   owner: userOneId,
-  ownerName: "Simon",
+  ownerName: "Simon"
 };
 
 const expenseThree = {
@@ -66,7 +66,7 @@ const expenseThree = {
   amount: 223,
   date: Date.now(),
   owner: userTwoId,
-  ownerName: "Lee",
+  ownerName: "Lee"
 };
 
 const incomeOne = {
@@ -76,7 +76,7 @@ const incomeOne = {
   amount: 123,
   date: Date.now(),
   owner: userOneId,
-  ownerName: "Simon",
+  ownerName: "Simon"
 };
 
 const incomeTwo = {
@@ -86,7 +86,7 @@ const incomeTwo = {
   amount: 234,
   date: Date.now(),
   owner: userOneId,
-  ownerName: "Simon",
+  ownerName: "Simon"
 };
 
 const incomeThree = {
@@ -96,7 +96,7 @@ const incomeThree = {
   amount: 223,
   date: Date.now(),
   owner: userTwoId,
-  ownerName: "Lee",
+  ownerName: "Lee"
 };
 
 const setupDatabase = async () => {
@@ -124,5 +124,5 @@ module.exports = {
   incomeOne,
   incomeTwo,
   incomeThree,
-  setupDatabase,
+  setupDatabase
 };
