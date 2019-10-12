@@ -234,8 +234,8 @@ describe("Signup component", () => {
       });
 
       test("should display error message paragraph on form when there is an error in application state (log in server error)", () => {
-        wrapper.setState({ email: "s@test.com", password: "pw1234" });
-        wrapper.find("form").simulate("submit", { preventDefault: () => {} });
+        // wrapper.setState({ email: "s@test.com", password: "pw1234" });
+        // wrapper.find("form").simulate("submit", { preventDefault: () => {} });
         wrapper.setProps({ serverErrorMsg: "Unable to log in" });
         const paragraph = findByTestAttr(wrapper, "error-paragraphTwo");
         expect(paragraph.length).toBe(1);
