@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { findByTestAttr, testStore } from "../../utils/testUtils";
+import { findByTestAttr, testStore, checkProps } from "../../utils/testUtils";
 import ConnectedSignup, { Signup } from "./index";
 
 const setup = (initialState = {}) => {
@@ -106,10 +106,28 @@ describe("Signup component", () => {
       const authProps = wrapper.instance().props.isAuthenticated;
       expect(authProps).toBe(isAuthenticated);
     });
+
+    test("should have registerUser action available as a function on the props", () => {
+      const wrapper = setup();
+      const registerUserProp = wrapper.instance().props.registerUser;
+      expect(registerUserProp).toBeInstanceOf(Function);
+    });
   });
 
   // TESTING UNCONNECTED COMPONENT
   describe("registerUser action creator call on form submission", () => {
+    describe("Check prop types", () => {
+      test("should not throw warning with expected props", () => {
+        const expectedProps = {
+          registerUser: jest.fn(),
+          serverErrorMsg: "",
+          isAuthenticated: false
+        };
+
+        checkProps(Signup, expectedProps);
+      });
+    });
+
     describe("when form submitted with valid data", () => {
       let registerUserMock;
       let wrapper;

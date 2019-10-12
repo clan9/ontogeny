@@ -15,7 +15,7 @@ export const checkProps = (component, expectedProps) => {
     "props",
     component.name
   );
-  return propsErr;
+  expect(propsErr).toBeUndefined();
 };
 
 export const testStore = initialState => {

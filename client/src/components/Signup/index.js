@@ -77,66 +77,70 @@ export class Signup extends Component {
     return this.props.isAuthenticated ? (
       <Redirect to="/dash" />
     ) : (
-      <form
-        className="login-form"
-        data-test="signup-component"
-        onSubmit={this.onSubmit}
-      >
-        <div className="login-form__error-container">
-          {this.state.errorMsg && (
-            <p className="login-form__errorMsg">{this.state.errorMsg}</p>
-          )}
-          {this.props.serverErrorMsg && (
-            <p className="login-form__errorMsg">{this.props.serverErrorMsg}</p>
-          )}
-        </div>
-        <input
-          type="text"
-          className="login-form__field"
-          data-test="nameField"
-          name="name"
-          placeholder="Enter name"
-          autoFocus
-          autoComplete="off"
-          value={this.state.name}
-          onChange={this.onNameChange}
-        />
-        <input
-          type="email"
-          className="login-form__field"
-          data-test="emailField"
-          name="email"
-          placeholder="Email address"
-          autoComplete="off"
-          value={this.state.email}
-          onChange={this.onEmailChange}
-        />
-        <input
-          type="password"
-          className="login-form__field"
-          name="passwordOne"
-          data-test="passwordFieldOne"
-          placeholder="Enter password"
-          value={this.state.passwordOne}
-          onChange={this.onPasswordOneChange}
-        />
-        <input
-          type="password"
-          className="login-form__field"
-          name="passwordTwo"
-          data-test="passwordFieldTwo"
-          placeholder="Confirm password"
-          value={this.state.passwordTwo}
-          onChange={this.onPasswordTwoChange}
-        />
-        <button
-          type="submit"
-          className="login-form__button"
-          data-test="submitButton"
+      <Fragment>
+        <form
+          className="login-form"
+          data-test="signup-component"
+          onSubmit={this.onSubmit}
         >
-          Sign Up
-        </button>
-      </form>
+          <div className="login-form__error-container">
+            {this.state.errorMsg && (
+              <p className="login-form__errorMsg">{this.state.errorMsg}</p>
+            )}
+            {this.props.serverErrorMsg && (
+              <p className="login-form__errorMsg">
+                {this.props.serverErrorMsg}
+              </p>
+            )}
+          </div>
+          <input
+            type="text"
+            className="login-form__field"
+            data-test="nameField"
+            name="name"
+            placeholder="Enter name"
+            autoFocus
+            autoComplete="off"
+            value={this.state.name}
+            onChange={this.onNameChange}
+          />
+          <input
+            type="email"
+            className="login-form__field"
+            data-test="emailField"
+            name="email"
+            placeholder="Email address"
+            autoComplete="off"
+            value={this.state.email}
+            onChange={this.onEmailChange}
+          />
+          <input
+            type="password"
+            className="login-form__field"
+            name="passwordOne"
+            data-test="passwordFieldOne"
+            placeholder="Enter password"
+            value={this.state.passwordOne}
+            onChange={this.onPasswordOneChange}
+          />
+          <input
+            type="password"
+            className="login-form__field"
+            name="passwordTwo"
+            data-test="passwordFieldTwo"
+            placeholder="Confirm password"
+            value={this.state.passwordTwo}
+            onChange={this.onPasswordTwoChange}
+          />
+          <button
+            type="submit"
+            className="login-form__button"
+            data-test="submitButton"
+          >
+            Sign Up
+          </button>
+        </form>
+      </Fragment>
     );
   }
 }
