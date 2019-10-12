@@ -39,7 +39,7 @@ describe("User action creator and reducer", () => {
         });
       });
 
-      await store.dispatch(registerUser({}, history));
+      await store.dispatch(registerUser());
       const newState = store.getState();
       expect(newState.user).toEqual(expectedState);
     });
@@ -53,7 +53,7 @@ describe("User action creator and reducer", () => {
         });
       });
 
-      await store.dispatch(signIn({}, history));
+      await store.dispatch(signIn());
       const newState = store.getState();
       expect(newState.user).toEqual(expectedState);
     });
@@ -85,7 +85,7 @@ describe("User action creator and reducer", () => {
         });
       });
 
-      await store.dispatch(logout(history));
+      await store.dispatch(logout());
       const newState = await store.getState();
       expect(newState.user).toEqual(expectedState);
     });

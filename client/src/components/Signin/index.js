@@ -3,61 +3,44 @@ import PropTypes from "prop-types";
 import validator from "validator";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { registerUser } from "../../actions/user/user";
+import { signIn } from "../../actions/user/user";
 
-export class Signup extends Component {
+export class Signin extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: "",
       email: "",
-      passwordOne: "",
-      passwordTwo: "",
+      password: "",
       errorMsg: ""
     };
   }
-
-  onNameChange = e => {
-    const name = e.target.value;
-    this.setState(() => ({ name }));
-  };
 
   onEmailChange = e => {
     const email = e.target.value;
     this.setState(() => ({ email }));
   };
 
-  onPasswordOneChange = e => {
-    const passwordOne = e.target.value;
-    this.setState(() => ({ passwordOne }));
-  };
-
-  onPasswordTwoChange = e => {
-    const passwordTwo = e.target.value;
-    this.setState(() => ({ passwordTwo }));
+  onPasswordChange = e => {
+    const password = e.target.value;
+    this.setState(() => ({ password }));
   };
 
   onSubmit = e => {
     e.preventDefault();
+    const { email, password } = this.state;
 
-    const { name, email, passwordOne, passwordTwo } = this.state;
-
-    if (!name || !email) {
-      const errorMsg = "Please provide a name, email address and password";
+    if (!email || !password) {
+      const errorMsg = "Please provide your email and password";
       this.setState(() => ({ errorMsg }));
       this.resetError();
-    } else if (!validator.isEmail(this.state.email)) {
+    } else if (!validator.isEmail(email)) {
       const errorMsg = "Please provide a valid email address";
-      this.setState(() => ({ errorMsg }));
-      this.resetError();
-    } else if (passwordOne !== passwordTwo) {
-      const errorMsg = "Passwords do not match";
       this.setState(() => ({ errorMsg }));
       this.resetError();
     } else {
       this.setState(() => ({ errorMsg: "" }));
-      this.props.registerUser({ name, email, password: passwordOne });
+      this.props.signIn({ email, password });
     }
   };
 
@@ -68,7 +51,7 @@ export class Signup extends Component {
   };
 
   static propTypes = {
-    registerUser: PropTypes.func,
+    signIn: PropTypes.func,
     serverErrorMsg: PropTypes.string,
     isAuthenticated: PropTypes.bool.isRequired
   };
@@ -79,11 +62,11 @@ export class Signup extends Component {
     ) : (
       <Fragment>
         <header data-test="page-header">
-          <h2>Sign Up</h2>
+          <h2>Sign In</h2>
         </header>
         <form
           className="login-form"
-          data-test="signup-component"
+          data-test="signin-component"
           onSubmit={this.onSubmit}
         >
           <div className="login-form__error-container">
@@ -105,50 +88,27 @@ export class Signup extends Component {
             )}
           </div>
           <input
-            type="text"
-            className="login-form__field"
-            data-test="nameField"
-            name="name"
-            placeholder="Enter name"
-            autoFocus
-            autoComplete="off"
-            value={this.state.name}
-            onChange={this.onNameChange}
-          />
-          <input
             type="email"
             className="login-form__field"
             data-test="emailField"
-            name="email"
-            placeholder="Email address"
-            autoComplete="off"
+            placeholder="Enter your email address"
             value={this.state.email}
             onChange={this.onEmailChange}
           />
           <input
             type="password"
             className="login-form__field"
-            name="passwordOne"
-            data-test="passwordFieldOne"
-            placeholder="Enter password"
-            value={this.state.passwordOne}
-            onChange={this.onPasswordOneChange}
-          />
-          <input
-            type="password"
-            className="login-form__field"
-            name="passwordTwo"
-            data-test="passwordFieldTwo"
-            placeholder="Confirm password"
-            value={this.state.passwordTwo}
-            onChange={this.onPasswordTwoChange}
+            data-test="passwordField"
+            placeholder="Enter your password"
+            value={this.state.password}
+            onChange={this.onPasswordChange}
           />
           <button
             type="submit"
             className="login-form__button"
-            data-test="submitButton"
+            data-test="signInButton"
           >
-            Sign Up
+            Sign In
           </button>
         </form>
       </Fragment>
@@ -163,5 +123,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerUser }
-)(Signup);
+  { signIn }
+)(Signin);

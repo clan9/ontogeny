@@ -24,6 +24,11 @@ describe("Signup component", () => {
       expect(component.length).toBe(1);
     });
 
+    test("should render page header", () => {
+      const header = findByTestAttr(wrapper, "page-header");
+      expect(header.length).toBe(1);
+    });
+
     test("should render input field for name", () => {
       const nameField = findByTestAttr(wrapper, "nameField");
       expect(nameField.length).toBe(1);
@@ -214,6 +219,26 @@ describe("Signup component", () => {
 
         wrapper.find("form").simulate("submit", { preventDefault: () => {} });
         expect(wrapper.state("errorMsg")).toBe("Passwords do not match");
+      });
+
+      test("should display error message paragraph on form when there is an error in component state", () => {
+        wrapper.setState({
+          name: "Simon",
+          email: "simon@test.com",
+          passwordOne: "pw1234",
+          passwordTwo: "something else"
+        });
+        wrapper.find("form").simulate("submit", { preventDefault: () => {} });
+        const paragraph = findByTestAttr(wrapper, "error-paragraphOne");
+        expect(paragraph.length).toBe(1);
+      });
+
+      test("should display error message paragraph on form when there is an error in application state (log in server error)", () => {
+        wrapper.setState({ email: "s@test.com", password: "pw1234" });
+        wrapper.find("form").simulate("submit", { preventDefault: () => {} });
+        wrapper.setProps({ serverErrorMsg: "Unable to log in" });
+        const paragraph = findByTestAttr(wrapper, "error-paragraphTwo");
+        expect(paragraph.length).toBe(1);
       });
     });
 
