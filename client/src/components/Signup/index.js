@@ -75,7 +75,7 @@ export class Signup extends Component {
 
   render() {
     return this.props.isAuthenticated ? (
-      <Redirect to="/dash" />
+      <Redirect to="/menu" />
     ) : (
       <Fragment>
         <header data-test="page-header">
