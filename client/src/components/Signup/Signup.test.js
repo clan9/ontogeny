@@ -87,7 +87,7 @@ describe("Signup component", () => {
   });
 
   describe("Redux props", () => {
-    test("should receive any serverErrorMsg (from user.error state) as a prop", () => {
+    test("should receive any serverErrorMsg (from mapStateToProps) as a prop", () => {
       const serverErrorMsg = "Unable to log in";
       const wrapper = setup({
         user: { error: serverErrorMsg, isAuthenticated: false }
