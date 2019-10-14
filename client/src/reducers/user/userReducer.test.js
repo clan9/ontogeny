@@ -8,7 +8,7 @@ describe("User reducer", () => {
         token: localStorage.getItem("authToken"),
         isAuthenticated: false,
         loading: true,
-        user: null,
+        user: {},
         error: ""
       };
       const newState = userReducer(undefined, { type: "@@INIT" });
@@ -70,7 +70,7 @@ describe("User reducer", () => {
         token: null,
         isAuthenticated: false,
         loading: false,
-        user: null,
+        user: {},
         error: "Unable to log in"
       };
       expect(newState).toEqual(expectedState);

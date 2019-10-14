@@ -69,7 +69,7 @@ describe("User action creator and reducer", () => {
         token: null,
         isAuthenticated: false,
         loading: false,
-        user: null,
+        user: {},
         error: ""
       };
     });

@@ -18,7 +18,8 @@ router.get(
 // @route   GET /api/expenses/:id
 // @desc    get an expense
 // @access  Private
-router.get("/:id", requireAuth, ExpensesController.getExpense);
+// *** NOT NEEDED ?? ***
+// router.get("/:id", requireAuth, ExpensesController.getExpense);
 
 // @route   POST /api/expenses
 // @desc    add an expense

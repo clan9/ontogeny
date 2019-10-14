@@ -4,7 +4,7 @@ const initialState = {
   token: localStorage.getItem("authToken"),
   isAuthenticated: false,
   loading: true,
-  user: null,
+  user: {},
   error: ""
 };
 

@@ -39,21 +39,22 @@ exports.editExpense = async (req, res) => {
   }
 };
 
-exports.getExpense = async (req, res) => {
-  const _id = req.params.id;
+// *** NOT NEEDED ?? ***
+// exports.getExpense = async (req, res) => {
+//   const _id = req.params.id;
 
-  try {
-    const expense = await Expenses.findOne({ _id, owner: req.user._id });
+//   try {
+//     const expense = await Expenses.findOne({ _id, owner: req.user._id });
 
-    if (!expense) {
-      res.status(404).send();
-    }
+//     if (!expense) {
+//       res.status(404).send();
+//     }
 
-    res.json(expense);
-  } catch (error) {
-    res.status(500).send();
-  }
-};
+//     res.json(expense);
+//   } catch (error) {
+//     res.status(500).send();
+//   }
+// };
 
 exports.deleteExpense = async (req, res) => {
   const _id = req.params.id;
