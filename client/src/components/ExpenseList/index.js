@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchUserExpenses } from "../../actions/expenses/expenses";
 import selectExpenses from "../../selectors/selectExpenses";
+import ExpenseListItem from "../ExpenseListItem";
 
 export class ExpenseList extends Component {
   componentDidMount() {
@@ -17,9 +18,19 @@ export class ExpenseList extends Component {
   render() {
     return (
       <div data-test="expense-list-component">
-        {this.props.expenses.map(expense => (
-          <p key={expense._id}>{expense.amount}</p>
-        ))}
+        {this.props.expenses.length === 0 ? (
+          <div data-test="no-expenses-msg">
+            <span>No expenses</span>
+          </div>
+        ) : (
+          this.props.expenses.map(expense => (
+            <ExpenseListItem
+              data-test="expense-list-item"
+              key={expense._id}
+              expense={expense}
+            />
+          ))
+        )}
       </div>
     );
   }

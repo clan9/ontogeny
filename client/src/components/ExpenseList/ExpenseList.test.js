@@ -25,6 +25,11 @@ describe("ExpenseList component", () => {
       const component = findByTestAttr(wrapper, "expense-list-component");
       expect(component.length).toBe(1);
     });
+
+    test("should render no expenses message if the filtered expense array is empty", () => {
+      const messageDiv = findByTestAttr(wrapper, "no-expenses-msg");
+      expect(messageDiv.length).toBe(1);
+    });
   });
 
   describe("Redux props", () => {
@@ -43,6 +48,11 @@ describe("ExpenseList component", () => {
     test("should have access to the fetchUserExpenses function as a prop", () => {
       const fetchUserExpensesProp = wrapper.instance().props.fetchUserExpenses;
       expect(fetchUserExpensesProp).toBeInstanceOf(Function);
+    });
+
+    test("should render expense list items when filtered expense array is not empty", () => {
+      const expenseListItems = findByTestAttr(wrapper, "expense-list-item");
+      expect(expenseListItems.length).toBe(3);
     });
   });
 
