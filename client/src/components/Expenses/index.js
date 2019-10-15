@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import ExpenseList from "../ExpenseList";
 
 export default class Expenses extends Component {
   static propTypes = {
@@ -7,6 +8,11 @@ export default class Expenses extends Component {
   };
 
   render() {
-    return <div>This is the Expenses page</div>;
+    return (
+      <div>
+        <p>This is the Expenses page</p>
+        <ExpenseList />
+      </div>
+    );
   }
 }
