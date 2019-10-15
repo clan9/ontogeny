@@ -3,6 +3,7 @@ import { shallow } from "enzyme";
 import { findByTestAttr, checkProps, testStore } from "../../utils/testUtils";
 import ConnectedExpenseList, { ExpenseList } from "./index";
 import expenses from "../../fixtures/expenses";
+import { filters } from "../../fixtures/filters";
 
 const setup = (initialState = {}) => {
   const store = testStore(initialState);
@@ -30,12 +31,13 @@ describe("ExpenseList component", () => {
     let wrapper;
 
     beforeEach(() => {
-      wrapper = setup({ expenses });
+      wrapper = setup({ expenses, filters });
     });
 
-    test("should receive expenses array from mapStateToProps as a prop", () => {
+    test("should receive filtered (sorted by date) expenses array from mapStateToProps as a prop", () => {
       const expensesProp = wrapper.instance().props.expenses;
-      expect(expensesProp).toEqual(expenses);
+      const filteredExpenses = [expenses[1], expenses[0], expenses[2]];
+      expect(expensesProp).toEqual(filteredExpenses);
     });
 
     test("should have access to the fetchUserExpenses function as a prop", () => {

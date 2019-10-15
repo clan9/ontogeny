@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchUserExpenses } from "../../actions/expenses/expenses";
+import selectExpenses from "../../selectors/selectExpenses";
 
 export class ExpenseList extends Component {
   componentDidMount() {
@@ -25,7 +26,7 @@ export class ExpenseList extends Component {
 }
 
 const mapStateToProps = state => ({
-  expenses: state.expenses
+  expenses: selectExpenses(state.expenses, state.filters)
 });
 
 export default connect(
