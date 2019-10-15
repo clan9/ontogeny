@@ -17,5 +17,5 @@ export const sortByAmount = () => {
 };
 
 export const sortByDate = () => {
-  return { tye: actionTypes.SORT_BY_DATE };
+  return { type: actionTypes.SORT_BY_DATE };
 };
