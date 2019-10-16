@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import ExpenseList from "../ExpenseList";
 
 export default class Expenses extends Component {
-  static propTypes = {
-    prop: PropTypes
-  };
+  // static propTypes = {
+  //   prop: PropTypes
+  // };
 
   render() {
     return (
