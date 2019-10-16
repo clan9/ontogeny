@@ -30,7 +30,7 @@ export class ExpensesSummary extends Component {
           </h1>
         </div>
         <div>
-          <Link to="/create" data-test="add-expense">
+          <Link to="/createExpense" data-test="add-expense">
             Add Expense
           </Link>
         </div>
