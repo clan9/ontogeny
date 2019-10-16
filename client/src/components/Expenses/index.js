@@ -1,19 +1,33 @@
-import React, { Component } from "react";
-// import PropTypes from "prop-types";
+import React from "react";
 import ExpensesSummary from "../ExpensesSummary";
+import ExpenseListFilters from "../ExpenseListFilters";
 import ExpenseList from "../ExpenseList";
 
-export default class Expenses extends Component {
-  // static propTypes = {
-  //   prop: PropTypes
-  // };
+const Expenses = () => {
+  return (
+    <div>
+      <ExpensesSummary />
+      <ExpenseListFilters />
+      <ExpenseList />
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div>
-        <ExpensesSummary />
-        <ExpenseList />
-      </div>
-    );
-  }
-}
+export default Expenses;
+
+// import React, { Component } from "react";
+// import ExpensesSummary from "../ExpensesSummary";
+// import ExpenseListFilters from "../ExpenseListFilters";
+// import ExpenseList from "../ExpenseList";
+
+// export default class Expenses extends Component {
+//   render() {
+//     return (
+//       <div>
+// <ExpensesSummary />
+// <ExpenseListFilters />
+// <ExpenseList />
+//       </div>
+//     );
+//   }
+// }
