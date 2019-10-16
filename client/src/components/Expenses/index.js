@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 // import PropTypes from "prop-types";
+import ExpensesSummary from "../ExpensesSummary";
 import ExpenseList from "../ExpenseList";
 
 export default class Expenses extends Component {
@@ -10,7 +11,7 @@ export default class Expenses extends Component {
   render() {
     return (
       <div>
-        <p>This is the Expenses page</p>
+        <ExpensesSummary />
         <ExpenseList />
       </div>
     );
