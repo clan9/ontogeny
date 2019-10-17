@@ -40,6 +40,7 @@ export const logout = () => async dispatch => {
 
     dispatch({ type: actionTypes.LOG_OUT });
     dispatch({ type: actionTypes.CLEAR_EXPENSES });
+    dispatch({ type: actionTypes.CLEAR_INCOMES });
   } catch (error) {
     console.error("Action Error!!", error);
   }
