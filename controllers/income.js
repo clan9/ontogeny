@@ -39,21 +39,21 @@ exports.editIncome = async (req, res) => {
   }
 };
 
-exports.getIncome = async (req, res) => {
-  const _id = req.params.id;
+// exports.getIncome = async (req, res) => {
+//   const _id = req.params.id;
 
-  try {
-    const income = await Income.findOne({ _id, owner: req.user._id });
+//   try {
+//     const income = await Income.findOne({ _id, owner: req.user._id });
 
-    if (!income) {
-      res.status(404).send();
-    }
+//     if (!income) {
+//       res.status(404).send();
+//     }
 
-    res.json(income);
-  } catch (error) {
-    res.status(500).send();
-  }
-};
+//     res.json(income);
+//   } catch (error) {
+//     res.status(500).send();
+//   }
+// };
 
 exports.deleteIncome = async (req, res) => {
   const _id = req.params.id;

@@ -10,10 +10,10 @@ const router = express.Router();
 // @access  Private & Admin
 router.get("/all", requireAuth, requireAdmin, IncomeController.listAllIncomes);
 
-// @route   GET /api/income/:id
-// @desc    get an income
-// @access  Private
-router.get("/:id", requireAuth, IncomeController.getIncome);
+// // @route   GET /api/income/:id
+// // @desc    get an income
+// // @access  Private
+// router.get("/:id", requireAuth, IncomeController.getIncome);
 
 // @route   POST /api/income
 // @desc    add an income
