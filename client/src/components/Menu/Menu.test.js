@@ -2,6 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import { findByTestAttr, testStore, checkProps } from "../../utils/testUtils";
 import ConnectedMenu, { Menu } from "./index";
+import { JestEnvironment } from "@jest/environment";
 
 const setup = (initialState = {}) => {
   const store = testStore(initialState);
@@ -79,7 +80,8 @@ describe("Menu component", () => {
     test("should not throw warning with expected props", () => {
       const expectedProps = {
         isAuthenticated: true,
-        name: "Simon"
+        name: "Simon",
+        logout: jest.fn()
       };
       checkProps(Menu, expectedProps);
     });

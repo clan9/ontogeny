@@ -46,12 +46,6 @@ export const deleteExpense = id => async dispatch => {
   }
 };
 
-// *** NOT NEEDED ?? ***
-// export const fetchSingleExpense = id => async dispatch => {
-//   try {
-//     const res = await axios.get(`/api/expenses/${id}`);
-//     dispatch({ type: actionTypes.FETCH_SINGLE_EXPENSE, payload: res.data });
-//   } catch (error) {
-//     dispatch({ type: actionTypes.EXPENSES_ERROR });
-//   }
-// };
+export const clearExpenses = () => {
+  return { type: actionTypes.CLEAR_EXPENSES };
+};

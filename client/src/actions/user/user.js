@@ -39,6 +39,7 @@ export const logout = () => async dispatch => {
     await axios.post("/api/user/logout");
 
     dispatch({ type: actionTypes.LOG_OUT });
+    dispatch({ type: actionTypes.CLEAR_EXPENSES });
   } catch (error) {
     console.error("Action Error!!", error);
   }

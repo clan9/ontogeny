@@ -1,7 +1,7 @@
 @import "../../styles/main.scss";
 
 .landing {
-  background-color: $blue-light;
+  background-color: $theme-light;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -9,21 +9,21 @@
   align-items: center;
 
   &__title {
-    color: $blue-dark;
+    color: $theme-dark;
     font-weight: 300;
     margin-bottom: 1em;
   }
 
   &__actions {
-    background-color: $blue-mid;
+    background-color: $theme-mid;
     padding: 2em;
 
     &__button {
       background-color: $grey-light;
       border: none;
       border-radius: 3px;
-      box-shadow: 0 4px 4px rgba($blue-dark, 0.6);
-      color: $blue-dark;
+      box-shadow: 0 4px 4px rgba($theme-dark, 0.6);
+      color: $theme-dark;
       cursor: pointer;
       font-family: inherit;
       font-size: 1.4rem;
@@ -39,12 +39,12 @@
     }
 
     &__button--admin {
-      background-color: $blue-dark;
+      background-color: $theme-dark;
       color: $grey-light;
 
       &:hover {
         background-color: darken($grey-light, 10%);
-        color: $blue-dark;
+        color: $theme-dark;
       }
     }
   }

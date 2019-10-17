@@ -22,6 +22,7 @@ export default (state = initialState, action) => {
     case actionTypes.DELETE_EXPENSE:
       return state.filter(expense => expense._id !== payload._id);
     case actionTypes.EXPENSES_ERROR:
+    case actionTypes.CLEAR_EXPENSES:
       return [];
     default:
       return state;
