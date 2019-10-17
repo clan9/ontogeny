@@ -43,31 +43,31 @@ describe("Expenses routes", () => {
       .expect(401);
   });
 
-  it("Should fetch an expense by id", async () => {
-    const response = await request(app)
-      .get(`/api/expenses/${expenseOne._id}`)
-      .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
-      .send()
-      .expect(200);
+  // it("Should fetch an expense by id", async () => {
+  //   const response = await request(app)
+  //     .get(`/api/expenses/${expenseOne._id}`)
+  //     .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+  //     .send()
+  //     .expect(200);
 
-    // Assert correct expense returned
-    expect(response.body.description).toBe("Expense 1");
-  });
+  //   // Assert correct expense returned
+  //   expect(response.body.description).toBe("Expense 1");
+  // });
 
-  it("Should NOT fetch an expense that does not belong to a user", async () => {
-    await request(app)
-      .get(`/api/expenses/${expenseOne._id}`)
-      .set("Authorization", `Bearer ${userTwo.tokens[0].token}`)
-      .send()
-      .expect(404);
-  });
+  // it("Should NOT fetch an expense that does not belong to a user", async () => {
+  //   await request(app)
+  //     .get(`/api/expenses/${expenseOne._id}`)
+  //     .set("Authorization", `Bearer ${userTwo.tokens[0].token}`)
+  //     .send()
+  //     .expect(404);
+  // });
 
-  it("Should NOT fetch a users expense if user does not have an auth token", async () => {
-    await request(app)
-      .get(`/api/expenses/${expenseOne._id}`)
-      .send()
-      .expect(401);
-  });
+  // it("Should NOT fetch a users expense if user does not have an auth token", async () => {
+  //   await request(app)
+  //     .get(`/api/expenses/${expenseOne._id}`)
+  //     .send()
+  //     .expect(401);
+  // });
 
   it("Should edit an expense that belongs to a user", async () => {
     const updates = { description: "Updated desc", amount: 765 };

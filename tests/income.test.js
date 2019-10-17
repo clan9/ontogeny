@@ -43,31 +43,31 @@ describe("Income routes", () => {
       .expect(401);
   });
 
-  it("Should fetch an income by id", async () => {
-    const response = await request(app)
-      .get(`/api/income/${incomeOne._id}`)
-      .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
-      .send()
-      .expect(200);
+  // it("Should fetch an income by id", async () => {
+  //   const response = await request(app)
+  //     .get(`/api/income/${incomeOne._id}`)
+  //     .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+  //     .send()
+  //     .expect(200);
 
-    // Assert correct income returned
-    expect(response.body.description).toBe("Income 1");
-  });
+  //   // Assert correct income returned
+  //   expect(response.body.description).toBe("Income 1");
+  // });
 
-  it("Should NOT fetch an expense that does not belong to a user", async () => {
-    await request(app)
-      .get(`/api/income/${incomeOne._id}`)
-      .set("Authorization", `Bearer ${userTwo.tokens[0].token}`)
-      .send()
-      .expect(404);
-  });
+  // it("Should NOT fetch an expense that does not belong to a user", async () => {
+  //   await request(app)
+  //     .get(`/api/income/${incomeOne._id}`)
+  //     .set("Authorization", `Bearer ${userTwo.tokens[0].token}`)
+  //     .send()
+  //     .expect(404);
+  // });
 
-  it("Should NOT fetch a users income if user does not have an auth token", async () => {
-    await request(app)
-      .get(`/api/income/${incomeOne._id}`)
-      .send()
-      .expect(401);
-  });
+  // it("Should NOT fetch a users income if user does not have an auth token", async () => {
+  //   await request(app)
+  //     .get(`/api/income/${incomeOne._id}`)
+  //     .send()
+  //     .expect(401);
+  // });
 
   it("Should edit an income that belongs to a user", async () => {
     const updates = { description: "Updated desc", amount: 765 };

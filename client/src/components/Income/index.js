@@ -1,12 +1,15 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from "react";
+import { Link } from "react-router-dom";
+// IncomeSummary
+// IncomeFilters
+// IncomeList
 
-export default class Income extends Component {
-  static propTypes = {
-    prop: PropTypes
-  };
+const Income = () => {
+  return (
+    <div>
+      <Link to="/menu">Main menu</Link>
+    </div>
+  );
+};
 
-  render() {
-    return <div>This is the Income page</div>;
-  }
-}
+export default Income;
