@@ -16,7 +16,12 @@ export class AddExpense extends Component {
           <h1>Add an expense</h1>
         </div>
         <div data-test="expense-form">
-          <ExpenseForm />
+          <ExpenseForm
+            onSubmit={expense => {
+              this.props.addExpense(expense);
+              this.props.history.push("/menu");
+            }}
+          />
         </div>
       </div>
     );
