@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addExpense } from "../../actions/expenses/expenses";
+import ExpenseForm from "../ExpenseForm";
 
 export class AddExpense extends Component {
   static propTypes = {
@@ -15,7 +16,7 @@ export class AddExpense extends Component {
           <h1>Add an expense</h1>
         </div>
         <div data-test="expense-form">
-          <p>Expense form here!</p>
+          <ExpenseForm />
         </div>
       </div>
     );
