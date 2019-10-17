@@ -19,7 +19,7 @@ export class AddExpense extends Component {
           <ExpenseForm
             onSubmit={expense => {
               this.props.addExpense(expense);
-              this.props.history.push("/menu");
+              this.props.history.push("/expenses");
             }}
           />
         </div>

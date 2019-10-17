@@ -68,7 +68,7 @@ describe("Edit expense component", () => {
         expenses[0],
         expenses[0]._id
       );
-      expect(history.push).toHaveBeenLastCalledWith("/menu");
+      expect(history.push).toHaveBeenLastCalledWith("/expenses");
     });
 
     test("should call deleteExpense when button clicked", () => {
@@ -81,7 +81,7 @@ describe("Edit expense component", () => {
       wrapper.find("button").simulate("click");
       expect(deleteExpenseMock.mock.calls.length).toBe(1);
       expect(deleteExpenseMock).toHaveBeenLastCalledWith(expenses[0]._id);
-      expect(history.push).toHaveBeenLastCalledWith("/menu");
+      expect(history.push).toHaveBeenLastCalledWith("/expenses");
     });
   });
 });

@@ -22,7 +22,7 @@ export class EditExpense extends Component {
             expense={this.props.expense}
             onSubmit={expense => {
               this.props.editExpense(expense, this.props.expense._id);
-              this.props.history.push("/menu");
+              this.props.history.push("/expenses");
             }}
           />
         </div>
@@ -30,7 +30,7 @@ export class EditExpense extends Component {
           <button
             onClick={() => {
               this.props.deleteExpense(this.props.expense._id);
-              this.props.history.push("/menu");
+              this.props.history.push("/expenses");
             }}
           >
             Remove Expense

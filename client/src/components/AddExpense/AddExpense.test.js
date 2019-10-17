@@ -49,7 +49,7 @@ describe("Add Expense component", () => {
       wrapper.setProps({ history, addExpense: addExpenseMock });
       wrapper.find("ExpenseForm").prop("onSubmit")(expenses[1]);
       expect(addExpenseMock).toHaveBeenLastCalledWith(expenses[1]);
-      expect(history.push).toHaveBeenLastCalledWith("/menu");
+      expect(history.push).toHaveBeenLastCalledWith("/expenses");
     });
   });
 });
