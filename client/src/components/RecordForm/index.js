@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { SingleDatePicker } from "react-dates";
 
-export default class ExpenseForm extends Component {
+export default class RecordForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      description: props.expense ? props.expense.description : "",
-      note: props.expense ? props.expense.note : "",
-      amount: props.expense ? (props.expense.amount / 100).toString() : "",
-      date: props.expense ? moment(props.expense.date) : moment(),
+      description: props.record ? props.record.description : "",
+      note: props.record ? props.record.note : "",
+      amount: props.record ? (props.record.amount / 100).toString() : "",
+      date: props.record ? moment(props.record.date) : moment(),
       calendarFocused: false,
       error: ""
     };
@@ -68,7 +68,7 @@ export default class ExpenseForm extends Component {
 
   render() {
     return (
-      <form data-test="expense-form-component" onSubmit={this.onSubmit}>
+      <form data-test="record-form-component" onSubmit={this.onSubmit}>
         <div data-test="errorMsg-div">
           {this.state.error && <p>{this.state.error}</p>}
         </div>
@@ -108,7 +108,7 @@ export default class ExpenseForm extends Component {
           />
         </div>
         <div data-test="submit-button">
-          <button>Save expense</button>
+          <button>Save record</button>
         </div>
       </form>
     );

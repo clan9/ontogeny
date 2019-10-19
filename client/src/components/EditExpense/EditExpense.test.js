@@ -62,7 +62,7 @@ describe("Edit expense component", () => {
         editExpense: editExpenseMock,
         history
       });
-      wrapper.find("ExpenseForm").prop("onSubmit")(expenses[0]);
+      wrapper.find("RecordForm").prop("onSubmit")(expenses[0]);
       expect(editExpenseMock.mock.calls.length).toBe(1);
       expect(editExpenseMock).toHaveBeenLastCalledWith(
         expenses[0],

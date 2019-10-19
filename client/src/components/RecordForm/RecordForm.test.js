@@ -4,14 +4,14 @@ import moment from "moment";
 import { SingleDatePicker } from "react-dates";
 import { findByTestAttr, checkProps } from "../../utils/testUtils";
 import expenses from "../../fixtures/expenses";
-import ExpenseForm from "./index";
+import RecordForm from "./index";
 
 const setup = (props = {}) => {
-  const wrapper = shallow(<ExpenseForm {...props} />);
+  const wrapper = shallow(<RecordForm {...props} />);
   return wrapper;
 };
 
-describe("ExpenseForm component", () => {
+describe("RecordForm component", () => {
   describe("Rendering", () => {
     let wrapper;
 
@@ -20,7 +20,7 @@ describe("ExpenseForm component", () => {
     });
 
     test("Component should render without error", () => {
-      const component = findByTestAttr(wrapper, "expense-form-component");
+      const component = findByTestAttr(wrapper, "record-form-component");
       expect(component.length).toBe(1);
     });
 
@@ -55,7 +55,7 @@ describe("ExpenseForm component", () => {
     });
 
     test("should render form correctly with provided expense", () => {
-      const wrapper = shallow(<ExpenseForm expense={expenses[0]} />);
+      const wrapper = shallow(<RecordForm record={expenses[0]} />);
       expect(wrapper.state("description")).toBe(expenses[0].description);
       expect(wrapper.state("note")).toBe(expenses[0].note);
       expect(wrapper.state("amount")).toBe(
@@ -70,7 +70,7 @@ describe("ExpenseForm component", () => {
     let onSubmitMock = jest.fn();
 
     beforeEach(() => {
-      wrapper = shallow(<ExpenseForm onSubmit={onSubmitMock} />);
+      wrapper = shallow(<RecordForm onSubmit={onSubmitMock} />);
     });
 
     test("should update the description correctly", () => {

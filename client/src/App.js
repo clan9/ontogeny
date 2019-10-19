@@ -8,6 +8,8 @@ import Expenses from "./components/Expenses";
 import AddExpense from "./components/AddExpense";
 import EditExpense from "./components/EditExpense";
 import Income from "./components/Income";
+import AddIncome from "./components/AddIncome";
+import EditIncome from "./components/EditIncome";
 import Dashboard from "./components/Dashboard";
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
         <Route exact path="/createExpense" component={AddExpense} />
         <Route exact path="/editExpense/:id" component={EditExpense} />
         <Route exact path="/income" component={Income} />
+        <Route exact path="/createIncome" component={AddIncome} />
+        <Route exact path="/editIncome/:id" component={EditIncome} />
         <Route exact path="/dash" component={Dashboard} />
       </Switch>
     </BrowserRouter>

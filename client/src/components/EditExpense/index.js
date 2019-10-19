@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { editExpense, deleteExpense } from "../../actions/expenses/expenses";
-import ExpenseForm from "../ExpenseForm";
+import RecordForm from "../RecordForm";
 
 export class EditExpense extends Component {
   static propTypes = {
@@ -18,8 +18,8 @@ export class EditExpense extends Component {
           <h1>Edit your expense</h1>
         </div>
         <div data-test="expense-form">
-          <ExpenseForm
-            expense={this.props.expense}
+          <RecordForm
+            record={this.props.expense}
             onSubmit={expense => {
               this.props.editExpense(expense, this.props.expense._id);
               this.props.history.push("/expenses");
