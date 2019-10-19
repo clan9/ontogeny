@@ -30,6 +30,12 @@ describe("ExpenseList component", () => {
       const messageDiv = findByTestAttr(wrapper, "no-expenses-msg");
       expect(messageDiv.length).toBe(1);
     });
+
+    test("should not render `no incomes` message when there is income data in state", () => {
+      wrapper = setup({ expenses });
+      const msg = findByTestAttr(wrapper, "no-expenses-msg");
+      expect(msg.length).toBe(0);
+    });
   });
 
   describe("Redux props", () => {
@@ -58,26 +64,23 @@ describe("ExpenseList component", () => {
 
   // UNCONNECTED COMPONENT
 
-  describe("Check prop types with unconnected component", () => {
-    test("should not throw warning with expectedProps", () => {
-      const fetchUserExpensesMock = jest.fn();
+  describe("Check prop types and lifecycle method call with unconnected component", () => {
+    let expectedProps, fetchUserExpensesMock;
 
-      const expectedProps = {
+    beforeEach(() => {
+      fetchUserExpensesMock = jest.fn();
+      expectedProps = {
         expenses,
         fetchUserExpenses: fetchUserExpensesMock
       };
+    });
+
+    test("should not throw warning with expectedProps", () => {
       checkProps(ExpenseList, expectedProps);
     });
-  });
 
-  describe("ComponentDidMount LifeCycle Method", () => {
     test("should run fetchUserExpenses on ExpenseList mount", () => {
-      const fetchUserExpensesMock = jest.fn();
-      const props = {
-        expenses,
-        fetchUserExpenses: fetchUserExpensesMock
-      };
-      const wrapper = shallow(<ExpenseList {...props} />);
+      const wrapper = shallow(<ExpenseList {...expectedProps} />);
       wrapper.instance().componentDidMount();
       const mockFuncCallCount = fetchUserExpensesMock.mock.calls.length;
       expect(mockFuncCallCount).toBe(1);

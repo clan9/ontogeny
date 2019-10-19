@@ -1,3 +1,5 @@
+// Use this code for selecting incomes too
+
 import moment from "moment";
 
 // Get visible expenses based on the selected filters on page

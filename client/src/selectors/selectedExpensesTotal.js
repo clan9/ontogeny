@@ -1,3 +1,5 @@
+// Use this code for totalling incomes too
+
 export default expenses => {
   return expenses
     .map(expense => expense.amount)
