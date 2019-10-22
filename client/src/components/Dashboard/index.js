@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { DateRangePicker } from "react-dates";
 import { fetchUserExpenses } from "../../actions/expenses/expenses";
 import { fetchUserIncomes } from "../../actions/income/income";
-import getVisibleRecords from "../../selectors/selectExpenses";
-import { DateRangePicker } from "react-dates";
 import { setStartDate, setEndDate } from "../../actions/filters/filters";
-import RecordBarChart from "../RecordBarChart";
+import getVisibleRecords from "../../selectors/dashboardRecordSelector";
+import getTotal from "../../selectors/selectedExpensesTotal";
+import UserBarChart from "../UserBarChart";
+import UserPieChart from "../UserPieChart";
 
 export class Dashboard extends Component {
   constructor(props) {
@@ -34,21 +36,46 @@ export class Dashboard extends Component {
   static propTypes = {
     expenses: PropTypes.array,
     income: PropTypes.array,
+    expensesTotal: PropTypes.number,
+    incomeTotal: PropTypes.number,
     setStartDate: PropTypes.func,
     setEndDate: PropTypes.func
   };
 
-  renderData = () =>
-    this.props.expenses.length === 0 && this.props.income.length === 0 ? (
+  renderData = () => {
+    return this.props.expenses.length === 0 &&
+      this.props.income.length === 0 ? (
       <div>
         <span>No information to show</span>
       </div>
     ) : (
       <div>
-        <RecordBarChart data={this.props.expenses} />
-        <RecordBarChart data={this.props.income} />
+        <UserPieChart
+          data={[
+            {
+              title: "Expenses",
+              total: this.props.expensesTotal
+            },
+            {
+              title: "Income",
+              total: this.props.incomeTotal
+            }
+          ]}
+          colors={["#70cad1", "#bbb6DF"]}
+        />
+
+        <h2>Expenses</h2>
+        <UserBarChart
+          data={this.props.expenses}
+          title="expenses"
+          color="#70cad1"
+        />
+
+        <h2>Income</h2>
+        <UserBarChart data={this.props.income} title="income" color="#bbb6df" />
       </div>
     );
+  };
 
   render() {
     return (
@@ -75,17 +102,26 @@ export class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  expenses: getVisibleRecords(state.expenses, state.filters),
-  income: getVisibleRecords(state.income, state.filters),
-  filters: state.filters
-});
+const mapStateToProps = state => {
+  const expenses = getVisibleRecords(state.expenses, state.filters);
+  const income = getVisibleRecords(state.income, state.filters);
+  const filters = state.filters;
+
+  return {
+    expenses,
+    income,
+    filters,
+    expensesTotal: getTotal(expenses),
+    incomeTotal: getTotal(income)
+  };
+};
 
 export default connect(
   mapStateToProps,
   {
     fetchUserExpenses,
     fetchUserIncomes,
+    getTotal,
     setStartDate,
     setEndDate
   }
