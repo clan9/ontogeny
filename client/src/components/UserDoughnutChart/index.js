@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Chart from "chart.js";
 
-export default class UserPieChart extends Component {
+export default class UserDoughnutChart extends Component {
   constructor(props) {
     super(props);
 
@@ -11,7 +11,7 @@ export default class UserPieChart extends Component {
 
   componentDidMount() {
     this.myChart = new Chart(this.chartRef.current, {
-      type: "pie",
+      type: "doughnut",
       data: {
         labels: this.props.data.map(record => record.title),
         datasets: [
@@ -33,7 +33,8 @@ export default class UserPieChart extends Component {
   }
 
   static propTypes = {
-    prop: PropTypes
+    data: PropTypes.array,
+    colors: PropTypes.array
   };
 
   render() {

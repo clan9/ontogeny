@@ -8,7 +8,7 @@ import { setStartDate, setEndDate } from "../../actions/filters/filters";
 import getVisibleRecords from "../../selectors/dashboardRecordSelector";
 import getTotal from "../../selectors/selectedExpensesTotal";
 import UserBarChart from "../UserBarChart";
-import UserPieChart from "../UserPieChart";
+import UserPieChart from "../UserDoughnutChart";
 
 export class Dashboard extends Component {
   constructor(props) {
@@ -53,15 +53,15 @@ export class Dashboard extends Component {
         <UserPieChart
           data={[
             {
-              title: "Expenses",
-              total: this.props.expensesTotal
-            },
-            {
               title: "Income",
               total: this.props.incomeTotal
+            },
+            {
+              title: "Expenses",
+              total: this.props.expensesTotal
             }
           ]}
-          colors={["#70cad1", "#bbb6DF"]}
+          colors={["#bbb6DF", "#70cad1"]}
         />
 
         <h2>Expenses</h2>
