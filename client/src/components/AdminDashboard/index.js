@@ -2,15 +2,19 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { DateRangePicker } from "react-dates";
-import { fetchUserExpenses } from "../../actions/expenses/expenses";
-import { fetchUserIncomes } from "../../actions/income/income";
+import { fetchAllExpenses } from "../../actions/expenses/expenses";
+import { fetchAllIncomes } from "../../actions/income/income";
 import { setStartDate, setEndDate } from "../../actions/filters/filters";
-import getVisibleRecords from "../../selectors/dashboardRecordSelector";
+import {
+  getUserNamesSet,
+  getDataForUsers,
+  getTotalsByUser
+} from "../../selectors/sortRecordsByUser";
+import getVisibleRecords from "../../selectors/selectExpenses";
 import getTotal from "../../selectors/selectedExpensesTotal";
-import UserBarChart from "../UserBarChart";
-import UserDoughnutChart from "../UserDoughnutChart";
+import AdminBarChart from "../AdminBarChart";
 
-export class Dashboard extends Component {
+export class AdminDashboard extends Component {
   constructor(props) {
     super(props);
 
@@ -20,8 +24,8 @@ export class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchUserExpenses();
-    this.props.fetchUserIncomes();
+    this.props.fetchAllExpenses();
+    this.props.fetchAllIncomes();
   }
 
   onDatesChange = ({ startDate, endDate }) => {
@@ -33,54 +37,62 @@ export class Dashboard extends Component {
     this.setState(() => ({ calendarFocused }));
   };
 
+  filterDataByUser = () => {
+    const userNamesSet = getUserNamesSet([
+      this.props.expenses,
+      this.props.income
+    ]);
+    const dataForUsers = getDataForUsers(
+      userNamesSet,
+      this.props.expenses,
+      this.props.income
+    );
+    return dataForUsers;
+  };
+
+  getUserTotals = () => {
+    const userData = this.filterDataByUser();
+    return getTotalsByUser(userData, getTotal);
+  };
+
   static propTypes = {
+    fetchAllIncomes: PropTypes.func,
+    fetchAllExpenses: PropTypes.func,
+    getTotal: PropTypes.func,
+    getVisibleRecords: PropTypes.func,
+    setStartDate: PropTypes.func,
+    setEndDate: PropTypes.func,
     expenses: PropTypes.array,
     income: PropTypes.array,
     expensesTotal: PropTypes.number,
-    incomeTotal: PropTypes.number,
-    setStartDate: PropTypes.func,
-    setEndDate: PropTypes.func
+    incomeTotal: PropTypes.number
   };
 
-  renderData = () => {
-    return this.props.expenses.length === 0 &&
-      this.props.income.length === 0 ? (
+  renderData() {
+    return !this.props.expenses && !this.props.income ? (
       <div>
         <span>No information to show</span>
       </div>
     ) : (
       <div>
-        <UserDoughnutChart
-          data={[
-            {
-              title: "Income",
-              total: this.props.incomeTotal
-            },
-            {
-              title: "Expenses",
-              total: this.props.expensesTotal
-            }
-          ]}
-          colors={["#bbb6DF", "#70cad1"]}
-        />
-
-        <h2>Expenses</h2>
-        <UserBarChart
-          data={this.props.expenses}
-          title="expenses"
-          color="#70cad1"
-        />
-
-        <h2>Income</h2>
-        <UserBarChart data={this.props.income} title="income" color="#bbb6df" />
+        <div>
+          <h2>Overall Totals (All users)</h2>
+          <AdminBarChart
+            expenses={this.props.expenses}
+            income={this.props.income}
+          />
+        </div>
+        <div>
+          <h2>Expenses and Income by user</h2>
+        </div>
       </div>
     );
-  };
+  }
 
   render() {
     return (
       <div>
-        <h1>Compare your income to expenses</h1>
+        <h1>User statistics</h1>
         <div data-test="date-range-picker">
           <DateRangePicker
             startDateId="start"
@@ -119,10 +131,10 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    fetchUserExpenses,
-    fetchUserIncomes,
+    fetchAllExpenses,
+    fetchAllIncomes,
     getTotal,
-    setStartDate,
-    setEndDate
+    setEndDate,
+    setStartDate
   }
-)(Dashboard);
+)(AdminDashboard);

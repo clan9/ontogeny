@@ -34,6 +34,21 @@ export const signIn = formData => async dispatch => {
   }
 };
 
+export const signInAdmin = formData => async dispatch => {
+  try {
+    const res = await axios.post("/api/user/signinAdmin", formData);
+
+    dispatch({ type: actionTypes.SIGN_IN, payload: res.data });
+    setAuthToken(res.data.token);
+  } catch (error) {
+    dispatch({ type: actionTypes.LOG_IN_ERROR, payload: "Unable to log in" });
+
+    setTimeout(() => {
+      dispatch({ type: actionTypes.LOG_IN_ERROR, payload: "" });
+    }, 5000);
+  }
+};
+
 export const logout = () => async dispatch => {
   try {
     await axios.post("/api/user/logout");

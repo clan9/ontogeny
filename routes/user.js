@@ -10,6 +10,11 @@ const router = express.Router();
 // @access  Public
 router.post("/signin", UserController.signin);
 
+// @route   POST /api/user/signinAdmin
+// @desc    signin an existing user with admin priviledges
+// @access  Public
+router.post("/signinAdmin", UserController.signinAdmin);
+
 // @route   POST /api/user/signup
 // @desc    signup a new user
 // @access  Public
@@ -43,7 +48,7 @@ router.patch(
   "/toggleAdmin",
   requireAuth,
   requireAdmin,
-  UserController.toggleIsAdmin,
+  UserController.toggleIsAdmin
 );
 
 // @route   DELETE /api/user

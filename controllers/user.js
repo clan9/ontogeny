@@ -11,6 +11,21 @@ exports.signin = async (req, res) => {
   }
 };
 
+exports.signinAdmin = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findByCredentials(email, password);
+    if (user.isAdmin) {
+      const token = await user.generateAuthToken();
+      return res.json({ user, token });
+    } else {
+      res.status(401).send();
+    }
+  } catch (error) {
+    res.status(400).send();
+  }
+};
+
 exports.signup = async (req, res) => {
   const { name, email, password } = req.body;
   try {
@@ -26,7 +41,7 @@ exports.signup = async (req, res) => {
 exports.logout = async (req, res) => {
   try {
     req.user.tokens = req.user.tokens.filter(
-      (token) => token.token !== req.token,
+      token => token.token !== req.token
     );
     await req.user.save();
     res.json({ msg: "Logged out" });
