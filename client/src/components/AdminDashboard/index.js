@@ -12,7 +12,9 @@ import {
 } from "../../selectors/sortRecordsByUser";
 import getVisibleRecords from "../../selectors/selectExpenses";
 import getTotal from "../../selectors/selectedExpensesTotal";
-import AdminBarChart from "../AdminBarChart";
+import BarChart from "../BarChart";
+import DoughnutChart from "../DoughnutChart";
+import LineChart from "../LineChart";
 
 export class AdminDashboard extends Component {
   constructor(props) {
@@ -77,13 +79,52 @@ export class AdminDashboard extends Component {
       <div>
         <div>
           <h2>Overall Totals (All users)</h2>
-          <AdminBarChart
+          <DoughnutChart
+            data={[
+              {
+                title: "Income",
+                total: this.props.incomeTotal
+              },
+              {
+                title: "Expenses",
+                total: this.props.expensesTotal
+              }
+            ]}
+            colors={["#bbb6DF", "#70cad1"]}
+          />
+          <BarChart expenses={this.props.expenses} income={this.props.income} />
+          <LineChart
             expenses={this.props.expenses}
             income={this.props.income}
           />
         </div>
         <div>
           <h2>Expenses and Income by user</h2>
+          {this.getUserTotals().map((user, index) => {
+            const { name, expensesTotal, incomeTotal } = user;
+            return (
+              <div key={index}>
+                <p>Data for {name}</p>
+                <div>
+                  <DoughnutChart
+                    data={[
+                      { title: "Income", total: incomeTotal },
+                      { title: "Expenses", total: expensesTotal }
+                    ]}
+                    colors={["#bbb6DF", "#70cad1"]}
+                  />
+                  <BarChart
+                    expenses={this.filterDataByUser()[index].expenses}
+                    income={this.filterDataByUser()[index].income}
+                  />
+                  <LineChart
+                    expenses={this.filterDataByUser()[index].expenses}
+                    income={this.filterDataByUser()[index].income}
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     );

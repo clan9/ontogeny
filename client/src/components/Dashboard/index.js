@@ -7,8 +7,9 @@ import { fetchUserIncomes } from "../../actions/income/income";
 import { setStartDate, setEndDate } from "../../actions/filters/filters";
 import getVisibleRecords from "../../selectors/dashboardRecordSelector";
 import getTotal from "../../selectors/selectedExpensesTotal";
-import UserBarChart from "../UserBarChart";
-import UserDoughnutChart from "../UserDoughnutChart";
+import DoughnutChart from "../DoughnutChart";
+import BarChart from "../BarChart";
+import LineChart from "../LineChart";
 
 export class Dashboard extends Component {
   constructor(props) {
@@ -50,7 +51,7 @@ export class Dashboard extends Component {
       </div>
     ) : (
       <div>
-        <UserDoughnutChart
+        <DoughnutChart
           data={[
             {
               title: "Income",
@@ -65,14 +66,8 @@ export class Dashboard extends Component {
         />
 
         <h2>Expenses</h2>
-        <UserBarChart
-          data={this.props.expenses}
-          title="expenses"
-          color="#70cad1"
-        />
-
-        <h2>Income</h2>
-        <UserBarChart data={this.props.income} title="income" color="#bbb6df" />
+        <BarChart expenses={this.props.expenses} income={this.props.income} />
+        <LineChart expenses={this.props.expenses} income={this.props.income} />
       </div>
     );
   };

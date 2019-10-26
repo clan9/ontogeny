@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Chart from "chart.js";
 
-export default class AdminDoughnutChartOne extends Component {
+export default class DoughNutChart extends Component {
   constructor(props) {
     super(props);
 
