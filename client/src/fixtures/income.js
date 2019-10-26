@@ -6,6 +6,7 @@ export default [
     description: "project instalment",
     note: "",
     amount: 2000,
+    ownerName: "simon",
     date: moment(0)
       .add(3, "days")
       .valueOf()
@@ -15,6 +16,7 @@ export default [
     description: "salary",
     note: "",
     amount: 59599,
+    ownerName: "jess",
     date: moment(0)
       .add(5, "days")
       .valueOf()
@@ -24,6 +26,7 @@ export default [
     description: "project complete",
     note: "",
     amount: 99500,
+    ownerName: "lee",
     date: moment(0)
       .subtract(3, "days")
       .valueOf()

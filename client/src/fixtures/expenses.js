@@ -6,6 +6,7 @@ export default [
     description: "lunch",
     note: "",
     amount: 195,
+    ownerName: "simon",
     date: moment(0)
       .add(3, "days")
       .valueOf()
@@ -15,6 +16,7 @@ export default [
     description: "rent",
     note: "",
     amount: 59599,
+    ownerName: "jess",
     date: moment(0)
       .add(5, "days")
       .valueOf()
@@ -24,6 +26,7 @@ export default [
     description: "dinner",
     note: "",
     amount: 2500,
+    ownerName: "lee",
     date: moment(0)
       .subtract(3, "days")
       .valueOf()
