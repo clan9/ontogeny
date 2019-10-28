@@ -56,7 +56,9 @@ export default class BarChart extends Component {
 
   static propTypes = {
     expenses: PropTypes.array,
-    income: PropTypes.array
+    income: PropTypes.array,
+    sortDates: PropTypes.func,
+    summedTotalsForDates: PropTypes.func
   };
 
   render() {

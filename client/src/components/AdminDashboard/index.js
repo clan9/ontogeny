@@ -58,27 +58,29 @@ export class AdminDashboard extends Component {
   };
 
   static propTypes = {
+    expenses: PropTypes.array,
+    income: PropTypes.array,
+    filters: PropTypes.object,
     fetchAllIncomes: PropTypes.func,
     fetchAllExpenses: PropTypes.func,
     getTotal: PropTypes.func,
     getVisibleRecords: PropTypes.func,
     setStartDate: PropTypes.func,
     setEndDate: PropTypes.func,
-    expenses: PropTypes.array,
-    income: PropTypes.array,
     expensesTotal: PropTypes.number,
     incomeTotal: PropTypes.number
   };
 
   renderData() {
-    return !this.props.expenses && !this.props.income ? (
-      <div>
+    return this.props.expenses.length === 0 &&
+      this.props.income.length === 0 ? (
+      <div data-test="no-content">
         <span>No information to show</span>
       </div>
     ) : (
-      <div>
-        <div>
-          <h2>Overall Totals (All users)</h2>
+      <div data-test="content-to-show">
+        <div data-test="stats-all-users">
+          <h2 data-test="sub-heading-1">Overall Totals (All users)</h2>
           <DoughnutChart
             data={[
               {
@@ -91,15 +93,21 @@ export class AdminDashboard extends Component {
               }
             ]}
             colors={["#bbb6DF", "#70cad1"]}
+            data-test="doughnut-all-users"
           />
-          <BarChart expenses={this.props.expenses} income={this.props.income} />
+          <BarChart
+            expenses={this.props.expenses}
+            income={this.props.income}
+            data-test="barchart-all-users"
+          />
           <LineChart
             expenses={this.props.expenses}
             income={this.props.income}
+            data-test="linechart-all-users"
           />
         </div>
-        <div>
-          <h2>Expenses and Income by user</h2>
+        <div data-test="stats-per-user">
+          <h2 data-test="sub-heading-2">Expenses and Income by user</h2>
           {this.getUserTotals().map((user, index) => {
             const { name, expensesTotal, incomeTotal } = user;
             return (
@@ -112,14 +120,17 @@ export class AdminDashboard extends Component {
                       { title: "Expenses", total: expensesTotal }
                     ]}
                     colors={["#bbb6DF", "#70cad1"]}
+                    data-test="doughnut-user"
                   />
                   <BarChart
                     expenses={this.filterDataByUser()[index].expenses}
                     income={this.filterDataByUser()[index].income}
+                    data-test="barchart-user"
                   />
                   <LineChart
                     expenses={this.filterDataByUser()[index].expenses}
                     income={this.filterDataByUser()[index].income}
+                    data-test="linechart-user"
                   />
                 </div>
               </div>
@@ -132,8 +143,8 @@ export class AdminDashboard extends Component {
 
   render() {
     return (
-      <div>
-        <h1>User statistics</h1>
+      <div data-test="admin-dash-component">
+        <h1 data-test="header">User statistics</h1>
         <div data-test="date-range-picker">
           <DateRangePicker
             startDateId="start"

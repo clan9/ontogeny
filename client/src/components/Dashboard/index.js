@@ -37,8 +37,11 @@ export class Dashboard extends Component {
   static propTypes = {
     expenses: PropTypes.array,
     income: PropTypes.array,
+    filters: PropTypes.object,
     expensesTotal: PropTypes.number,
     incomeTotal: PropTypes.number,
+    fetchUserExpenses: PropTypes.func,
+    fetchUserIncomes: PropTypes.func,
     setStartDate: PropTypes.func,
     setEndDate: PropTypes.func
   };
@@ -46,11 +49,11 @@ export class Dashboard extends Component {
   renderData = () => {
     return this.props.expenses.length === 0 &&
       this.props.income.length === 0 ? (
-      <div>
+      <div data-test="no-content">
         <span>No information to show</span>
       </div>
     ) : (
-      <div>
+      <div data-test="content-to-show">
         <DoughnutChart
           data={[
             {
@@ -63,19 +66,26 @@ export class Dashboard extends Component {
             }
           ]}
           colors={["#bbb6DF", "#70cad1"]}
+          data-test="doughnut-user"
         />
-
-        <h2>Expenses</h2>
-        <BarChart expenses={this.props.expenses} income={this.props.income} />
-        <LineChart expenses={this.props.expenses} income={this.props.income} />
+        <BarChart
+          expenses={this.props.expenses}
+          income={this.props.income}
+          data-test="barchart-user"
+        />
+        <LineChart
+          expenses={this.props.expenses}
+          income={this.props.income}
+          data-test="linechart-user"
+        />
       </div>
     );
   };
 
   render() {
     return (
-      <div>
-        <h1>Compare your income to expenses</h1>
+      <div data-test="dash-component">
+        <h1 data-test="header">Compare your income to expenses</h1>
         <div data-test="date-range-picker">
           <DateRangePicker
             startDateId="start"

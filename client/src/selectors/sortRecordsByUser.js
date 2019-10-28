@@ -36,7 +36,7 @@ const getDataForUsers = (usernameSet, expensesArray, incomeArray) => {
 const getTotalsByUser = (usersArray, getTotalFn) => {
   const data = [];
 
-  usersArray.forEach(userObject => {
+  usersArray.map(userObject => {
     const user = {
       name: userObject.name,
       expensesTotal: getTotalFn(userObject.expenses),
