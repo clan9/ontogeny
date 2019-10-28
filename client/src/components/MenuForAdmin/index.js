@@ -10,9 +10,7 @@ import { logout } from "../../actions/user/user";
  *   View all users stats
  *   Give another user admin access
  *  General:
- *   View your own stats
- *   Add expense to your account
- *   Add income to your account
+ *   Go to your account
  *   Logout
  */
 
@@ -29,11 +27,11 @@ export const MenuForAdmin = props => {
         <Link to="/dashAdmin" data-test="dashboardLink">
           View all users stats
         </Link>
-        <Link to="/expenses" data-test="expenseLink">
-          Go to expenses page
+        <Link to="/menu" data-test="menuLink">
+          Go to your account
         </Link>
-        <Link to="/income" data-test="incomeLink">
-          Go to income page
+        <Link to="/toggleAdmin" data-test="toggleAdminLink">
+          Add/Remove Admin access for another user
         </Link>
         <Link
           to="/"

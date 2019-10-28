@@ -49,6 +49,22 @@ export const signInAdmin = formData => async dispatch => {
   }
 };
 
+export const toggleAdmin = formData => async dispatch => {
+  try {
+    const res = await axios.patch("/api/user/toggleAdmin", formData);
+    dispatch({ type: actionTypes.TOGGLE_ADMIN, payload: res.data });
+  } catch (error) {
+    dispatch({
+      type: actionTypes.TOGGLE_ADMIN_ERROR,
+      payload: "Unable to log in"
+    });
+
+    setTimeout(() => {
+      dispatch({ type: actionTypes.TOGGLE_ADMIN_ERROR, payload: "" });
+    }, 5000);
+  }
+};
+
 export const logout = () => async dispatch => {
   try {
     await axios.post("/api/user/logout");

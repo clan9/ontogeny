@@ -44,6 +44,7 @@ const getTotalsByUser = (usersArray, getTotalFn) => {
     };
 
     data.push(user);
+    return null;
   });
   return data;
 };

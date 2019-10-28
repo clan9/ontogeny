@@ -41,14 +41,14 @@ describe("MenuForAdmin component", () => {
       expect(para.length).toBe(1);
     });
 
-    test("should render link to expenses page", () => {
-      const expenseLink = findByTestAttr(wrapper, "expenseLink");
-      expect(expenseLink.length).toBe(1);
+    test("should render link to user menu", () => {
+      const menuLink = findByTestAttr(wrapper, "menuLink");
+      expect(menuLink.length).toBe(1);
     });
 
-    test("should render link to income page", () => {
-      const incomeLink = findByTestAttr(wrapper, "incomeLink");
-      expect(incomeLink.length).toBe(1);
+    test("should render link for toggleAdmin", () => {
+      const toggleAdminLink = findByTestAttr(wrapper, "toggleAdminLink");
+      expect(toggleAdminLink.length).toBe(1);
     });
 
     test("should render link to dashboard page", () => {
