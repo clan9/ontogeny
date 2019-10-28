@@ -40,21 +40,12 @@ exports.signup = async (req, res) => {
 
 exports.logout = async (req, res) => {
   try {
-    req.user.tokens = req.user.tokens.filter(
-      token => token.token !== req.token
-    );
-    await req.user.save();
-    res.json({ msg: "Logged out" });
-  } catch (error) {
-    res.status(500).json({ msg: "Server error" });
-  }
-};
-
-exports.logoutAll = async (req, res) => {
-  try {
+    // req.user.tokens = req.user.tokens.filter(
+    //   token => token.token !== req.token
+    // );
     req.user.tokens = [];
     await req.user.save();
-    res.json({ msg: "You are now logged out on all devices" });
+    res.json({ msg: "Logged out" });
   } catch (error) {
     res.status(500).json({ msg: "Server error" });
   }
@@ -86,7 +77,13 @@ exports.toggleIsAdmin = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).send();
+      return res.status(404).send();
+    }
+
+    if (user._id.toString() === req.user._id.toString()) {
+      return res
+        .status(400)
+        .json({ error: "You cannot remove your own access" });
     }
 
     user.isAdmin = !user.isAdmin;
@@ -111,3 +108,13 @@ exports.deleteUser = async (req, res) => {
     res.status(500).send();
   }
 };
+
+// exports.logoutAll = async (req, res) => {
+//   try {
+//     req.user.tokens = [];
+//     await req.user.save();
+//     res.json({ msg: "You are now logged out on all devices" });
+//   } catch (error) {
+//     res.status(500).json({ msg: "Server error" });
+//   }
+// };

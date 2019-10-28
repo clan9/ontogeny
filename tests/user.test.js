@@ -8,7 +8,7 @@ const {
   userOneId,
   userTwo,
   userTwoId,
-  setupDatabase,
+  setupDatabase
 } = require("./fixtures/db");
 
 describe("User routes tests", () => {
@@ -20,7 +20,7 @@ describe("User routes tests", () => {
       .send({
         name: "Jess",
         email: "jess@test.com",
-        password: "grumpyCat",
+        password: "grumpyCat"
       })
       .expect(201);
 
@@ -38,7 +38,7 @@ describe("User routes tests", () => {
       .send({
         name: "Jess",
         email: "Jess123",
-        password: "grumpyCat",
+        password: "grumpyCat"
       })
       .expect(400);
   });
@@ -49,7 +49,7 @@ describe("User routes tests", () => {
       .send({
         name: "Jess",
         email: "jess@test.com",
-        password: "grump",
+        password: "grump"
       })
       .expect(400);
   });
@@ -59,7 +59,7 @@ describe("User routes tests", () => {
       .post("/api/user/signin")
       .send({
         email: userOne.email,
-        password: userOne.password,
+        password: userOne.password
       })
       .expect(200);
   });
@@ -69,7 +69,7 @@ describe("User routes tests", () => {
       .post("/api/user/signin")
       .send({
         email: "random@test.com",
-        password: "notAUser",
+        password: "notAUser"
       })
       .expect(400);
   });
@@ -115,7 +115,7 @@ describe("User routes tests", () => {
       .patch("/api/user/toggleAdmin")
       .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
       .send({
-        email: userTwo.email,
+        email: userTwo.email
       })
       .expect(200);
 
@@ -124,12 +124,26 @@ describe("User routes tests", () => {
     expect(user.isAdmin).toBe(true);
   });
 
+  it("should NOT toggle the isAdmin property if the admin user submitting the request is trying to remove their own access", async () => {
+    await request(app)
+      .patch("/api/user/toggleAdmin")
+      .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+      .send({
+        email: userOne.email
+      })
+      .expect(400);
+
+    // Assert that user is still an admin user
+    const user = await User.findOne({ email: userOne.email });
+    expect(user.isAdmin).toBe(true);
+  });
+
   it("Should NOT toggle the isAdmin property for another user when user who is submitting request does NOT HAVE admin priviledges", async () => {
     await request(app)
       .patch("/api/user/toggleAdmin")
       .set("Authorization", `Bearer ${userTwo.tokens[0].token}`)
       .send({
-        email: userOne.email,
+        email: userOne.email
       })
       .expect(401);
   });
@@ -144,24 +158,9 @@ describe("User routes tests", () => {
     // Assert logout message received
     expect(response.body.msg).toBe("Logged out");
 
-    // Assert that token was removed from user instance tokens array
+    // Assert that user tokens array is empty
     const user = await User.findById(userOneId);
-    expect(user.tokens.length).toBe(1);
-  });
-
-  it("Should logout a user on all devices", async () => {
-    const response = await request(app)
-      .post("/api/user/logoutAll")
-      .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
-      .send()
-      .expect(200);
-
-    // Assert logout message received
-    expect(response.body.msg).toBe("You are now logged out on all devices");
-
-    // Assert that all auth tokens removed from the instance tokens arrray
-    const user = await User.findById(userOneId);
-    expect(user.tokens.length).toBe(0);
+    expect(user.tokens.length).toEqual(0);
   });
 
   it("Should delete a user, along with their expenses and incomes", async () => {
@@ -191,3 +190,18 @@ describe("User routes tests", () => {
       .expect(401);
   });
 });
+
+// it("Should logout a user on all devices", async () => {
+//   const response = await request(app)
+//     .post("/api/user/logoutAll")
+//     .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+//     .send()
+//     .expect(200);
+
+//   // Assert logout message received
+//   expect(response.body.msg).toBe("You are now logged out on all devices");
+
+//   // Assert that all auth tokens removed from the instance tokens arrray
+//   const user = await User.findById(userOneId);
+//   expect(user.tokens.length).toBe(0);
+// });

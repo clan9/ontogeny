@@ -21,15 +21,9 @@ router.post("/signinAdmin", UserController.signinAdmin);
 router.post("/signup", UserController.signup);
 
 // @route   POST /api/user/logout
-// @desc    logout user on one device
+// @desc    logout user
 // @access  Private
 router.post("/logout", requireAuth, UserController.logout);
-
-// *** NOT SURE ABOUT INCORPORATING THIS ROUTE ***
-// @route   POST /api/user/logoutAll
-// @desc    logout user on all devices
-// @access  Private
-router.post("/logoutAll", requireAuth, UserController.logoutAll);
 
 // @route   GET /api/user/listExpenses
 // @desc    List all expenses for a user
@@ -57,3 +51,9 @@ router.patch(
 router.delete("/", requireAuth, UserController.deleteUser);
 
 module.exports = router;
+
+// *** NOT SURE ABOUT INCORPORATING THIS ROUTE ***
+// @route   POST /api/user/logoutAll
+// @desc    logout user on all devices
+// @access  Private
+// router.post("/logoutAll", requireAuth, UserController.logoutAll);
