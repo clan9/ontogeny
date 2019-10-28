@@ -110,6 +110,38 @@ describe("User routes tests", () => {
       .expect(401);
   });
 
+  it("should return a list of user names, email addresses and isAdmin status for authorized user", async () => {
+    const response = await request(app)
+      .get("/api/user/listUsers")
+      .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+      .send()
+      .expect(200);
+
+    // Assert that correct data is returned
+    const expectedResponse = [
+      {
+        name: "Simon",
+        email: "s@test.com",
+        isAdmin: true
+      },
+      {
+        name: "Lee",
+        email: "l@test.com",
+        isAdmin: false
+      }
+    ];
+    expect(response.body.length).toBe(2);
+    expect(response.body).toEqual(expectedResponse);
+  });
+
+  it("Should NOT return list of users details for someone who does not have admin access", async () => {
+    await request(app)
+      .get("/api/user/listUsers")
+      .set("Authorization", `Bearer ${userTwo.tokens[0].token}`)
+      .send()
+      .expect(401);
+  });
+
   it("Should toggle the isAdmin property for another user when user who is submitting request has admin priviledges", async () => {
     await request(app)
       .patch("/api/user/toggleAdmin")

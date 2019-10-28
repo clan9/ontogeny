@@ -11,21 +11,6 @@ exports.signin = async (req, res) => {
   }
 };
 
-exports.signinAdmin = async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await User.findByCredentials(email, password);
-    if (user.isAdmin) {
-      const token = await user.generateAuthToken();
-      return res.json({ user, token });
-    } else {
-      res.status(401).send();
-    }
-  } catch (error) {
-    res.status(400).send();
-  }
-};
-
 exports.signup = async (req, res) => {
   const { name, email, password } = req.body;
   try {
@@ -71,6 +56,58 @@ exports.getUserIncomes = async (req, res) => {
   }
 };
 
+exports.deleteUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).send();
+    }
+
+    await user.remove();
+    res.json(user);
+  } catch (error) {
+    res.status(500).send();
+  }
+};
+
+// ADMIN ROUTES:
+
+exports.signinAdmin = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findByCredentials(email, password);
+    if (user.isAdmin) {
+      const token = await user.generateAuthToken();
+      return res.json({ user, token });
+    } else {
+      res.status(401).send();
+    }
+  } catch (error) {
+    res.status(400).send();
+  }
+};
+
+exports.getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+
+    if (!users) {
+      return res.status(404).send();
+    }
+
+    const userNamesAndEmails = users.map(user => ({
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin
+    }));
+
+    res.json(userNamesAndEmails);
+  } catch (error) {
+    res.status(500).send();
+  }
+};
+
 exports.toggleIsAdmin = async (req, res) => {
   const { email } = req.body;
   try {
@@ -88,21 +125,6 @@ exports.toggleIsAdmin = async (req, res) => {
 
     user.isAdmin = !user.isAdmin;
     await user.save();
-    res.json(user);
-  } catch (error) {
-    res.status(500).send();
-  }
-};
-
-exports.deleteUser = async (req, res) => {
-  try {
-    const user = await User.findById(req.user._id);
-
-    if (!user) {
-      return res.status(404).send();
-    }
-
-    await user.remove();
     res.json(user);
   } catch (error) {
     res.status(500).send();
