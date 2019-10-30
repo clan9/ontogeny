@@ -27,11 +27,14 @@ export const MenuForAdmin = props => {
         <Link to="/dashAdmin" data-test="dashboardLink">
           View all users stats
         </Link>
-        <Link to="/menu" data-test="menuLink">
-          Go to your account
-        </Link>
         <Link to="/toggleAdmin" data-test="toggleAdminLink">
           Add/Remove Admin access for another user
+        </Link>
+        <Link to="/deleteUser" data-test="deleteUserLink">
+          Delete a user
+        </Link>
+        <Link to="/menu" data-test="menuLink">
+          Go to your account
         </Link>
         <Link
           to="/"

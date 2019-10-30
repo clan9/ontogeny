@@ -51,6 +51,11 @@ describe("MenuForAdmin component", () => {
       expect(toggleAdminLink.length).toBe(1);
     });
 
+    test("should render link for delete a user", () => {
+      const deleteUserLink = findByTestAttr(wrapper, "deleteUserLink");
+      expect(deleteUserLink.length).toBe(1);
+    });
+
     test("should render link to dashboard page", () => {
       const dashboardLink = findByTestAttr(wrapper, "dashboardLink");
       expect(dashboardLink.length).toBe(1);

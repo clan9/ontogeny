@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout } from "../../actions/user/user";
+import { logout, deleteUser } from "../../actions/user/user";
 
 export const Menu = props => {
   return props.isAuthenticated ? (
@@ -31,6 +31,7 @@ export const Menu = props => {
         >
           Log out
         </Link>
+        <button onClick={() => props.deleteUser()}>Delete your account</button>
       </div>
     </div>
   ) : (
@@ -41,7 +42,8 @@ export const Menu = props => {
 Menu.propTypes = {
   isAuthenticated: PropTypes.bool,
   name: PropTypes.string,
-  logout: PropTypes.func
+  logout: PropTypes.func,
+  deleteUser: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -51,5 +53,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logout }
+  { logout, deleteUser }
 )(Menu);

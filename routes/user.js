@@ -57,10 +57,14 @@ router.patch(
   UserController.toggleIsAdmin
 );
 
-module.exports = router;
+// @route   DELETE /api/user/adminDeleteUser
+// @desc    Logged in admin user deleting a user
+// @access  Private & Admin
+router.patch(
+  "/adminDeleteUser",
+  requireAuth,
+  requireAdmin,
+  UserController.adminDeleteUser
+);
 
-// *** NOT SURE ABOUT INCORPORATING THIS ROUTE ***
-// @route   POST /api/user/logoutAll
-// @desc    logout user on all devices
-// @access  Private
-// router.post("/logoutAll", requireAuth, UserController.logoutAll);
+module.exports = router;

@@ -143,7 +143,7 @@ describe("User routes tests", () => {
   });
 
   it("Should toggle the isAdmin property for another user when user who is submitting request has admin priviledges", async () => {
-    await request(app)
+    const response = await request(app)
       .patch("/api/user/toggleAdmin")
       .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
       .send({
@@ -154,20 +154,47 @@ describe("User routes tests", () => {
     // Assert that the user is now an Admin user
     const user = await User.findOne({ email: userTwo.email });
     expect(user.isAdmin).toBe(true);
+
+    // Assert that a list of all users is returned
+    expect(response.body.length).toBe(2);
   });
 
-  it("should NOT toggle the isAdmin property if the admin user submitting the request is trying to remove their own access", async () => {
+  it("should NOT toggle the isAdmin property if the admin user submitting the request is trying to remove their own access and they are the only admin user set up", async () => {
     await request(app)
       .patch("/api/user/toggleAdmin")
       .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
       .send({
         email: userOne.email
       })
-      .expect(400);
+      .expect(403);
 
     // Assert that user is still an admin user
     const user = await User.findOne({ email: userOne.email });
     expect(user.isAdmin).toBe(true);
+  });
+
+  it("should allow an admin user to remove their own admin access if they are not the only user to have admin access", async () => {
+    // setup userTwo with admin access
+    await request(app)
+      .patch("/api/user/toggleAdmin")
+      .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+      .send({
+        email: userTwo.email
+      })
+      .expect(200);
+
+    // now as userOne, remove your own admin access
+    await request(app)
+      .patch("/api/user/toggleAdmin")
+      .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+      .send({
+        email: userOne.email
+      })
+      .expect(200);
+
+    // Assert that admin access has been removed
+    const user = await User.findOne({ email: userOne.email });
+    expect(user.isAdmin).toBe(false);
   });
 
   it("Should NOT toggle the isAdmin property for another user when user who is submitting request does NOT HAVE admin priviledges", async () => {
@@ -202,7 +229,7 @@ describe("User routes tests", () => {
       .send()
       .expect(200);
 
-    // Assert correct user was deleted from sb
+    // Assert correct user was deleted from db
     const user = await User.findById(userTwoId);
     expect(user).toBeNull();
 
@@ -221,19 +248,60 @@ describe("User routes tests", () => {
       .send()
       .expect(401);
   });
+
+  it("should NOT delete a user if they are the sole user with admin access", async () => {
+    await request(app)
+      .delete("/api/user")
+      .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+      .send()
+      .expect(403);
+  });
+
+  it("should allow admin user to delete another user account", async () => {
+    await request(app)
+      .patch("/api/user/adminDeleteUser")
+      .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+      .send({ email: userTwo.email })
+      .expect(200);
+  });
+
+  it("should NOT allow admin user to delete their own account if they are the only user with admin access", async () => {
+    await request(app)
+      .patch("/api/user/adminDeleteUser")
+      .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+      .send({ email: userOne.email })
+      .expect(403);
+  });
+
+  it("should allow admin user to delete their own account if they are NOT the only user with admin access", async () => {
+    // setup userTwo with admin access
+    await request(app)
+      .patch("/api/user/toggleAdmin")
+      .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+      .send({
+        email: userTwo.email
+      })
+      .expect(200);
+
+    // now as userOne, delete your account
+    await request(app)
+      .patch("/api/user/adminDeleteUser")
+      .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
+      .send({
+        email: userOne.email
+      })
+      .expect(200);
+
+    // Assert correct user was deleted from db
+    const user = await User.findById(userOneId);
+    expect(user).toBeNull();
+
+    // Assert users expenses were removed
+    const expenses = await Expenses.find({ ownerName: "Simon" });
+    expect(expenses).toEqual([]);
+
+    // Assert user incomes were removed
+    const incomes = await Income.find({ ownerName: "Simon" });
+    expect(incomes).toEqual([]);
+  });
 });
-
-// it("Should logout a user on all devices", async () => {
-//   const response = await request(app)
-//     .post("/api/user/logoutAll")
-//     .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
-//     .send()
-//     .expect(200);
-
-//   // Assert logout message received
-//   expect(response.body.msg).toBe("You are now logged out on all devices");
-
-//   // Assert that all auth tokens removed from the instance tokens arrray
-//   const user = await User.findById(userOneId);
-//   expect(user.tokens.length).toBe(0);
-// });

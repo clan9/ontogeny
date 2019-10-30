@@ -7,6 +7,7 @@ import SigninAdmin from "./components/SigninAdmin";
 import Menu from "./components/Menu";
 import MenuForAdmin from "./components/MenuForAdmin";
 import ToggleAdmin from "./components/ToggleAdmin";
+import DeleteUser from "./components/DeleteUser";
 import Expenses from "./components/Expenses";
 import AddExpense from "./components/AddExpense";
 import EditExpense from "./components/EditExpense";
@@ -26,6 +27,7 @@ function App() {
         <Route exact path="/signinAdmin" component={SigninAdmin} />
         <Route exact path="/menu" component={Menu} />
         <Route exact path="/menuForAdminUser" component={MenuForAdmin} />
+        <Route exact path="/deleteUser" component={DeleteUser} />
         <Route exact path="/toggleAdmin" component={ToggleAdmin} />
         <Route exact path="/expenses" component={Expenses} />
         <Route exact path="/createExpense" component={AddExpense} />

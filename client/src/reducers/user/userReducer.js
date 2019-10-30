@@ -5,7 +5,9 @@ const initialState = {
   isAuthenticated: false,
   loading: true,
   user: {},
-  error: ""
+  users: [],
+  error: "",
+  adminStatusMsg: ""
 };
 
 export default (state = initialState, action) => {
@@ -21,6 +23,23 @@ export default (state = initialState, action) => {
         isAuthenticated: true,
         loading: false
       };
+    case actionTypes.FETCH_USERS_DETAILS:
+      return {
+        ...state,
+        users: [...payload]
+      };
+    case actionTypes.TOGGLE_ADMIN:
+      return {
+        ...state,
+        users: [...payload.users],
+        adminStatusMsg: payload.msg
+      };
+    case actionTypes.ADMIN_ERROR:
+    case actionTypes.DELETE_USER_ERROR:
+      return {
+        ...state,
+        error: payload
+      };
     case actionTypes.LOG_IN_ERROR:
       localStorage.removeItem("authToken");
       return {
@@ -30,11 +49,17 @@ export default (state = initialState, action) => {
         error: payload
       };
     case actionTypes.LOG_OUT:
+    case actionTypes.DELETE_USER:
       localStorage.removeItem("authToken");
       return {
         ...initialState,
         token: null,
         loading: false
+      };
+    case actionTypes.ADMIN_DELETE_USER:
+      return {
+        ...state,
+        users: [...payload]
       };
     default:
       return state;

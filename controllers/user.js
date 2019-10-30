@@ -25,9 +25,6 @@ exports.signup = async (req, res) => {
 
 exports.logout = async (req, res) => {
   try {
-    // req.user.tokens = req.user.tokens.filter(
-    //   token => token.token !== req.token
-    // );
     req.user.tokens = [];
     await req.user.save();
     res.json({ msg: "Logged out" });
@@ -59,15 +56,25 @@ exports.getUserIncomes = async (req, res) => {
 exports.deleteUser = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
+    const userIsAdmin = user.isAdmin;
+    const adminUsers = await User.find({ isAdmin: true });
+    const adminUsersCount = adminUsers.length;
 
     if (!user) {
-      return res.status(404).send();
+      return res.status(404).json({ msg: "Not found" });
+    }
+
+    if (userIsAdmin && adminUsersCount === 1) {
+      return res.status(403).json({
+        msg:
+          "You are currently the only user with Admin access therefore you cannot delete your account at this time"
+      });
     }
 
     await user.remove();
-    res.json(user);
+    res.redirect(200, "/");
   } catch (error) {
-    res.status(500).send();
+    res.status(500).json({ msg: "Server Error" });
   }
 };
 
@@ -80,9 +87,8 @@ exports.signinAdmin = async (req, res) => {
     if (user.isAdmin) {
       const token = await user.generateAuthToken();
       return res.json({ user, token });
-    } else {
-      res.status(401).send();
     }
+    res.status(401).send();
   } catch (error) {
     res.status(400).send();
   }
@@ -112,31 +118,83 @@ exports.toggleIsAdmin = async (req, res) => {
   const { email } = req.body;
   try {
     const user = await User.findOne({ email });
+    const adminUsers = await User.find({ isAdmin: true });
+    const adminUsersCount = adminUsers.length;
 
     if (!user) {
-      return res.status(404).send();
+      return res.status(404).json({ msg: "Not Found" });
     }
 
+    // If the admin user tries to remove their own access
+    // Check if they are the only admin user -> if so, send error
+    // If not, remove access and redirect to home page ->
+    // so they cannot carry out any further admin actions.
     if (user._id.toString() === req.user._id.toString()) {
-      return res
-        .status(400)
-        .json({ error: "You cannot remove your own access" });
+      if (adminUsersCount === 1) {
+        return res.status(403).json({
+          msg:
+            "You are currently the only user with Admin access therefore you cannot remove it at this time."
+        });
+      }
+      user.isAdmin = !user.isAdmin;
+      await user.save();
+      return res.redirect(200, "/");
     }
 
     user.isAdmin = !user.isAdmin;
     await user.save();
-    res.json(user);
+
+    // Send back list of updated users with admin access info
+    const users = await User.find();
+    const updatedUsers = users.map(user => ({
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin
+    }));
+    res.json(updatedUsers);
+  } catch (error) {
+    res.status(500).json({ msg: "Server error" });
+  }
+};
+
+exports.adminDeleteUser = async (req, res) => {
+  const { email } = req.body;
+  const adminId = req.user._id;
+  try {
+    const userToDelete = await User.findOne({ email });
+    const adminUsers = await User.find({ isAdmin: true });
+    const adminUsersCount = adminUsers.length;
+
+    if (!userToDelete) {
+      return res.status(404).json({ msg: "Not Found" });
+    }
+
+    // If the admin user tries to delete their own account
+    // Check if they are the only admin user -> if so, send error
+    // If not, delete account and redirect to home page
+    // so they cannot carry out any further admin actions.
+    if (userToDelete._id.toString() === adminId.toString()) {
+      if (adminUsersCount === 1) {
+        return res.status(403).json({
+          msg:
+            "You are currently the only user with Admin access therefore you cannot delete your account at this time."
+        });
+      }
+      await userToDelete.remove();
+      return res.redirect(200, "/");
+    }
+
+    await userToDelete.remove();
+
+    // Send back list of remaining users with admin access info
+    const users = await User.find();
+    const updatedUsers = users.map(user => ({
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin
+    }));
+    res.json(updatedUsers);
   } catch (error) {
     res.status(500).send();
   }
 };
-
-// exports.logoutAll = async (req, res) => {
-//   try {
-//     req.user.tokens = [];
-//     await req.user.save();
-//     res.json({ msg: "You are now logged out on all devices" });
-//   } catch (error) {
-//     res.status(500).json({ msg: "Server error" });
-//   }
-// };
