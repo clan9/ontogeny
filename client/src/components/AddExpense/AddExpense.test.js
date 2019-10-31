@@ -19,7 +19,7 @@ describe("Add Expense component", () => {
     });
 
     test("should render Component without error", () => {
-      const component = findByTestAttr(wrapper, "add-expense-component");
+      const component = findByTestAttr(wrapper, "add-record-component");
       expect(component.length).toBe(1);
     });
 
