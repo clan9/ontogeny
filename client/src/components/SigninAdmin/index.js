@@ -60,8 +60,8 @@ export class SigninAdmin extends Component {
     return this.props.isAuthenticated ? (
       <Redirect to="/menuForAdminUser" />
     ) : (
-      <Fragment>
-        <header data-test="page-header">
+      <div className="container">
+        <header data-test="page-header" className="page-header">
           <h2>Sign In</h2>
         </header>
         <form
@@ -92,6 +92,7 @@ export class SigninAdmin extends Component {
             className="login-form__field"
             data-test="emailField"
             placeholder="Enter your email address"
+            autoFocus
             value={this.state.email}
             onChange={this.onEmailChange}
           />
@@ -108,10 +109,10 @@ export class SigninAdmin extends Component {
             className="login-form__button"
             data-test="signInAdminButton"
           >
-            Sign In
+            Submit
           </button>
         </form>
-      </Fragment>
+      </div>
     );
   }
 }

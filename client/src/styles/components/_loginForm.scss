@@ -1,0 +1,60 @@
+.page-header h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-top: 2em;
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  // height: 75vh;
+  justify-content: center;
+
+  &__error-container {
+    height: 2.5em;
+  }
+
+  &__errorMsg {
+    color: $theme-5;
+    font-size: 1.8rem;
+    font-style: italic;
+    text-align: center;
+  }
+
+  &__field {
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 4px 4px rgba($theme-1, 0.3);
+    color: $theme-1;
+    font: inherit;
+    height: 3em;
+    margin-bottom: 1em;
+    padding: 1em;
+    transition: all 0.3s;
+
+    &:focus {
+      background-color: rgba($theme-4, 0.2);
+      outline-color: rgba($theme-5, 0.8);
+    }
+  }
+
+  &__button {
+    align-self: center;
+    background-color: $theme-5;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 4px 4px rgba($theme-1, 0.6);
+    color: $grey-light;
+    font: inherit;
+    font-size: 1.8rem;
+    margin-top: 1em;
+    padding: 0.2em 1em;
+    width: 20%;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: lighten($theme-5, 10%);
+    }
+  }
+}

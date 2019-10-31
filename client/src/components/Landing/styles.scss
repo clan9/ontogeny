@@ -67,8 +67,8 @@
       color: $theme-1;
 
       &:hover {
-        background-color: darken($theme-4, 10%);
-        color: $theme-1;
+        background-color: darken($theme-5, 20%);
+        color: $grey-light;
       }
     }
   }

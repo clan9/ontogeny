@@ -77,8 +77,8 @@ export class Signup extends Component {
     return this.props.isAuthenticated ? (
       <Redirect to="/menu" />
     ) : (
-      <Fragment>
-        <header data-test="page-header">
+      <div className="container">
+        <header data-test="page-header" className="page-header">
           <h2>Sign Up</h2>
         </header>
         <form
@@ -148,10 +148,10 @@ export class Signup extends Component {
             className="login-form__button"
             data-test="submitButton"
           >
-            Sign Up
+            Submit
           </button>
         </form>
-      </Fragment>
+      </div>
     );
   }
 }
