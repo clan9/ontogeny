@@ -1,0 +1,57 @@
+@import "../../styles/main.scss";
+
+.header h3 {
+  font-size: 2rem;
+  font-weight: 300;
+  margin-top: $md;
+  margin-bottom: $sm;
+  text-align: center;
+}
+
+.menu-paragraph {
+  margin-bottom: $md;
+  text-align: center;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+
+  &__link,
+  &__link:link,
+  &__link:active,
+  &__link:visited {
+    background-color: $theme-1;
+    border-radius: 3px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.6);
+    color: $grey-light;
+    font-size: 1.6rem;
+    margin-bottom: $sm;
+    padding: $sm $md;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: lighten($theme-1, 15%);
+    }
+  }
+
+  &__button {
+    align-self: center;
+    background-color: orangered;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.6);
+    color: $grey-light;
+    font: inherit;
+    font-size: 1.2rem;
+    padding: $sm $md;
+    transition: all 0.3s;
+
+    &:hover {
+      // background-color: darken(orangered, 15%);
+      background-color: red;
+    }
+  }
+}

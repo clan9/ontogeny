@@ -3,24 +3,27 @@ import PropTypes from "prop-types";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout, deleteUser } from "../../actions/user/user";
+import "./styles.scss";
 
 export const Menu = props => {
   return props.isAuthenticated ? (
-    <div data-test="menu-component">
-      <header data-test="header">
-        <h3>Welcome {props.name}</h3>
+    <div data-test="menu-component" className="container">
+      <header data-test="header" className="header">
+        <h3>Hello {props.name}</h3>
       </header>
 
-      <p data-test="paragraph">What would you like to do?</p>
-      <div>
-        <Link to="/expenses" data-test="expenseLink">
+      <p data-test="paragraph" className="menu-paragraph">
+        What would you like to do?
+      </p>
+      <div className="menu">
+        <Link to="/expenses" data-test="expenseLink" className="menu__link">
           Go to expenses page
         </Link>
-        <Link to="/income" data-test="incomeLink">
+        <Link to="/income" data-test="incomeLink" className="menu__link">
           Go to income page
         </Link>
-        <Link to="/dash" data-test="dashboardLink">
-          Go to dashboard page
+        <Link to="/dash" data-test="dashboardLink" className="menu__link">
+          Go to stats page
         </Link>
         <Link
           to="/"
@@ -28,10 +31,13 @@ export const Menu = props => {
           onClick={() => {
             props.logout();
           }}
+          className="menu__link"
         >
           Log out
         </Link>
-        <button onClick={() => props.deleteUser()}>Delete your account</button>
+        <button onClick={() => props.deleteUser()} className="menu__button">
+          Delete your account
+        </button>
       </div>
     </div>
   ) : (

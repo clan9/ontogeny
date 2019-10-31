@@ -18,13 +18,13 @@
   &__box {
     background-color: rgba($theme-1, 0.7);
     border-radius: 3px;
-    padding: 1em;
+    padding: $sm;
   }
 
   &__title {
     color: $grey-light;
     font-weight: 300;
-    margin-bottom: 0.5em;
+    margin-bottom: $xs;
     text-align: center;
   }
 
@@ -32,8 +32,8 @@
     color: $grey-light;
     font-style: italic;
     font-weight: 300;
-    margin-bottom: 0.5em;
-    padding: 0.5em;
+    margin-bottom: $xs;
+    padding: $xs;
     text-align: center;
   }
 
@@ -50,9 +50,9 @@
       cursor: pointer;
       font-family: inherit;
       font-size: 1.4rem;
-      margin: 1em;
+      margin: $sm;
       outline: none;
-      padding: 0.4em 1em;
+      padding: 0.4em $sm;
       text-decoration: none;
       transition: all 0.3s;
 
