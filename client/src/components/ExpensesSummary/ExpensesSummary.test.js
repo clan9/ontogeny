@@ -30,11 +30,6 @@ describe("ExpensesSummary component", () => {
       const heading = findByTestAttr(wrapper, "heading");
       expect(heading.length).toBe(1);
     });
-
-    test("should render add expense link", () => {
-      const addLink = findByTestAttr(wrapper, "add-expense");
-      expect(addLink.length).toBe(1);
-    });
   });
 
   describe("Redux props", () => {

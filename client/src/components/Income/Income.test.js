@@ -29,9 +29,4 @@ describe("Income Component", () => {
     const list = findByTestAttr(wrapper, "list");
     expect(list.length).toBe(1);
   });
-
-  test("should render menu link", () => {
-    const link = findByTestAttr(wrapper, "menu-link");
-    expect(link.length).toBe(1);
-  });
 });

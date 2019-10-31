@@ -1,0 +1,22 @@
+@import "../../styles/main.scss";
+
+.userNavBar {
+  background-color: $theme-1;
+  display: flex;
+  justify-content: space-between;
+  padding: $sm;
+
+  &__link,
+  &:link,
+  &:active,
+  &:visited {
+    color: $grey-light;
+    margin: 0 $xs;
+    text-decoration: none;
+    transition: all 0.3s;
+
+    &:hover {
+      color: $theme-2;
+    }
+  }
+}

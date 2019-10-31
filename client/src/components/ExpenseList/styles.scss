@@ -1,0 +1,9 @@
+@import "../../styles/main.scss";
+
+.no-expenses-msg {
+  color: $theme-5;
+  display: inline-block;
+  font-size: 1.6rem;
+  font-style: italic;
+  margin-top: $sm;
+}

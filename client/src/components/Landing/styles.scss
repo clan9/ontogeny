@@ -16,7 +16,7 @@
   align-items: center;
 
   &__box {
-    background-color: rgba($theme-1, 0.7);
+    background-color: rgba($theme-5, 0.5);
     border-radius: 3px;
     padding: $sm;
   }
@@ -45,7 +45,7 @@
       background-color: $theme-2;
       border: none;
       border-radius: 3px;
-      box-shadow: 0 4px 4px rgba($theme-1, 0.85);
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
       color: $grey-light;
       cursor: pointer;
       font-family: inherit;
@@ -57,19 +57,19 @@
       transition: all 0.3s;
 
       &:hover {
-        background-color: $theme-3;
-        color: $theme-1;
-      }
-    }
-
-    &__button--admin {
-      background-color: $theme-3;
-      color: $theme-1;
-
-      &:hover {
-        background-color: darken($theme-5, 20%);
+        // background-color: $theme-1;
+        background-color: darken($theme-2, 10%);
         color: $grey-light;
       }
     }
+
+    // &__button--admin {
+    //   background-color: $theme-1;
+    //   color: $grey-light;
+
+    //   &:hover {
+    //     background-color: $theme-2;
+    //   }
+    // }
   }
 }

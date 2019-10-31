@@ -33,14 +33,14 @@
     transition: all 0.3s;
 
     &:focus {
-      background-color: rgba($theme-4, 0.2);
+      background-color: rgba($theme-4, 0.1);
       outline-color: rgba($theme-5, 0.8);
     }
   }
 
   &__button {
     align-self: center;
-    background-color: $theme-5;
+    background-color: $theme-2;
     border: none;
     border-radius: 3px;
     box-shadow: 0 4px 4px rgba($theme-1, 0.6);
@@ -53,7 +53,7 @@
     transition: all 0.3s;
 
     &:hover {
-      background-color: lighten($theme-5, 10%);
+      background-color: darken($theme-2, 10%);
     }
   }
 }

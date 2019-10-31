@@ -20,7 +20,7 @@ export class IncomeList extends Component {
       <div data-test="income-list-component">
         {this.props.income.length === 0 ? (
           <div data-test="no-incomes-msg">
-            <span>No incomes</span>
+            <span className="no-expenses-msg">No incomes</span>
           </div>
         ) : (
           this.props.income.map(income => (

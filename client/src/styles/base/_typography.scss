@@ -1,5 +1,5 @@
 body {
-  background-color: $grey-light;
+  background-color: rgba($theme-1, 0.3);
   color: $theme-1;
   font-family: "Open Sans", sans-serif;
   font-size: 1.3rem;
@@ -9,5 +9,6 @@ body {
 
 .container {
   margin: 0 auto;
-  width: 80%;
+  padding: 0 $sm;
+  max-width: 50rem;
 }

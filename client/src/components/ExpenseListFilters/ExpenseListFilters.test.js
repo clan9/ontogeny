@@ -38,7 +38,7 @@ describe("ExpenseListFilters component", () => {
     });
 
     test("should render date range picker", () => {
-      const datePicker = findByTestAttr(wrapper, "date-range-picker");
+      const datePicker = wrapper.find(DateRangePicker);
       expect(datePicker.length).toBe(1);
     });
   });

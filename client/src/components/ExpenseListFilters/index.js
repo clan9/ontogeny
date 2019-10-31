@@ -9,6 +9,7 @@ import {
   sortByAmount,
   sortByDate
 } from "../../actions/filters/filters";
+import "./styles.scss";
 
 export class ExpenseListFilters extends Component {
   constructor(props) {
@@ -50,26 +51,24 @@ export class ExpenseListFilters extends Component {
   render() {
     return (
       <div data-test="expense-filters-component">
-        <div>
+        <div className="expense-filters">
           <input
             type="text"
             data-test="text-input"
+            className="expense-filters__text"
             placeholder="Search Expenses"
             value={this.props.filters.text}
             onChange={this.onTextChange}
           />
-        </div>
-        <div>
           <select
             data-test="sort-by"
+            className="expense-filters__sortBy"
             value={this.props.filters.sortBy}
             onChange={this.onSortChange}
           >
             <option value="date">Date</option>
             <option value="amount">Amount</option>
           </select>
-        </div>
-        <div data-test="date-range-picker">
           <DateRangePicker
             startDateId="start"
             endDateId="end"

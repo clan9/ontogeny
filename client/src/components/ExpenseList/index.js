@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { fetchUserExpenses } from "../../actions/expenses/expenses";
 import selectExpenses from "../../selectors/selectExpenses";
 import ExpenseListItem from "../ExpenseListItem";
+import "./styles.scss";
 
 export class ExpenseList extends Component {
   componentDidMount() {
@@ -19,8 +20,10 @@ export class ExpenseList extends Component {
     return (
       <div data-test="expense-list-component">
         {this.props.expenses.length === 0 ? (
-          <div data-test="no-expenses-msg">
-            <span>No expenses</span>
+          <div>
+            <span data-test="no-expenses-msg" className="no-expenses-msg">
+              No expenses to show
+            </span>
           </div>
         ) : (
           this.props.expenses.map(expense => (

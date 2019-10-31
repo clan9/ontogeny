@@ -22,15 +22,19 @@ export class IncomeSummary extends Component {
     );
 
     return (
-      <div data-test="summary-component">
+      <div data-test="summary-component" className="records-summary">
         <div>
-          <h1 data-test="heading">
+          <h1 data-test="heading" className="records-summary__heading">
             Viewing <span>{this.props.incomeCount}</span> {incomeWord} totalling{" "}
             <span>{formattedIncomesTotal}</span>
           </h1>
         </div>
         <div>
-          <Link to="/createIncome" data-test="add-income">
+          <Link
+            to="/createIncome"
+            data-test="add-income"
+            className="records-summary__add-record"
+          >
             Add Income
           </Link>
         </div>
