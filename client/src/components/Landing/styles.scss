@@ -1,50 +1,74 @@
 @import "../../styles/main.scss";
 
 .landing {
-  background-color: $theme-light;
+  background-image: linear-gradient(
+      to bottom,
+      rgba($theme-2, 0.2),
+      rgba($theme-2, 0.6)
+    ),
+    url("/images/main.jpg");
+  background-position: right;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: center;
   align-items: center;
 
+  &__box {
+    background-color: rgba($theme-1, 0.7);
+    border-radius: 3px;
+    padding: 1em;
+  }
+
   &__title {
-    color: $theme-dark;
+    color: $grey-light;
     font-weight: 300;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
+    text-align: center;
+  }
+
+  &__definition {
+    color: $grey-light;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    text-align: center;
   }
 
   &__actions {
-    background-color: $theme-mid;
-    padding: 2em;
+    display: flex;
+    justify-content: space-evenly;
 
     &__button {
-      background-color: $grey-light;
+      background-color: $theme-2;
       border: none;
       border-radius: 3px;
-      box-shadow: 0 4px 4px rgba($theme-dark, 0.6);
-      color: $theme-dark;
+      box-shadow: 0 4px 4px rgba($theme-1, 0.85);
+      color: $grey-light;
       cursor: pointer;
       font-family: inherit;
       font-size: 1.4rem;
-      margin: 0 1em;
+      margin: 1em;
       outline: none;
-      padding: 0.5em;
+      padding: 0.4em 1em;
       text-decoration: none;
       transition: all 0.3s;
 
       &:hover {
-        background-color: darken($grey-light, 10%);
+        background-color: $theme-3;
+        color: $theme-1;
       }
     }
 
     &__button--admin {
-      background-color: $theme-dark;
-      color: $grey-light;
+      background-color: $theme-3;
+      color: $theme-1;
 
       &:hover {
-        background-color: darken($grey-light, 10%);
-        color: $theme-dark;
+        background-color: darken($theme-4, 10%);
+        color: $theme-1;
       }
     }
   }
