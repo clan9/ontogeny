@@ -8,7 +8,8 @@ import "./styles.scss";
 
 export class AddExpense extends Component {
   static propTypes = {
-    addExpense: PropTypes.func
+    addExpense: PropTypes.func,
+    isAuthenticated: PropTypes.bool
   };
 
   render() {
@@ -21,6 +22,7 @@ export class AddExpense extends Component {
           </div>
           <div data-test="record-form">
             <RecordForm
+              isAuthenticated={this.props.isAuthenticated}
               onSubmit={expense => {
                 this.props.addExpense(expense);
                 this.props.history.push("/expenses");
@@ -33,7 +35,11 @@ export class AddExpense extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  isAuthenticated: state.user.isAuthenticated
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { addExpense }
 )(AddExpense);

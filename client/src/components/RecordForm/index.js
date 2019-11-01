@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 import moment from "moment";
 import { SingleDatePicker } from "react-dates";
+import "./styles.scss";
 
 export default class RecordForm extends Component {
   constructor(props) {
@@ -44,12 +46,19 @@ export default class RecordForm extends Component {
     this.setState(() => ({ note }));
   };
 
+  resetErrorMsg = () => {
+    setTimeout(() => {
+      this.setState(() => ({ error: "" }));
+    }, 5000);
+  };
+
   onSubmit = e => {
     e.preventDefault();
 
     if (!this.state.description || !this.state.amount) {
       const error = "Please provide a description and amount";
       this.setState(() => ({ error }));
+      this.resetErrorMsg();
     } else {
       const error = "";
       this.setState(() => ({ error }));
@@ -63,54 +72,61 @@ export default class RecordForm extends Component {
   };
 
   static propTypes = {
-    expense: PropTypes.object
+    expense: PropTypes.object,
+    isAuthenticated: PropTypes.bool
   };
 
   render() {
-    return (
-      <form data-test="record-form-component" onSubmit={this.onSubmit}>
-        <div data-test="errorMsg-div">
-          {this.state.error && <p>{this.state.error}</p>}
+    return !this.props.isAuthenticated ? (
+      <Redirect to="/" />
+    ) : (
+      <form
+        data-test="record-form-component"
+        onSubmit={this.onSubmit}
+        className="record-form container"
+      >
+        <div data-test="errorMsg-div" className="record-form__error-container">
+          {this.state.error && (
+            <p className="record-form__errorMsg">{this.state.error}</p>
+          )}
         </div>
-        <div data-test="description">
-          <input
-            type="text"
-            placeholder="Description"
-            autoFocus
-            autoComplete="off"
-            value={this.state.description}
-            onChange={this.onDescriptionChange}
-          />
-        </div>
-        <div data-test="amount">
-          <input
-            type="text"
-            placeholder="Amount"
-            value={this.state.amount}
-            onChange={this.onAmountChange}
-          />
-        </div>
-        <div data-test="date-picker">
-          <SingleDatePicker
-            date={this.state.date}
-            onDateChange={this.onDateChange}
-            focused={this.state.calendarFocused}
-            onFocusChange={this.onFocusChange}
-            numberOfMonths={1}
-            isOutsideRange={() => false}
-            displayFormat={() => "DD/MM/YYYY"}
-          />
-        </div>
-        <div data-test="note">
-          <textarea
-            placeholder="Add a note (optional)"
-            value={this.state.note}
-            onChange={this.onNoteChange}
-          />
-        </div>
-        <div data-test="submit-button">
-          <button>Save record</button>
-        </div>
+        <input
+          type="text"
+          className="record-form__field"
+          data-test="description"
+          placeholder="Description"
+          autoFocus
+          autoComplete="off"
+          value={this.state.description}
+          onChange={this.onDescriptionChange}
+        />
+        <input
+          type="text"
+          className="record-form__field"
+          data-test="amount"
+          placeholder="Amount"
+          value={this.state.amount}
+          onChange={this.onAmountChange}
+        />
+        <SingleDatePicker
+          date={this.state.date}
+          onDateChange={this.onDateChange}
+          focused={this.state.calendarFocused}
+          onFocusChange={this.onFocusChange}
+          numberOfMonths={1}
+          isOutsideRange={() => false}
+          displayFormat={() => "DD/MM/YYYY"}
+        />
+        <textarea
+          className="record-form__field record-form__field--textarea"
+          data-test="note"
+          placeholder="Add a note (optional)"
+          value={this.state.note}
+          onChange={this.onNoteChange}
+        />
+        <button className="record-form__button" data-test="submit-button">
+          Save
+        </button>
       </form>
     );
   }

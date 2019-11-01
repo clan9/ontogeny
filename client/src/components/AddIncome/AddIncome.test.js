@@ -6,7 +6,9 @@ import income from "../../fixtures/income";
 
 const setup = (initialState = {}) => {
   const store = testStore(initialState);
-  const wrapper = shallow(<ConnectedAddIncome store={store} />).dive();
+  const wrapper = shallow(<ConnectedAddIncome store={store} />)
+    .dive()
+    .dive();
   return wrapper;
 };
 

@@ -16,7 +16,7 @@ describe("RecordForm component", () => {
     let wrapper;
 
     beforeEach(() => {
-      wrapper = setup();
+      wrapper = setup({ isAuthenticated: true });
     });
 
     test("Component should render without error", () => {
@@ -40,7 +40,7 @@ describe("RecordForm component", () => {
     });
 
     test("should render datepicker", () => {
-      const datePicker = findByTestAttr(wrapper, "date-picker");
+      const datePicker = wrapper.find(SingleDatePicker);
       expect(datePicker.length).toBe(1);
     });
 
@@ -70,7 +70,9 @@ describe("RecordForm component", () => {
     let onSubmitMock = jest.fn();
 
     beforeEach(() => {
-      wrapper = shallow(<RecordForm onSubmit={onSubmitMock} />);
+      wrapper = shallow(
+        <RecordForm onSubmit={onSubmitMock} isAuthenticated={true} />
+      );
     });
 
     test("should update the description correctly", () => {

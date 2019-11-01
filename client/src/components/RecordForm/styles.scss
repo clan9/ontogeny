@@ -1,11 +1,6 @@
-.page-header h2 {
-  font-size: 2.5rem;
-  font-weight: 300;
-  margin-top: $lg;
-  text-align: center;
-}
+@import "../../styles/main.scss";
 
-.login-form {
+.record-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,10 +19,9 @@
   &__field {
     border: none;
     border-radius: 3px;
-    box-shadow: 0 4px 4px rgba($theme-1, 0.3);
     color: $theme-1;
     font: inherit;
-    height: 3em;
+    height: 2.5em;
     margin-bottom: $sm;
     padding: $sm;
     transition: all 0.3s;
@@ -35,6 +29,11 @@
     &:focus {
       background-color: rgba($theme-3, 0.2);
       outline-color: rgba($theme-5, 0.8);
+    }
+
+    &--textarea {
+      height: 6em;
+      margin-top: $sm;
     }
   }
 
@@ -46,7 +45,7 @@
     box-shadow: 0 4px 4px rgba($theme-1, 0.6);
     color: $grey-light;
     font: inherit;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-top: $sm;
     padding: 0.2em $sm;
     width: 20%;
