@@ -1,0 +1,34 @@
+@import "../../styles/main.scss";
+
+.edit-record__header {
+  text-align: center;
+
+  h1 {
+    font-weight: 300;
+    margin-top: $sm;
+  }
+}
+
+.delete-record {
+  text-align: center;
+
+  &__button {
+    background-color: $theme-1;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 4px 4px rgba($theme-1, 0.6);
+    color: $grey-light;
+    display: inline-block;
+    font: inherit;
+    font-size: 1.6rem;
+    margin-top: $sm;
+    padding: 0.2em $sm;
+    text-align: center;
+    transition: all 0.3s;
+    width: 6em;
+
+    &:hover {
+      background-color: red;
+    }
+  }
+}

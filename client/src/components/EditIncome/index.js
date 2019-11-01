@@ -2,23 +2,28 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { editIncome, deleteIncome } from "../../actions/income/income";
+import UserNavBar from "../UserNavbar.js";
 import RecordForm from "../RecordForm";
+// import "./styles.scss";
 
 export class EditIncome extends Component {
   static propTypes = {
     expense: PropTypes.object,
     editExpense: PropTypes.func,
-    deleteExpense: PropTypes.func
+    deleteExpense: PropTypes.func,
+    isAuthenticated: PropTypes.bool
   };
 
   render() {
     return (
       <div data-test="edit-income-component">
-        <div data-test="header">
+        <UserNavBar />
+        <div data-test="header" className="edit-record__header container">
           <h1>Edit your income</h1>
         </div>
         <div data-test="record-form">
           <RecordForm
+            isAuthenticated={this.props.isAuthenticated}
             record={this.props.income}
             onSubmit={income => {
               this.props.editIncome(income, this.props.income._id);
@@ -26,14 +31,15 @@ export class EditIncome extends Component {
             }}
           />
         </div>
-        <div data-test="remove-income">
+        <div data-test="remove-income" className="delete-record">
           <button
+            className="delete-record__button"
             onClick={() => {
               this.props.deleteIncome(this.props.income._id);
               this.props.history.push("/income");
             }}
           >
-            Remove Income
+            Delete
           </button>
         </div>
       </div>
@@ -42,7 +48,8 @@ export class EditIncome extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  income: state.income.find(income => income._id === ownProps.match.params.id)
+  income: state.income.find(income => income._id === ownProps.match.params.id),
+  isAuthenticated: state.user.isAuthenticated
 });
 
 export default connect(
