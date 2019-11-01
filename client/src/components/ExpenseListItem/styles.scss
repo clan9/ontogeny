@@ -1,0 +1,29 @@
+@import "../../styles/main.scss";
+
+.record-item,
+.record-item:link,
+.record-item:active,
+.record-item:visited {
+  background-color: #fff;
+  border: 1px solid rgba($theme-1, 0.6);
+  border-radius: 3px;
+  box-shadow: 0 4px 4px rgba($theme-1, 0.6);
+  color: inherit;
+  display: flex;
+  font: inherit;
+  justify-content: space-between;
+  margin-bottom: $xs;
+  padding: $sm;
+  text-decoration: none;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: rgba($theme-3, 0.2);
+    border: 2px solid rgba($theme-1, 0.6);
+  }
+
+  h3 {
+    font-weight: 400;
+    word-break: break-all;
+  }
+}

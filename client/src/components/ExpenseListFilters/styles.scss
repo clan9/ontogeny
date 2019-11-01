@@ -3,6 +3,7 @@
 .expense-filters {
   display: flex;
   justify-content: space-between;
+  margin-bottom: $sm;
 
   &__text {
     border: none;
@@ -26,12 +27,10 @@
     justify-content: space-around;
 
     &__text {
-      // flex: 0.8;
       padding: $xs;
     }
 
     &__sortBy {
-      // flex: 0.8;
       padding: $xs;
     }
   }
