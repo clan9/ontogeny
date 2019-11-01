@@ -1,0 +1,36 @@
+@import "../../styles/main.scss";
+
+.user-stats {
+  &__header {
+    font-weight: 300;
+    margin-top: $sm;
+    text-align: center;
+  }
+
+  &__dates {
+    margin: $sm 0;
+    text-align: center;
+  }
+
+  &__no-content {
+    font-size: 1.6rem;
+    font-style: italic;
+  }
+
+  &__data {
+    display: inline-block;
+    padding: $sm;
+
+    &--main {
+      // height: 5em;
+      // position: relative;
+      width: 90%;
+    }
+
+    &--sub {
+      height: 15em;
+      // position: relative;
+      width: 45%;
+    }
+  }
+}

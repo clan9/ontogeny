@@ -26,14 +26,18 @@ export default class BarChart extends Component {
           {
             label: "Income",
             data: summedIncome.map(income => income.incomeTotal),
-            backgroundColor: "#bbb6df"
+            backgroundColor: "#3c9d9b"
           },
           {
             label: "Expenses",
             data: summedExpenses.map(expense => expense.expenseTotal),
-            backgroundColor: "#70cad1"
+            backgroundColor: "#394a6d"
           }
         ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
       }
     });
   }

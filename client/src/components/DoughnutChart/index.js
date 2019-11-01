@@ -20,6 +20,9 @@ export default class DoughNutChart extends Component {
             backgroundColor: this.props.colors
           }
         ]
+      },
+      options: {
+        responsive: true
       }
     });
   }

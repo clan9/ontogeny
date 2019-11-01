@@ -27,14 +27,18 @@ export default class LineChart extends Component {
           {
             label: "Income",
             data: summedIncome.map(income => income.incomeTotal),
-            backgroundColor: "#bbb6df8d"
+            backgroundColor: "#3c9d9b77"
           },
           {
             label: "Expenses",
             data: summedExpenses.map(expense => expense.expenseTotal),
-            backgroundColor: "#70cad18d"
+            backgroundColor: "#394a6d"
           }
         ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
       }
     });
   }
