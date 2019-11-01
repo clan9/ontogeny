@@ -1,0 +1,54 @@
+@import "../../styles/main.scss";
+
+.admin-stats {
+  &__header {
+    &__main {
+      font-weight: 300;
+      margin-top: $sm;
+      text-align: center;
+    }
+
+    &__sub {
+      font-weight: 300;
+      margin-top: $sm;
+      text-align: center;
+    }
+  }
+
+  &__dates {
+    margin: $sm 0;
+    text-align: center;
+  }
+
+  &__no-content {
+    font-size: 1.6rem;
+    font-style: italic;
+  }
+
+  &__data {
+    display: inline-block;
+    padding: $sm;
+
+    &--main {
+      width: 90%;
+    }
+
+    &--sub {
+      height: 15em;
+      width: 45%;
+    }
+  }
+
+  &__username {
+    background-color: rgba($theme-2, 0.3);
+    display: inline-block;
+    margin-top: $xs;
+    padding: $xs;
+  }
+}
+
+hr {
+  border: 1px solid $theme-1;
+  margin: 0 auto;
+  width: 60%;
+}
