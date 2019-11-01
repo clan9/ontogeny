@@ -1,52 +1,50 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout } from "../../actions/user/user";
-
-/**
- * Layout
- *  Admin:
- *   View all users stats
- *   Give another user admin access
- *  General:
- *   Go to your account
- *   Logout
- */
+import AdminNavBar from "../AdminNavBar";
 
 export const MenuForAdmin = props => {
   return props.isAuthenticated ? (
-    <div data-test="menuForAdmin-component">
-      <header data-test="header">
-        <h3>Welcome {props.name} (Admin)</h3>
-      </header>
+    <Fragment>
+      <AdminNavBar />
+      <div data-test="menuForAdmin-component" className="container">
+        <header data-test="header" className="menu__header">
+          <h3>Welcome {props.name} (Admin)</h3>
+        </header>
 
-      <p data-test="paragraph">What would you like to do?</p>
+        <p data-test="paragraph" className="menu__paragraph">
+          What would you like to do?
+        </p>
 
-      <div>
-        <Link to="/dashAdmin" data-test="dashboardLink">
-          View all users stats
-        </Link>
-        <Link to="/toggleAdmin" data-test="toggleAdminLink">
-          Add/Remove Admin access for another user
-        </Link>
-        <Link to="/deleteUser" data-test="deleteUserLink">
-          Delete a user
-        </Link>
-        <Link to="/menu" data-test="menuLink">
-          Go to your account
-        </Link>
-        <Link
-          to="/"
-          data-test="logoutLink"
-          onClick={() => {
-            props.logout();
-          }}
-        >
-          Log out
-        </Link>
+        <div className="menu__items">
+          <Link
+            to="/dashAdmin"
+            data-test="dashboardLink"
+            className="menu__link"
+          >
+            View all users stats
+          </Link>
+          <Link
+            to="/toggleAdmin"
+            data-test="toggleAdminLink"
+            className="menu__link"
+          >
+            Add/Remove Admin access for another user
+          </Link>
+          <Link
+            to="/deleteUser"
+            data-test="deleteUserLink"
+            className="menu__link"
+          >
+            Delete a user
+          </Link>
+          <Link to="/menu" data-test="menuLink" className="menu__link">
+            Go to your account
+          </Link>
+        </div>
       </div>
-    </div>
+    </Fragment>
   ) : (
     <Redirect to="/" data-test="redirect" />
   );
@@ -54,8 +52,7 @@ export const MenuForAdmin = props => {
 
 MenuForAdmin.propTypes = {
   isAuthenticated: PropTypes.bool,
-  name: PropTypes.string,
-  logout: PropTypes.func
+  name: PropTypes.string
 };
 
 const mapStateToProps = state => ({
@@ -63,7 +60,4 @@ const mapStateToProps = state => ({
   name: state.user.user.name
 });
 
-export default connect(
-  mapStateToProps,
-  { logout }
-)(MenuForAdmin);
+export default connect(mapStateToProps)(MenuForAdmin);
