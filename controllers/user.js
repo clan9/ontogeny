@@ -147,10 +147,10 @@ exports.toggleIsAdmin = async (req, res) => {
 };
 
 exports.adminDeleteUser = async (req, res) => {
-  const { email } = req.body;
+  const id = req.params.id;
   const adminId = req.user._id;
   try {
-    const userToDelete = await User.findOne({ email });
+    const userToDelete = await User.findById(id);
     const adminUsers = await User.find({ isAdmin: true });
     const adminUsersCount = adminUsers.length;
 
@@ -160,29 +160,25 @@ exports.adminDeleteUser = async (req, res) => {
 
     // If the admin user tries to delete their own account
     // Check if they are the only admin user -> if so, send error
-    // If not, delete account and redirect to home page
-    // so they cannot carry out any further admin actions.
+    // If not, delete account
     if (userToDelete._id.toString() === adminId.toString()) {
       if (adminUsersCount === 1) {
         return res.status(403).json({
           msg:
             "You are currently the only user with Admin access therefore you cannot delete your account at this time."
         });
+      } else {
+        await userToDelete.remove();
+        const users = await User.find();
+        return res.json(users);
       }
-      await userToDelete.remove();
-      return res.redirect(200, "/");
     }
 
     await userToDelete.remove();
 
     // Send back list of remaining users with admin access info
     const users = await User.find();
-    const updatedUsers = users.map(user => ({
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin
-    }));
-    res.json(updatedUsers);
+    res.json(users);
   } catch (error) {
     res.status(500).send();
   }

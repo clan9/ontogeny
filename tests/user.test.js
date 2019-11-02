@@ -248,7 +248,7 @@ describe("User routes tests", () => {
 
   it("should allow admin user to delete another user account", async () => {
     await request(app)
-      .patch("/api/user/adminDeleteUser")
+      .delete(`/api/user/adminDeleteUser/${userTwoId}`)
       .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
       .send({ email: userTwo.email })
       .expect(200);
@@ -256,7 +256,7 @@ describe("User routes tests", () => {
 
   it("should NOT allow admin user to delete their own account if they are the only user with admin access", async () => {
     await request(app)
-      .patch("/api/user/adminDeleteUser")
+      .delete(`/api/user/adminDeleteUser/${userOneId}`)
       .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
       .send({ email: userOne.email })
       .expect(403);
@@ -274,7 +274,7 @@ describe("User routes tests", () => {
 
     // now as userOne, delete your account
     await request(app)
-      .patch("/api/user/adminDeleteUser")
+      .delete(`/api/user/adminDeleteUser/${userOneId}`)
       .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
       .send({
         email: userOne.email

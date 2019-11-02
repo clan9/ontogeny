@@ -57,11 +57,11 @@ router.patch(
   UserController.toggleIsAdmin
 );
 
-// @route   DELETE /api/user/adminDeleteUser
+// @route   DELETE /api/user/adminDeleteUser/:id
 // @desc    Logged in admin user deleting a user
 // @access  Private & Admin
-router.patch(
-  "/adminDeleteUser",
+router.delete(
+  "/adminDeleteUser/:id",
   requireAuth,
   requireAdmin,
   UserController.adminDeleteUser
