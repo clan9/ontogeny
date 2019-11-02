@@ -169,16 +169,12 @@ exports.adminDeleteUser = async (req, res) => {
         });
       } else {
         await userToDelete.remove();
-        const users = await User.find();
-        return res.json(users);
+        return res.json(userToDelete);
       }
     }
 
     await userToDelete.remove();
-
-    // Send back list of remaining users with admin access info
-    const users = await User.find();
-    res.json(users);
+    res.json(userToDelete);
   } catch (error) {
     res.status(500).send();
   }

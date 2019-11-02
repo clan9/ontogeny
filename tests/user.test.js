@@ -250,7 +250,7 @@ describe("User routes tests", () => {
     await request(app)
       .delete(`/api/user/adminDeleteUser/${userTwoId}`)
       .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
-      .send({ email: userTwo.email })
+      .send()
       .expect(200);
   });
 
@@ -258,7 +258,7 @@ describe("User routes tests", () => {
     await request(app)
       .delete(`/api/user/adminDeleteUser/${userOneId}`)
       .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
-      .send({ email: userOne.email })
+      .send()
       .expect(403);
   });
 
@@ -267,18 +267,14 @@ describe("User routes tests", () => {
     await request(app)
       .patch("/api/user/toggleAdmin")
       .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
-      .send({
-        email: userTwo.email
-      })
+      .send({ email: userTwo.email })
       .expect(200);
 
     // now as userOne, delete your account
     await request(app)
       .delete(`/api/user/adminDeleteUser/${userOneId}`)
       .set("Authorization", `Bearer ${userOne.tokens[0].token}`)
-      .send({
-        email: userOne.email
-      })
+      .send()
       .expect(200);
 
     // Assert correct user was deleted from db
