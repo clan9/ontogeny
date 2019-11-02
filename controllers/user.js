@@ -102,13 +102,7 @@ exports.getUsers = async (req, res) => {
       return res.status(404).send();
     }
 
-    const userNamesAndEmails = users.map(user => ({
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin
-    }));
-
-    res.json(userNamesAndEmails);
+    res.json(users);
   } catch (error) {
     res.status(500).send();
   }
@@ -127,31 +121,26 @@ exports.toggleIsAdmin = async (req, res) => {
 
     // If the admin user tries to remove their own access
     // Check if they are the only admin user -> if so, send error
-    // If not, remove access and redirect to home page ->
-    // so they cannot carry out any further admin actions.
+    // If not, remove access
     if (user._id.toString() === req.user._id.toString()) {
       if (adminUsersCount === 1) {
         return res.status(403).json({
           msg:
             "You are currently the only user with Admin access therefore you cannot remove it at this time."
         });
+      } else {
+        user.isAdmin = !user.isAdmin;
+        await user.save();
+        const users = await User.find();
+        return res.json(users);
       }
-      user.isAdmin = !user.isAdmin;
-      await user.save();
-      return res.redirect(200, "/");
     }
 
+    // The admin user is toggling admin access for another user:
     user.isAdmin = !user.isAdmin;
     await user.save();
-
-    // Send back list of updated users with admin access info
     const users = await User.find();
-    const updatedUsers = users.map(user => ({
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin
-    }));
-    res.json(updatedUsers);
+    res.json(users);
   } catch (error) {
     res.status(500).json({ msg: "Server error" });
   }
