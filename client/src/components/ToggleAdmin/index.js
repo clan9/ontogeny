@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
-import { fetchUsersDetails } from "../../actions/user/user";
+import { fetchUsersDetails, logout } from "../../actions/user/user";
 import { connect } from "react-redux";
-import { logout } from "../../actions/user/user";
 import ToggleAdminList from "../ToggleAdminList";
 import AdminNavBar from "../AdminNavBar";
 

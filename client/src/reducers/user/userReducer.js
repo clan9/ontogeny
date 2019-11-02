@@ -51,6 +51,7 @@ export default (state = initialState, action) => {
       };
     case actionTypes.LOG_OUT:
     case actionTypes.DELETE_USER:
+    case actionTypes.ADMIN_DELETE_SELF:
       localStorage.removeItem("authToken");
       return {
         ...initialState,
@@ -58,9 +59,6 @@ export default (state = initialState, action) => {
         loading: false
       };
     case actionTypes.ADMIN_DELETE_USER:
-      if (payload._id === state.user._id) {
-        localStorage.removeItem("authToken");
-      }
       return {
         ...state,
         users: state.users.filter(user => user._id !== payload._id)

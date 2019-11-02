@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { adminDeleteUser } from "../../actions/user/user";
 
 const DeleteUserListItem = ({ user, adminDeleteUser }) => {
   return (
-    <div>
-      <p>Name: {user.name}</p>
-      <button onClick={() => adminDeleteUser({ email: user.email })}>
+    <div className="toggle-list__item">
+      <p className="toggle-list__item__text">Name: {user.name}</p>
+      <button
+        className="toggle-list__item__button"
+        onClick={() => adminDeleteUser(user._id)}
+      >
         Delete this user
       </button>
     </div>
@@ -19,7 +20,4 @@ DeleteUserListItem.propTypes = {
   adminDeleteUser: PropTypes.func
 };
 
-export default connect(
-  null,
-  { adminDeleteUser }
-)(DeleteUserListItem);
+export default DeleteUserListItem;

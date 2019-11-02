@@ -141,3 +141,5 @@ export const adminDeleteUser = id => async dispatch => {
     }, 3000);
   }
 };
+
+export const adminDeleteSelf = () => ({ type: actionTypes.ADMIN_DELETE_SELF });
