@@ -114,7 +114,7 @@ describe("User reducer", () => {
   // ADMIN TESTS
   describe("Admin user tests", () => {
     let state;
-    let usersInfo;
+    let users;
 
     beforeEach(() => {
       state = {
@@ -122,28 +122,30 @@ describe("User reducer", () => {
         isAuthenticated: true,
         loading: false,
         user: {
-          name: "Simon"
+          _id: "1",
+          name: "Simon",
+          email: "s@test.com"
         },
         users: [],
         error: "",
         adminStatusMsg: ""
       };
 
-      usersInfo = [
-        { name: "Simon", email: "s@test.com" },
-        { name: "Lee", email: "l@test.com" }
+      users = [
+        { _id: "1", name: "Simon", email: "s@test.com" },
+        { _id: "2", name: "Lee", email: "l@test.com" }
       ];
     });
 
     test("should update state correctly when FETCH_USER_DETAILS action is received", () => {
       const action = {
         type: actionTypes.FETCH_USERS_DETAILS,
-        payload: usersInfo
+        payload: users
       };
 
       const expectedState = {
         ...state,
-        users: [...usersInfo]
+        users: [...users]
       };
 
       const newState = userReducer(state, action);
@@ -155,14 +157,14 @@ describe("User reducer", () => {
       const action = {
         type: actionTypes.TOGGLE_ADMIN,
         payload: {
-          users: usersInfo,
+          users: users,
           msg: "Admin status has been updated"
         }
       };
 
       const expectedState = {
         ...state,
-        users: [...usersInfo],
+        users: [...users],
         adminStatusMsg: action.payload.msg
       };
 

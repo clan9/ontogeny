@@ -32,7 +32,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         users: [...payload.users],
-        adminStatusMsg: payload.msg
+        adminStatusMsg: payload.msg,
+        user: payload.users.find(user => user._id === state.user._id)
       };
     case actionTypes.ADMIN_ERROR:
     case actionTypes.DELETE_USER_ERROR:
@@ -60,6 +61,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         users: [...payload]
+      };
+    case actionTypes.RESET_ADMIN_MSG:
+      return {
+        ...state,
+        adminStatusMsg: ""
+      };
+    case actionTypes.RESET_ERROR_MSG:
+      return {
+        ...state,
+        error: ""
       };
     default:
       return state;

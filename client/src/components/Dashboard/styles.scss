@@ -22,14 +22,24 @@
     padding: $sm;
 
     &--main {
-      // position: relative;
       width: 90%;
     }
 
     &--sub {
       height: 15em;
-      // position: relative;
       width: 45%;
+    }
+  }
+}
+
+@media (max-width: 40em) {
+  .admin-stats {
+    &__data {
+      display: block;
+
+      &--sub {
+        width: 90%;
+      }
     }
   }
 }

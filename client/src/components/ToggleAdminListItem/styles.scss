@@ -1,0 +1,36 @@
+@import "../../styles/main.scss";
+
+.toggle-list__item {
+  background-color: $theme-1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: $sm auto;
+  padding: $sm;
+  width: 80%;
+
+  &__text {
+    color: $grey-light;
+
+    span {
+      display: block;
+      margin-top: $xs;
+    }
+  }
+
+  &__button {
+    background-color: $theme-2;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 4px 4px rgba($theme-1, 0.6);
+    color: $grey-light;
+    cursor: pointer;
+    font: inherit;
+    padding: 0.2em $sm;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: darken($theme-2, 10%);
+    }
+  }
+}

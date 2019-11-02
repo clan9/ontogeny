@@ -1,0 +1,19 @@
+@import "../../styles/main.scss";
+
+.adminList {
+  &__header {
+    font-weight: 300;
+    margin: $sm 0;
+    text-align: center;
+  }
+
+  &__message-container {
+    height: 4em;
+  }
+
+  &__message {
+    font-size: 1.6rem;
+    font-style: italic;
+    text-align: center;
+  }
+}

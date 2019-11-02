@@ -13,8 +13,8 @@ export const registerUser = formData => async dispatch => {
     dispatch({ type: actionTypes.LOG_IN_ERROR, payload: "Unable to log in" });
 
     setTimeout(() => {
-      dispatch({ type: actionTypes.LOG_IN_ERROR, payload: "" });
-    }, 5000);
+      dispatch({ type: actionTypes.RESET_ERROR_MSG });
+    }, 3000);
   }
 };
 
@@ -26,11 +26,14 @@ export const signIn = formData => async dispatch => {
 
     setAuthToken(res.data.token);
   } catch (error) {
-    dispatch({ type: actionTypes.LOG_IN_ERROR, payload: "Unable to log in" });
+    dispatch({
+      type: actionTypes.LOG_IN_ERROR,
+      payload: "Unable to log in, please try again"
+    });
 
     setTimeout(() => {
-      dispatch({ type: actionTypes.LOG_IN_ERROR, payload: "" });
-    }, 5000);
+      dispatch({ type: actionTypes.RESET_ERROR_MSG });
+    }, 3000);
   }
 };
 
@@ -42,7 +45,7 @@ export const logout = () => async dispatch => {
     dispatch({ type: actionTypes.CLEAR_EXPENSES });
     dispatch({ type: actionTypes.CLEAR_INCOMES });
   } catch (error) {
-    console.error("Action Error!!", error);
+    console.error("Logout Action Error!!", error);
   }
 };
 
@@ -57,12 +60,10 @@ export const deleteUser = () => async dispatch => {
     });
 
     setTimeout(() => {
-      dispatch({ type: actionTypes.DELETE_USER_ERROR, payload: "" });
-    }, 5000);
+      dispatch({ type: actionTypes.RESET_ERROR_MSG });
+    }, 3000);
   }
 };
-
-// *** Need to setup deleteUser and adminDeleteUser actions and reducers (and add delete button to user menu) *** //
 
 // ADMIN ACTIONS
 
@@ -73,11 +74,14 @@ export const signInAdmin = formData => async dispatch => {
     dispatch({ type: actionTypes.SIGN_IN, payload: res.data });
     setAuthToken(res.data.token);
   } catch (error) {
-    dispatch({ type: actionTypes.LOG_IN_ERROR, payload: "Unable to log in" });
+    dispatch({
+      type: actionTypes.LOG_IN_ERROR,
+      payload: "Unable to log in, please try again"
+    });
 
     setTimeout(() => {
-      dispatch({ type: actionTypes.LOG_IN_ERROR, payload: "" });
-    }, 5000);
+      dispatch({ type: actionTypes.RESET_ERROR_MSG });
+    }, 3000);
   }
 };
 
@@ -92,25 +96,23 @@ export const fetchUsersDetails = () => async dispatch => {
     });
 
     setTimeout(() => {
-      dispatch({ type: actionTypes.ADMIN_ERROR, payload: "" });
-    }, 5000);
+      dispatch({ type: actionTypes.RESET_ERROR_MSG });
+    }, 3000);
   }
 };
 
 export const toggleAdmin = formData => async dispatch => {
   try {
     const res = await axios.patch("/api/user/toggleAdmin", formData);
+
     dispatch({
       type: actionTypes.TOGGLE_ADMIN,
       payload: { users: res.data, msg: "Admin status has been updated" }
     });
 
     setTimeout(() => {
-      dispatch({
-        type: actionTypes.TOGGLE_ADMIN,
-        payload: { users: res.data, msg: "" }
-      });
-    }, 5000);
+      dispatch({ type: actionTypes.RESET_ADMIN_MSG });
+    }, 3000);
   } catch (error) {
     dispatch({
       type: actionTypes.ADMIN_ERROR,
@@ -118,8 +120,8 @@ export const toggleAdmin = formData => async dispatch => {
     });
 
     setTimeout(() => {
-      dispatch({ type: actionTypes.ADMIN_ERROR, payload: "" });
-    }, 5000);
+      dispatch({ type: actionTypes.RESET_ERROR_MSG });
+    }, 3000);
   }
 };
 

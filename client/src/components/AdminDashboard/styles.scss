@@ -42,13 +42,25 @@
   &__username {
     background-color: rgba($theme-2, 0.3);
     display: inline-block;
-    margin-top: $xs;
+    margin-top: $sm;
     padding: $xs;
+  }
+
+  hr {
+    border: 1px solid $theme-1;
+    margin: 0 auto;
+    width: 80%;
   }
 }
 
-hr {
-  border: 1px solid $theme-1;
-  margin: 0 auto;
-  width: 60%;
+@media (max-width: 40em) {
+  .admin-stats {
+    &__data {
+      display: block;
+
+      &--sub {
+        width: 90%;
+      }
+    }
+  }
 }
