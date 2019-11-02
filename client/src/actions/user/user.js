@@ -125,14 +125,11 @@ export const toggleAdmin = formData => async dispatch => {
   }
 };
 
-export const adminDeleteUser = formData => async dispatch => {
-  // Could not use a delete method here -> no req.body data was available in express
+export const adminDeleteUser = id => async dispatch => {
   try {
-    const res = await axios.patch("/api/user/adminDeleteUser", formData);
+    const res = await axios.delete(`/api/user/adminDeleteUser/${id}`);
 
-    return res.data
-      ? dispatch({ type: actionTypes.ADMIN_DELETE_USER, payload: res.data })
-      : dispatch({ type: actionTypes.ADMIN_DELETE_USER, payload: [] });
+    dispatch({ type: actionTypes.ADMIN_DELETE_USER, payload: res.data });
   } catch (error) {
     dispatch({
       type: actionTypes.ADMIN_ERROR,
@@ -140,7 +137,7 @@ export const adminDeleteUser = formData => async dispatch => {
     });
 
     setTimeout(() => {
-      dispatch({ type: actionTypes.ADMIN_ERROR, payload: "" });
-    }, 5000);
+      dispatch({ type: actionTypes.RESET_ERROR_MSG });
+    }, 3000);
   }
 };

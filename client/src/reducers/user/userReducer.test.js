@@ -111,7 +111,10 @@ describe("User reducer", () => {
     });
   });
 
+  ///////////////////////////////////
   // ADMIN TESTS
+  //////////////////////////////////
+
   describe("Admin user tests", () => {
     let state;
     let users;
@@ -187,12 +190,16 @@ describe("User reducer", () => {
     });
 
     test("should update state when ADMIN_DELETE_USER action received", () => {
+      const currentState = {
+        user: { _id: "1", name: "Simon", email: "s@test.com" },
+        users
+      };
       const action = {
         type: actionTypes.ADMIN_DELETE_USER,
-        payload: [{ name: "Jess" }]
+        payload: { _id: "2", name: "Lee", email: "l@test.com" }
       };
-      const newState = userReducer(state, action);
-      expect(newState.users).toEqual(action.payload);
+      const newState = userReducer(currentState, action);
+      expect(newState.users.length).toEqual(1);
     });
   });
 });

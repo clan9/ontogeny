@@ -71,7 +71,7 @@ describe("User action creator and reducer", () => {
     });
   });
 
-  describe("Logout user on single/multiple devices", () => {
+  describe("Logout user", () => {
     let store;
     let expectedState;
 
@@ -202,15 +202,27 @@ describe("User action creator and reducer", () => {
       expect(newState.user.users).toEqual(users);
       expect(newState.user.adminStatusMsg).toBe(msg);
     });
+  });
+
+  describe("Admin deleting users", () => {
+    let store;
+
+    beforeEach(() => {
+      store = testStore({
+        user: {
+          user: { _id: "1", name: "simon" },
+          users: [{ _id: "1", name: "simon" }, { _id: "2", name: "lee" }]
+        }
+      });
+    });
 
     test("should update state correctly when admin user has deleted another users account", async () => {
-      const users = [{ name: "simon" }, { name: "lee" }];
-
+      const users = [{ _id: "1", name: "simon" }];
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           status: 200,
-          response: users
+          response: { _id: "2", name: "lee" }
         });
       });
 
