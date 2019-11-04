@@ -83,7 +83,7 @@ export default class RecordForm extends Component {
       <form
         data-test="record-form-component"
         onSubmit={this.onSubmit}
-        className="record-form container"
+        className="record-form"
       >
         <div data-test="errorMsg-div" className="record-form__error-container">
           {this.state.error && (
