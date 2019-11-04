@@ -4,6 +4,7 @@
   margin: $sm 0;
 
   &__heading {
+    font-size: 1.8rem;
     font-weight: 300;
 
     span {
@@ -28,6 +29,34 @@
 
     &:hover {
       background-color: darken($theme-2, 10%);
+    }
+  }
+}
+
+@media (max-width: 37.5em) {
+  .records-summary {
+    &__heading {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+@media (max-width: 30em) {
+  .records-summary {
+    &__add-record {
+      margin-bottom: $sm;
+    }
+  }
+}
+
+@media (max-width: 25em) {
+  .records-summary {
+    &__heading {
+      font-size: inherit;
+    }
+
+    &__add-record {
+      margin-bottom: $sm;
     }
   }
 }
