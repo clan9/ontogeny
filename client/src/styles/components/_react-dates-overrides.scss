@@ -1,0 +1,25 @@
+.DateRangePicker {
+  font-size: inherit;
+}
+
+.DateInput_input {
+  font: inherit;
+  font-size: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 30em) {
+  .DateInput {
+    width: 45%;
+  }
+  .DateInput_input {
+    padding: $xs;
+  }
+  .DateRangePickerInput_arrow_svg {
+    height: 1em;
+    width: 1em;
+  }
+  .DateRangePickerInput_clearDates {
+    font-size: 1em;
+  }
+}

@@ -13,3 +13,9 @@ body {
   max-width: 60rem;
   width: 75%;
 }
+
+@media (min-width: 75em) {
+  .container {
+    width: 60%;
+  }
+}

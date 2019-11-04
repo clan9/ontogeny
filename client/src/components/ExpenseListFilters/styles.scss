@@ -9,28 +9,31 @@
     border: none;
     border-radius: 3px;
     font: inherit;
+    font-size: 1rem;
     padding: 0 $xs;
   }
 
   &__sortBy {
     border-radius: 3px;
     font: inherit;
+    font-size: 1rem;
     padding: 0 $xs;
   }
 }
 
-@media (max-width: 42rem) {
+@media (max-width: 60em) {
   .expense-filters {
     flex-direction: column;
     align-items: flex-start;
-    height: 20vmax;
     justify-content: space-around;
 
     &__text {
+      margin-bottom: $xs;
       padding: $xs;
     }
 
     &__sortBy {
+      margin-bottom: $xs;
       padding: $xs;
     }
   }

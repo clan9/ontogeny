@@ -35,6 +35,8 @@
 
 @media (max-width: 37.5em) {
   .records-summary {
+    margin: $xs 0;
+
     &__heading {
       font-size: 1.4rem;
     }
@@ -44,7 +46,7 @@
 @media (max-width: 30em) {
   .records-summary {
     &__add-record {
-      margin-bottom: $sm;
+      margin-bottom: $xs;
     }
   }
 }
@@ -56,7 +58,7 @@
     }
 
     &__add-record {
-      margin-bottom: $sm;
+      margin-bottom: $xs;
     }
   }
 }
