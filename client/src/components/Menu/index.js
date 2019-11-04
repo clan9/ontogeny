@@ -20,16 +20,16 @@ export const Menu = props => {
         </p>
         <div className="menu__items">
           <Link to="/expenses" data-test="expenseLink" className="menu__link">
-            Go to expenses page
+            View/Edit Expenses
           </Link>
           <Link to="/income" data-test="incomeLink" className="menu__link">
-            Go to income page
+            View/Edit Income
           </Link>
           <Link to="/dash" data-test="dashboardLink" className="menu__link">
-            Go to stats page
+            View Stats
           </Link>
           <button onClick={() => props.deleteUser()} className="menu__button">
-            Delete your account
+            Delete account
           </button>
         </div>
       </div>

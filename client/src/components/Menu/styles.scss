@@ -33,7 +33,6 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.6);
     color: $grey-light;
     display: inline-block;
-    font-size: 1.6rem;
     margin-bottom: $sm;
     padding: $xs $md;
     text-align: center;
@@ -55,13 +54,24 @@
     color: $grey-light;
     display: inline-block;
     font: inherit;
-    font-size: 1.2rem;
     margin-top: $xs;
     padding: $sm $md;
     transition: all 0.3s;
 
     &:hover {
       background-color: red;
+    }
+  }
+}
+
+@media (min-width: 37.5em) {
+  .menu {
+    &__link {
+      padding: $xs;
+    }
+
+    &__button {
+      padding: $xs;
     }
   }
 }

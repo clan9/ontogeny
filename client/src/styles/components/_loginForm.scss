@@ -8,15 +8,16 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  height: 100vh;
 
   &__error-container {
-    height: $xl;
+    height: 3em;
+    margin-bottom: $xs;
   }
 
   &__errorMsg {
     color: $theme-5;
-    font-size: 1.8rem;
     font-style: italic;
     text-align: center;
   }

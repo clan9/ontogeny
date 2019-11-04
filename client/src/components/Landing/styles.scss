@@ -69,13 +69,19 @@
 @media (max-width: 37.5em) {
   .landing {
     &__box {
-      padding: $xs;
+      padding: 0.2em;
     }
 
     &__actions {
+      justify-content: space-between;
       &__button {
         font-size: inherit;
         padding: 0.2em $xs;
+
+        &--admin {
+          display: flex;
+          align-items: center;
+        }
       }
     }
   }
