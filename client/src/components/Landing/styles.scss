@@ -19,6 +19,7 @@
     background-color: rgba($theme-5, 0.5);
     border-radius: 3px;
     padding: $sm;
+    width: 80%;
   }
 
   &__title {
@@ -53,23 +54,29 @@
       margin: $sm;
       outline: none;
       padding: 0.4em $sm;
+      text-align: center;
       text-decoration: none;
       transition: all 0.3s;
 
       &:hover {
-        // background-color: $theme-1;
         background-color: darken($theme-2, 10%);
         color: $grey-light;
       }
     }
+  }
+}
 
-    // &__button--admin {
-    //   background-color: $theme-1;
-    //   color: $grey-light;
+@media (max-width: 37.5em) {
+  .landing {
+    &__box {
+      padding: $xs;
+    }
 
-    //   &:hover {
-    //     background-color: $theme-2;
-    //   }
-    // }
+    &__actions {
+      &__button {
+        font-size: inherit;
+        padding: 0.2em $xs;
+      }
+    }
   }
 }

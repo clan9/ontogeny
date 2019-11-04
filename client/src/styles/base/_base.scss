@@ -9,5 +9,14 @@
 :root {
   box-sizing: border-box;
   // define what 1rem is
-  font-size: calc(0.8vw + 0.4em);
+  font-size: calc(1vw + 0.5em);
+}
+
+@media (min-width: 62.5em) {
+  // at 1000px (62.5em) fix font size:
+  // at 1000px -> 1vw + .5em = 10 + 8 = 18px:
+  // 18/16 = 1.125
+  :root {
+    font-size: 1.125em;
+  }
 }

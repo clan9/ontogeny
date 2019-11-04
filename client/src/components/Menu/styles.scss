@@ -7,6 +7,10 @@
     margin-top: $sm;
     margin-bottom: $sm;
     text-align: center;
+
+    span {
+      color: red;
+    }
   }
 
   &__paragraph {

@@ -10,7 +10,9 @@ export const MenuForAdmin = props => {
       <AdminNavBar />
       <div data-test="menuForAdmin-component" className="container">
         <header data-test="header" className="menu__header">
-          <h3>Welcome {props.name} (Admin)</h3>
+          <h3>
+            Welcome {props.name} <span>(Admin)</span>
+          </h3>
         </header>
 
         <p data-test="paragraph" className="menu__paragraph">
