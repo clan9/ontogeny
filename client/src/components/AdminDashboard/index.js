@@ -80,41 +80,44 @@ export class AdminDashboard extends Component {
         <span className="admin-stats__no-content">No information to show</span>
       </div>
     ) : (
-      <div data-test="content-to-show" className="admin-stats__data">
+      <div data-test="content-to-show" className="admin-stats">
         <div data-test="stats-all-users">
           <h2 data-test="sub-heading-1" className="admin-stats__header__sub">
             Overall Totals (All users)
           </h2>
-          <div className="admin-stats__data admin-stats__data--main">
-            <DoughnutChart
-              data={[
-                {
-                  title: "Income",
-                  total: this.props.incomeTotal
-                },
-                {
-                  title: "Expenses",
-                  total: this.props.expensesTotal
-                }
-              ]}
-              colors={["#3c9d9b", "#394a6d"]}
-              data-test="doughnut-all-users"
-            />
-          </div>
-
-          <div className="admin-stats__data admin-stats__data--sub">
-            <BarChart
-              expenses={this.props.expenses}
-              income={this.props.income}
-              data-test="barchart-all-users"
-            />
-          </div>
-          <div className="admin-stats__data admin-stats__data--sub">
-            <LineChart
-              expenses={this.props.expenses}
-              income={this.props.income}
-              data-test="linechart-all-users"
-            />
+          <div className="admin-stats__data">
+            <div className="admin-stats__data admin-stats__data--main">
+              <DoughnutChart
+                data={[
+                  {
+                    title: "Income",
+                    total: this.props.incomeTotal
+                  },
+                  {
+                    title: "Expenses",
+                    total: this.props.expensesTotal
+                  }
+                ]}
+                colors={["#3c9d9b", "#394a6d"]}
+                data-test="doughnut-all-users"
+              />
+            </div>
+            <div className="admin-stats__data--sub-container">
+              <div className="admin-stats__data admin-stats__data--sub">
+                <BarChart
+                  expenses={this.props.expenses}
+                  income={this.props.income}
+                  data-test="barchart-all-users"
+                />
+              </div>
+              <div className="admin-stats__data admin-stats__data--sub">
+                <LineChart
+                  expenses={this.props.expenses}
+                  income={this.props.income}
+                  data-test="linechart-all-users"
+                />
+              </div>
+            </div>
           </div>
         </div>
         <hr />
@@ -128,7 +131,7 @@ export class AdminDashboard extends Component {
             return (
               <div key={index}>
                 <p className="admin-stats__username">Data for {name}</p>
-                <div>
+                <div className="admin-stats__data">
                   <div className="admin-stats__data admin-stats__data--main">
                     <DoughnutChart
                       data={[
@@ -139,19 +142,21 @@ export class AdminDashboard extends Component {
                       data-test="doughnut-user"
                     />
                   </div>
-                  <div className="admin-stats__data admin-stats__data--sub">
-                    <BarChart
-                      expenses={this.filterDataByUser()[index].expenses}
-                      income={this.filterDataByUser()[index].income}
-                      data-test="barchart-user"
-                    />
-                  </div>
-                  <div className="admin-stats__data admin-stats__data--sub">
-                    <LineChart
-                      expenses={this.filterDataByUser()[index].expenses}
-                      income={this.filterDataByUser()[index].income}
-                      data-test="linechart-user"
-                    />
+                  <div className="admin-stats__data--sub-container">
+                    <div className="admin-stats__data admin-stats__data--sub">
+                      <BarChart
+                        expenses={this.filterDataByUser()[index].expenses}
+                        income={this.filterDataByUser()[index].income}
+                        data-test="barchart-user"
+                      />
+                    </div>
+                    <div className="admin-stats__data admin-stats__data--sub">
+                      <LineChart
+                        expenses={this.filterDataByUser()[index].expenses}
+                        income={this.filterDataByUser()[index].income}
+                        data-test="linechart-user"
+                      />
+                    </div>
                   </div>
                 </div>
                 <hr />
@@ -167,7 +172,10 @@ export class AdminDashboard extends Component {
     return (
       <Fragment>
         <AdminNavBar />
-        <div data-test="admin-dash-component" className="admin-stats container">
+        <div
+          data-test="admin-dash-component"
+          className="admin-stats stats-container"
+        >
           <h1 data-test="header" className="admin-stats__header__main">
             User statistics
           </h1>
