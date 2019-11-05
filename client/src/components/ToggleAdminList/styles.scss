@@ -3,12 +3,14 @@
 .adminList {
   &__header {
     font-weight: 300;
-    margin: $sm 0;
+    margin-top: $sm;
+    margin-bottom: $xs;
     text-align: center;
   }
 
   &__message-container {
-    height: 4em;
+    height: 3em;
+    margin-bottom: $xs;
   }
 
   &__message {

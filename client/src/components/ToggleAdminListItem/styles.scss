@@ -2,6 +2,8 @@
 
 .toggle-list__item {
   background-color: $theme-1;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.6);
+  border-radius: 3px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,6 +33,16 @@
 
     &:hover {
       background-color: darken($theme-2, 10%);
+    }
+  }
+}
+
+@media (max-width: 31.25em) {
+  .toggle-list__item {
+    flex-direction: column;
+
+    &__button {
+      margin-top: $md;
     }
   }
 }

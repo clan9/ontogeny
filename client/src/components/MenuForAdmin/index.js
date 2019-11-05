@@ -32,7 +32,7 @@ export const MenuForAdmin = props => {
             data-test="toggleAdminLink"
             className="menu__link"
           >
-            Add/Remove Admin access for another user
+            Add/Remove Admin access
           </Link>
           <Link
             to="/deleteUser"
