@@ -24,7 +24,17 @@ export default class DoughNutChart extends Component {
       },
       options: {
         responsive: false,
-        maintainAspectRatio: true
+        maintainAspectRatio: true,
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              const index = tooltipItem.index;
+              return `${data.labels[index]} Total: £${Number(
+                data.datasets[0].data[index]
+              ).toFixed(2)}`;
+            }
+          }
+        }
       }
     });
   }

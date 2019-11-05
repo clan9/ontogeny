@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import moment from "moment";
 import { SingleDatePicker } from "react-dates";
+import numeral from "numeral";
 import "./styles.scss";
+require("numeral/locales/en-gb");
+numeral.locale("en-gb");
 
 export default class RecordForm extends Component {
   constructor(props) {
@@ -12,7 +15,9 @@ export default class RecordForm extends Component {
     this.state = {
       description: props.record ? props.record.description : "",
       note: props.record ? props.record.note : "",
-      amount: props.record ? (props.record.amount / 100).toString() : "",
+      amount: props.record
+        ? numeral(props.record.amount / 100).format("$0,0.00")
+        : "",
       date: props.record ? moment(props.record.date) : moment(),
       calendarFocused: false,
       error: ""
@@ -83,7 +88,7 @@ export default class RecordForm extends Component {
       <form
         data-test="record-form-component"
         onSubmit={this.onSubmit}
-        className="record-form"
+        className="record-form container"
       >
         <div data-test="errorMsg-div" className="record-form__error-container">
           {this.state.error && (

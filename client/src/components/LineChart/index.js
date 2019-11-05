@@ -38,7 +38,14 @@ export default class LineChart extends Component {
       },
       options: {
         responsive: false,
-        maintainAspectRatio: true
+        maintainAspectRatio: true,
+        tooltips: {
+          callbacks: {
+            label: tooltipItem => {
+              return `£${Number(tooltipItem.yLabel).toFixed(2)}`;
+            }
+          }
+        }
       }
     });
   }
