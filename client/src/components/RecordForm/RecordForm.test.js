@@ -59,7 +59,7 @@ describe("RecordForm component", () => {
       expect(wrapper.state("description")).toBe(expenses[0].description);
       expect(wrapper.state("note")).toBe(expenses[0].note);
       expect(wrapper.state("amount")).toBe(
-        (expenses[0].amount / 100).toString()
+        `£${(expenses[0].amount / 100).toString()}`
       );
       expect(wrapper.state("date")).toEqual(moment(expenses[0].date));
     });
@@ -129,7 +129,7 @@ describe("RecordForm component", () => {
     test("should call onSubmitMock for valid form submission", () => {
       const newState = {
         description: "test expense submission",
-        amount: "5.99"
+        amount: "£5.99"
       };
 
       wrapper.setState({ ...newState });

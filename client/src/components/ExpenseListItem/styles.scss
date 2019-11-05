@@ -24,6 +24,10 @@
 
   h3 {
     font-weight: 400;
-    word-break: break-all;
+    margin: 0 $xxs;
+  }
+
+  span {
+    margin: 0 $xxs;
   }
 }

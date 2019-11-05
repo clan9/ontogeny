@@ -112,7 +112,7 @@ export const toggleAdmin = formData => async dispatch => {
 
     setTimeout(() => {
       dispatch({ type: actionTypes.RESET_ADMIN_MSG });
-    }, 3000);
+    }, 5000);
   } catch (error) {
     dispatch({
       type: actionTypes.ADMIN_ERROR,
@@ -121,7 +121,7 @@ export const toggleAdmin = formData => async dispatch => {
 
     setTimeout(() => {
       dispatch({ type: actionTypes.RESET_ERROR_MSG });
-    }, 3000);
+    }, 5000);
   }
 };
 
@@ -138,7 +138,7 @@ export const adminDeleteUser = id => async dispatch => {
 
     setTimeout(() => {
       dispatch({ type: actionTypes.RESET_ERROR_MSG });
-    }, 3000);
+    }, 5000);
   }
 };
 
