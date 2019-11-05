@@ -66,8 +66,7 @@ exports.deleteUser = async (req, res) => {
 
     if (userIsAdmin && adminUsersCount === 1) {
       return res.status(403).json({
-        msg:
-          "You are currently the only user with Admin access therefore you cannot delete your account at this time"
+        msg: "There has to be at least one user with Admin access.",
       });
     }
 
@@ -125,15 +124,13 @@ exports.toggleIsAdmin = async (req, res) => {
     if (user._id.toString() === req.user._id.toString()) {
       if (adminUsersCount === 1) {
         return res.status(403).json({
-          msg:
-            "You are currently the only user with Admin access therefore you cannot remove it at this time."
+          msg: "There has to be at least one user with Admin access.",
         });
-      } else {
-        user.isAdmin = !user.isAdmin;
-        await user.save();
-        const users = await User.find();
-        return res.json(users);
       }
+      user.isAdmin = !user.isAdmin;
+      await user.save();
+      const users = await User.find();
+      return res.json(users);
     }
 
     // The admin user is toggling admin access for another user:
@@ -147,7 +144,7 @@ exports.toggleIsAdmin = async (req, res) => {
 };
 
 exports.adminDeleteUser = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const adminId = req.user._id;
   try {
     const userToDelete = await User.findById(id);
@@ -164,13 +161,11 @@ exports.adminDeleteUser = async (req, res) => {
     if (userToDelete._id.toString() === adminId.toString()) {
       if (adminUsersCount === 1) {
         return res.status(403).json({
-          msg:
-            "You are currently the only user with Admin access therefore you cannot delete your account at this time."
+          msg: "There has to be at least one user with Admin access.",
         });
-      } else {
-        await userToDelete.remove();
-        return res.json(userToDelete);
       }
+      await userToDelete.remove();
+      return res.json(userToDelete);
     }
 
     await userToDelete.remove();
