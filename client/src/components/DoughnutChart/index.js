@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Chart from "chart.js";
+import "./styles.scss";
 
 export default class DoughNutChart extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ export default class DoughNutChart extends Component {
         ]
       },
       options: {
-        responsive: true
+        responsive: false,
+        maintainAspectRatio: true
       }
     });
   }
@@ -41,6 +43,6 @@ export default class DoughNutChart extends Component {
   };
 
   render() {
-    return <canvas ref={this.chartRef} />;
+    return <canvas height="300px" ref={this.chartRef} />;
   }
 }

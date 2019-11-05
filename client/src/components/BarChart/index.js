@@ -36,8 +36,8 @@ export default class BarChart extends Component {
         ]
       },
       options: {
-        responsive: true,
-        maintainAspectRatio: false
+        responsive: false,
+        maintainAspectRatio: true
       }
     });
   }
@@ -66,6 +66,6 @@ export default class BarChart extends Component {
   };
 
   render() {
-    return <canvas ref={this.canvasRef} />;
+    return <canvas height="300px" ref={this.canvasRef} />;
   }
 }

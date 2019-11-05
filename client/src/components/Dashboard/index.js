@@ -73,21 +73,23 @@ export class Dashboard extends Component {
             data-test="doughnut-user"
           />
         </div>
-        <div className="user-stats__data user-stats__data--sub">
-          <BarChart
-            expenses={this.props.expenses}
-            income={this.props.income}
-            className="user-stats__bar"
-            data-test="barchart-user"
-          />
-        </div>
-        <div className="user-stats__data user-stats__data--sub">
-          <LineChart
-            expenses={this.props.expenses}
-            income={this.props.income}
-            className="user-stats__line"
-            data-test="linechart-user"
-          />
+        <div className="user-stats__data--sub-container">
+          <div className="user-stats__data user-stats__data--sub">
+            <BarChart
+              expenses={this.props.expenses}
+              income={this.props.income}
+              className="user-stats__bar"
+              data-test="barchart-user"
+            />
+          </div>
+          <div className="user-stats__data user-stats__data--sub">
+            <LineChart
+              expenses={this.props.expenses}
+              income={this.props.income}
+              className="user-stats__line"
+              data-test="linechart-user"
+            />
+          </div>
         </div>
       </div>
     );
@@ -97,7 +99,7 @@ export class Dashboard extends Component {
     return (
       <Fragment>
         <UserNavBar />
-        <div data-test="dash-component" className="user-stats container">
+        <div data-test="dash-component" className="user-stats stats-container">
           <h1 data-test="header" className="user-stats__header">
             Compare your income to expenses
           </h1>

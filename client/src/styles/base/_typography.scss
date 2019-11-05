@@ -14,8 +14,20 @@ body {
   width: 75%;
 }
 
+.stats-container {
+  margin: 0 auto;
+  padding: $xxs;
+  width: 95%;
+}
+
 @media (min-width: 75em) {
   .container {
     width: 60%;
+  }
+}
+
+@media (max-width: 32.5em) {
+  .container {
+    width: 95%;
   }
 }

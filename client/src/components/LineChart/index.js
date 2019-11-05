@@ -37,8 +37,8 @@ export default class LineChart extends Component {
         ]
       },
       options: {
-        responsive: true,
-        maintainAspectRatio: false
+        responsive: false,
+        maintainAspectRatio: true
       }
     });
   }
@@ -65,6 +65,6 @@ export default class LineChart extends Component {
   };
 
   render() {
-    return <canvas ref={this.chartRef} />;
+    return <canvas height="300px" ref={this.chartRef} />;
   }
 }
