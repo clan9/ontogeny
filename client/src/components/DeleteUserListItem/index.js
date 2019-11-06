@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 
 const DeleteUserListItem = ({ user, adminDeleteUser }) => {
   return (
-    <div className="toggle-list__item">
-      <p className="toggle-list__item__text">Name: {user.name}</p>
+    <div data-test="list-item" className="toggle-list__item">
+      <p data-test='user-name' className="toggle-list__item__text">Name: {user.name}</p>
       <button
+        data-test='delete-button'
         className="toggle-list__item__button"
         onClick={() => adminDeleteUser(user._id)}
       >
