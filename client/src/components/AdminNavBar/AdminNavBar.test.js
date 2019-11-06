@@ -49,4 +49,12 @@ describe("AdminNavBar component", () => {
       expect(logoutMock.mock.calls.length).toBe(1);
     });
   });
+
+  // Unconnected component
+  describe("Check prop types with unconnected component", () => {
+    test("should not throw warning with expected props", () => {
+      const expectedProps = { logout: jest.fn() };
+      checkProps(AdminNavBar, expectedProps);
+    });
+  });
 });

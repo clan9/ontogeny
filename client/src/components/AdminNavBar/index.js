@@ -5,10 +5,14 @@ import { connect } from "react-redux";
 import { logout } from "../../actions/user/user";
 import "./styles.scss";
 
-const AdminNavBar = props => {
+export const AdminNavBar = props => {
   return (
     <div className="adminNavBar" data-test="adminNavBar">
-      <NavLink to="/menuForAdminUser" className="adminNavBar__link" data-test='home-link'>
+      <NavLink
+        to="/menuForAdminUser"
+        className="adminNavBar__link"
+        data-test="home-link"
+      >
         Ontogeny
       </NavLink>
       <NavLink
