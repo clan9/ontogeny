@@ -4,18 +4,18 @@ import { connect } from "react-redux";
 import ToggleAdminListItem from "../ToggleAdminListItem";
 import "./styles.scss";
 
-const ToggleAdminList = ({ users, successMsg, errorMsg }) => {
+export const ToggleAdminList = ({ users, successMsg, errorMsg }) => {
   return (
-    <div className="adminList">
-      <h2 className="adminList__header">Current status</h2>
-      <div className="adminList__message-container">
+    <div data-test='admin-list' className="adminList">
+      <h2 data-test='header' className="adminList__header">Current status</h2>
+      <div data-test='message-container' className="adminList__message-container">
         {(successMsg || errorMsg) && (
-          <p className="adminList__message">{successMsg || errorMsg}</p>
+          <p data-test='message' className="adminList__message">{successMsg || errorMsg}</p>
         )}
       </div>
-      <div>
+      <div data-test='list-items'>
         {users.map((user, index) => (
-          <ToggleAdminListItem user={user} key={index} />
+          <ToggleAdminListItem data-test='list-item' user={user} key={index} />
         ))}
       </div>
     </div>
