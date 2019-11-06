@@ -10,14 +10,18 @@ export const DeleteUserList = ({
   adminDeleteUser
 }) => {
   return (
-    <div className="adminList">
-      <h2 className="adminList__header">Current status</h2>
-      <div className="adminList__message-container">
+    <div data-test="user-list" className="adminList">
+      <h2 data-test="header" className="adminList__header">
+        Current status
+      </h2>
+      <div data-test="error-container" className="adminList__message-container">
         {(successMsg || errorMsg) && (
-          <p className="adminList__message">{successMsg || errorMsg}</p>
+          <p data-test="message" className="adminList__message">
+            {successMsg || errorMsg}
+          </p>
         )}
       </div>
-      <div>
+      <div data-test="list-items">
         {users.map(user => (
           <DeleteUserListItem
             user={user}
@@ -33,7 +37,8 @@ export const DeleteUserList = ({
 DeleteUserList.propTypes = {
   users: PropTypes.array,
   successMsg: PropTypes.string,
-  errorMsg: PropTypes.string
+  errorMsg: PropTypes.string,
+  adminDeleteUser: PropTypes.func
 };
 
 const mapStateToProps = state => ({
