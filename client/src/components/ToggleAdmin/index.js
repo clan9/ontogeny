@@ -14,11 +14,11 @@ export class ToggleAdmin extends Component {
   checkAdminStatus = (isAdmin, logout, users) => {
     if (!isAdmin) {
       logout();
-      return <Redirect to="/" />;
+      return <Redirect data-test='redirect' to="/" />;
     } else {
       return (
-        <div className="container">
-          <ToggleAdminList users={users} />
+        <div data-test='toggle-admin' className="container">
+          <ToggleAdminList data-test='list' users={users} />
         </div>
       );
     }
@@ -39,7 +39,7 @@ export class ToggleAdmin extends Component {
       </div>
     ) : (
       <Fragment>
-        <AdminNavBar />
+        <AdminNavBar data-test='navbar' />
         {this.checkAdminStatus(isAdmin, logout, users)}
       </Fragment>
     );
