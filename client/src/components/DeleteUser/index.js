@@ -50,7 +50,7 @@ export class DeleteUser extends Component {
       </div>
     ) : (
       <Fragment>
-        <AdminNavBar />
+        <AdminNavBar data-test='admin-nav'/>
         <div className="container" data-test='delete-user'>
           <DeleteUserList
             users={this.props.allUsers}
