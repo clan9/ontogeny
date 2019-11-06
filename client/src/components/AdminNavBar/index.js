@@ -7,7 +7,7 @@ import "./styles.scss";
 
 const AdminNavBar = props => {
   return (
-    <div className="adminNavBar">
+    <div className="adminNavBar" data-test="adminNavBar">
       <NavLink to="/menuForAdminUser" className="adminNavBar__link">
         Ontogeny
       </NavLink>
