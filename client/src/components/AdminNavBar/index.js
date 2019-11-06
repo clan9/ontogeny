@@ -8,12 +8,12 @@ import "./styles.scss";
 const AdminNavBar = props => {
   return (
     <div className="adminNavBar" data-test="adminNavBar">
-      <NavLink to="/menuForAdminUser" className="adminNavBar__link">
+      <NavLink to="/menuForAdminUser" className="adminNavBar__link" data-test='home-link'>
         Ontogeny
       </NavLink>
       <NavLink
         to="/"
-        data-test="logoutLink"
+        data-test="logout-link"
         onClick={() => {
           props.logout();
         }}
