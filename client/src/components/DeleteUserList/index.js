@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import DeleteUserListItem from "../DeleteUserListItem";
 
-const DeleteUserList = ({ users, successMsg, errorMsg, adminDeleteUser }) => {
+export const DeleteUserList = ({
+  users,
+  successMsg,
+  errorMsg,
+  adminDeleteUser
+}) => {
   return (
     <div className="adminList">
       <h2 className="adminList__header">Current status</h2>
