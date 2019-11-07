@@ -79,6 +79,17 @@ describe('ToggleAdminListItem component', () => {
       expect(toggleAdminMock).toHaveBeenCalled();
     })
   });
+
+  describe('Prop types check', () => {
+    test('should not throw warning with expected props', () => {
+      const expectedProps = {
+        user: users[1],
+        toggleAdmin: jest.fn()
+      };
+
+      checkProps(ToggleAdminListItem, expectedProps);
+    });
+  });
   
 });
 
