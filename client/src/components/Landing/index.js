@@ -36,6 +36,11 @@ const Landing = props => {
           </Link>
         </div>
       </div>
+      <div className='admin-login-info'>
+        <p>Admin Login:</p>
+        <p>Email - s@gmail.com</p>
+        <p>Password - 123456</p>
+      </div>
     </div>
   );
 };
