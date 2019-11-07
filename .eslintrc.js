@@ -8,7 +8,8 @@ module.exports = {
     "func-names": "off",
     "no-underscore-dangle": "off",
     "no-use-before-define": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "global-require": "off"
   },
   overrides: [
     {
