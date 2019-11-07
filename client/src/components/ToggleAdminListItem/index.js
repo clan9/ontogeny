@@ -4,15 +4,16 @@ import { connect } from "react-redux";
 import { toggleAdmin } from "../../actions/user/user";
 import "./styles.scss";
 
-const ToggleAdminListItem = ({ user, toggleAdmin }) => {
+export const ToggleAdminListItem = ({ user, toggleAdmin }) => {
   return (
     <div>
       {user.isAdmin ? (
-        <div className="toggle-list__item">
-          <p className="toggle-list__item__text">
+        <div data-test='admin-list-item' className="toggle-list__item">
+          <p data-test='user-info' className="toggle-list__item__text">
             <span>User: {user.name}</span> <span>Admin Access: Yes</span>
           </p>
           <button
+            data-test='toggle-button'
             className="toggle-list__item__button"
             onClick={() => toggleAdmin({ email: user.email })}
           >
@@ -20,11 +21,12 @@ const ToggleAdminListItem = ({ user, toggleAdmin }) => {
           </button>
         </div>
       ) : (
-        <div className="toggle-list__item">
-          <p className="toggle-list__item__text">
+        <div data-test='admin-list-item' className="toggle-list__item">
+          <p data-test='user-info'  className="toggle-list__item__text">
             <span>User: {user.name}</span> <span>Admin Access: No</span>
           </p>
           <button
+            data-test='toggle-button'
             className="toggle-list__item__button"
             onClick={() => toggleAdmin({ email: user.email })}
           >
