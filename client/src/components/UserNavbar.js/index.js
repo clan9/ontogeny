@@ -5,15 +5,15 @@ import { connect } from "react-redux";
 import { logout } from "../../actions/user/user";
 import "./styles.scss";
 
-const UserNavBar = props => {
+export const UserNavBar = props => {
   return (
-    <div className="userNavBar">
-      <NavLink to="/menu" className="userNavBar__link">
+    <div data-test='user-navbar' className="userNavBar">
+      <NavLink data-test='menu-link' to="/menu" className="userNavBar__link">
         Ontogeny
       </NavLink>
       <NavLink
         to="/"
-        data-test="logoutLink"
+        data-test="logout-link"
         onClick={() => {
           props.logout();
         }}
