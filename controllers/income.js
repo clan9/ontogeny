@@ -7,7 +7,7 @@ exports.addIncome = async (req, res) => {
   const income = new Income({
     ...req.body,
     owner: req.user._id,
-    ownerName: user.name,
+    ownerName: user.name
   });
 
   try {
@@ -24,12 +24,11 @@ exports.editIncome = async (req, res) => {
 
   try {
     const income = await Income.findOne({ _id, owner: req.user._id });
-
     if (!income) {
       return res.status(404).send();
     }
 
-    updates.forEach((update) => {
+    updates.forEach(update => {
       income[update] = req.body[update];
     });
     await income.save();

@@ -58,9 +58,7 @@ describe("RecordForm component", () => {
       const wrapper = shallow(<RecordForm record={expenses[0]} />);
       expect(wrapper.state("description")).toBe(expenses[0].description);
       expect(wrapper.state("note")).toBe(expenses[0].note);
-      expect(wrapper.state("amount")).toBe(
-        `£${(expenses[0].amount / 100).toString()}`
-      );
+      expect(wrapper.state("amount")).toBe(String(expenses[0].amount / 100));
       expect(wrapper.state("date")).toEqual(moment(expenses[0].date));
     });
   });
