@@ -12,11 +12,11 @@
   font-size: calc(1vw + 0.5em);
 }
 
-@media (min-width: 62.5em) {
-  // at 1000px (62.5em) fix font size:
-  // at 1000px -> 1vw + .5em = 10 + 8 = 18px:
-  // 18/16 = 1.125
+@media (min-width: 56.25em) {
+  // at 900px (56.25em) fix font size:
+  // at 900px -> 1vw + .5em = 9 + 8 = 17px:
+  // 17/16 = 1.06
   :root {
-    font-size: 1.125em;
+    font-size: 1.06em;
   }
 }
