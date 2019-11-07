@@ -18,15 +18,16 @@ describe("User routes tests", () => {
     const response = await request(app)
       .post("/api/user/signup")
       .send({
-        name: "Jess",
+        name: "jess",
         email: "jess@test.com",
         password: "grumpyCat"
       })
       .expect(201);
 
-    // Assert that db was updated
+    // Assert that db was updated and name was capitalised
     const user = await User.findById(response.body.user._id);
     expect(user).not.toBeNull();
+    expect(user.name).toBe('Jess');
 
     // Assert password has not been saved as plaintext
     expect(user.password).not.toBe("grumpyCat");

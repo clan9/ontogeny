@@ -13,8 +13,9 @@ exports.signin = async (req, res) => {
 
 exports.signup = async (req, res) => {
   const { name, email, password } = req.body;
+  const capitalisedName = name.charAt(0).toUpperCase() + name.slice(1);
   try {
-    const user = await new User({ name, email, password });
+    const user = await new User({ name: capitalisedName, email, password });
     await user.save();
     const token = await user.generateAuthToken();
     res.status(201).json({ user, token });
