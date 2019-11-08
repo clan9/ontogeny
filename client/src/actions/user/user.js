@@ -14,7 +14,7 @@ export const registerUser = formData => async dispatch => {
 
     setTimeout(() => {
       dispatch({ type: actionTypes.RESET_ERROR_MSG });
-    }, 3000);
+    }, 5000);
   }
 };
 
@@ -33,7 +33,7 @@ export const signIn = formData => async dispatch => {
 
     setTimeout(() => {
       dispatch({ type: actionTypes.RESET_ERROR_MSG });
-    }, 3000);
+    }, 5000);
   }
 };
 
@@ -61,7 +61,7 @@ export const deleteUser = () => async dispatch => {
 
     setTimeout(() => {
       dispatch({ type: actionTypes.RESET_ERROR_MSG });
-    }, 3000);
+    }, 5000);
   }
 };
 
@@ -81,7 +81,7 @@ export const signInAdmin = formData => async dispatch => {
 
     setTimeout(() => {
       dispatch({ type: actionTypes.RESET_ERROR_MSG });
-    }, 3000);
+    }, 5000);
   }
 };
 
@@ -97,7 +97,7 @@ export const fetchUsersDetails = () => async dispatch => {
 
     setTimeout(() => {
       dispatch({ type: actionTypes.RESET_ERROR_MSG });
-    }, 3000);
+    }, 5000);
   }
 };
 

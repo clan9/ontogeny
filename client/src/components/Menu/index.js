@@ -18,6 +18,11 @@ export const Menu = props => {
         <p data-test="paragraph" className="menu__paragraph">
           What would you like to do?
         </p>
+        <div data-test='error-container' className="menu__error-container">
+          {props.error && (
+          <p className="menu__error-msg">{props.error}</p>
+          )}
+        </div>
         <div className="menu__items">
           <Link to="/expenses" data-test="expenseLink" className="menu__link">
             View/Edit Expenses
@@ -42,12 +47,14 @@ export const Menu = props => {
 Menu.propTypes = {
   isAuthenticated: PropTypes.bool,
   name: PropTypes.string,
-  deleteUser: PropTypes.func
+  deleteUser: PropTypes.func,
+  error: PropTypes.string
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.user.isAuthenticated,
-  name: state.user.user.name
+  name: state.user.user.name,
+  error: state.user.error
 });
 
 export default connect(

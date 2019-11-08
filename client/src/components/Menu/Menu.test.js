@@ -22,7 +22,7 @@ describe("Menu component", () => {
           isAuthenticated: true,
           user: {
             name: "Simon"
-          }
+         }
         }
       });
     });
@@ -40,6 +40,11 @@ describe("Menu component", () => {
     test("should render paragraph", () => {
       const para = findByTestAttr(wrapper, "paragraph");
       expect(para.length).toBe(1);
+    });
+
+    test('should render error message container', () => {
+      const errContainer = findByTestAttr(wrapper, 'error-container');
+      expect(errContainer.length).toBe(1);
     });
 
     test("should render link to expenses page", () => {
@@ -81,9 +86,11 @@ describe("Menu component", () => {
       const expectedProps = {
         isAuthenticated: true,
         name: "Simon",
-        logout: jest.fn()
+        logout: jest.fn(),
+        error: ''
       };
       checkProps(Menu, expectedProps);
     });
+
   });
 });

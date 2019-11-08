@@ -14,8 +14,19 @@
   }
 
   &__paragraph {
-    margin-bottom: $sm;
+    margin-bottom: $xs;
     text-align: center;
+  }
+
+  &__error-container {
+    height: 2.5em;
+    margin-bottom: $xs;
+  }
+
+  &__error-msg {
+    font-style: italic;
+    text-align: center;
+    animation: fadeInMsg 5s ease backwards;
   }
 
   &__items {
