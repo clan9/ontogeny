@@ -18,7 +18,6 @@ export default class BarChart extends Component {
       this.props.expenses,
       this.props.income
     );
-    console.log("Summed expenses (Barchart): ", summedExpenses);
     this.myChart = new Chart(this.canvasRef.current, {
       type: "bar",
       data: {
