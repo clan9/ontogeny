@@ -5,9 +5,13 @@ import moment from "moment";
 const sortDates = (expenses, income) => {
   const expensesDates = expenses.map(expense => moment(expense.date).valueOf());
   const incomeDates = income.map(income => moment(income.date).valueOf());
-  const datesSet = new Set([...expensesDates, ...incomeDates]);
-  const datesArray = [...datesSet].sort();
-  return datesArray.map(date => moment(date).format("DD MMM"));
+  const sortedCombinedDates = [...expensesDates, ...incomeDates].sort();
+  const formattedDatesArray = sortedCombinedDates.map(date =>
+    moment(date).format("DD MMM")
+  );
+  const datesSet = new Set(formattedDatesArray);
+  const finalDatesArray = [...datesSet];
+  return finalDatesArray;
 };
 
 // Call the sortDates method, map through the dates
