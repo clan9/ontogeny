@@ -1,4 +1,3 @@
-import moment from "moment";
 import { sortDates, summedTotalsForDates } from "./sortDatesAndSumTotals";
 import expenses from "../fixtures/expenses";
 import income from "../fixtures/income";
