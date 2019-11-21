@@ -9,9 +9,10 @@ export const ToggleAdminListItem = ({ user, toggleAdmin }) => {
     <div>
       {user.isAdmin ? (
         <div data-test='admin-list-item' className="toggle-list__item">
-          <p data-test='user-info' className="toggle-list__item__text">
-            <span>User: {user.name}</span> <span>Admin Access: Yes</span>
-          </p>
+          <div data-test='user-info' className="toggle-list__item__text">
+            <p>User: <span className='name'>{' '}{user.name}</span></p> 
+            <p>Admin Access: <span className='isAdmin'>{' '}Yes</span></p>
+          </div>
           <button
             data-test='toggle-button'
             className="toggle-list__item__button"
@@ -22,9 +23,10 @@ export const ToggleAdminListItem = ({ user, toggleAdmin }) => {
         </div>
       ) : (
         <div data-test='admin-list-item' className="toggle-list__item">
-          <p data-test='user-info'  className="toggle-list__item__text">
-            <span>User: {user.name}</span> <span>Admin Access: No</span>
-          </p>
+          <div data-test='user-info'  className="toggle-list__item__text">
+            <p>User: <span className='name'>{' '}{user.name}</span></p>
+            <p>Admin Access: <span className='nonAdmin'>{' '}No</span></p>
+          </div>
           <button
             data-test='toggle-button'
             className="toggle-list__item__button"

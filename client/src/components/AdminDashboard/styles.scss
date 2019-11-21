@@ -9,8 +9,11 @@
     }
 
     &__sub {
+      background-color: $theme-1;
+      color: $grey-light;
       font-weight: 300;
-      margin-top: $sm;
+      margin: $sm auto;
+      padding: $xs 0;
       text-align: center;
     }
   }
@@ -32,13 +35,44 @@
     margin: 0 $sm;
     padding: $sm;
 
-    &--sub-container {
+    &--main {
       display: flex;
+      flex-direction: column;
+
+      &__header {
+        background: #ddd;
+        border: 1px solid $theme-1;
+        font-weight: 300;
+        margin-bottom: $lg;
+        padding: $xxs $xs;
+      }
+    }
+
+    &--sub {
+      &__header {
+        background: #ddd;
+        border: 1px solid $theme-1;
+        font-weight: 300;
+        margin: $sm 0;
+        padding: $xxs $xs;
+      }
+
+      &-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      &-container {
+        display: flex;
+      }
     }
   }
 
   &__username {
-    background-color: rgba($theme-2, 0.3);
+    background: $theme-2;
+    border: 1px solid $theme-1;
+    color: $grey-light;
     display: inline-block;
     margin: $sm 0;
     padding: $xs;

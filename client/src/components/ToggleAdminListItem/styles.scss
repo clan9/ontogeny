@@ -15,8 +15,8 @@
     color: $grey-light;
 
     span {
-      display: block;
-      margin-top: $xs;
+      font-size: 1.6rem;
+      font-weight: 300;
     }
   }
 
@@ -37,7 +37,19 @@
   }
 }
 
-@media (max-width: 31.25em) {
+.name {
+  color: $theme-3;
+}
+
+.isAdmin {
+  color: $theme-3;
+}
+
+.nonAdmin {
+  color: orange;
+}
+
+@media (max-width: 37.5em) {
   .toggle-list__item {
     flex-direction: column;
 

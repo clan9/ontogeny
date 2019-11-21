@@ -4,8 +4,7 @@
   &__header h3 {
     font-size: 1.8rem;
     font-weight: 300;
-    margin-top: $sm;
-    margin-bottom: $sm;
+    margin: $xs 0;
     text-align: center;
 
     span {
@@ -14,12 +13,16 @@
   }
 
   &__paragraph {
-    margin-bottom: $xs;
+    margin-bottom: $xxs;
     text-align: center;
+
+    &--admin {
+      margin-bottom: $sm;
+    }
   }
 
   &__error-container {
-    height: 2.5em;
+    height: 1.8em;
     margin-bottom: $xs;
   }
 
@@ -86,3 +89,13 @@
     }
   }
 }
+
+@media (max-width: 25em) {
+  .menu__error-container {
+    height: 2.8em;
+  }
+}
+
+
+
+

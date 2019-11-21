@@ -7,7 +7,7 @@ import "./styles.scss";
 export const ToggleAdminList = ({ users, successMsg, errorMsg }) => {
   return (
     <div data-test='admin-list' className="adminList">
-      <h2 data-test='header' className="adminList__header">Current status</h2>
+      <h2 data-test='header' className="adminList__header">User Admin status</h2>
       <div data-test='message-container' className="adminList__message-container">
         {(successMsg || errorMsg) && (
           <p data-test='message' className="adminList__message">{successMsg || errorMsg}</p>

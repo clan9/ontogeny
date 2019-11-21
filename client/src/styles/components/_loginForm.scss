@@ -1,7 +1,8 @@
 .page-header h2 {
   font-size: 2.5rem;
   font-weight: 300;
-  margin-top: $lg;
+  margin-top: $sm;
+  margin-bottom: $xs;
   text-align: center;
 }
 
@@ -9,7 +10,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 100vh;
+  height: 80vh;
 
   &__error-container {
     height: 3em;
@@ -30,14 +31,15 @@
     color: $theme-1;
     font: inherit;
     height: 3em;
-    margin-bottom: $sm;
+    width: 90%;
+    margin: 0 auto $sm;
     padding: $sm;
     transition: all 0.3s;
 
-    &:focus {
-      background-color: rgba($theme-3, 0.2);
-      outline-color: rgba($theme-5, 0.8);
-    }
+  //  &:focus {
+    //  background-color: rgba($theme-3, 0.2);
+     // outline-color: rgba($theme-5, 0.8);
+    //}
   }
 
   &__button {
@@ -49,7 +51,7 @@
     color: $grey-light;
     cursor: pointer;
     font: inherit;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-top: $sm;
     padding: 0.2em $sm;
     transition: all 0.3s;

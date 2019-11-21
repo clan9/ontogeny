@@ -87,6 +87,10 @@ export class AdminDashboard extends Component {
           </h2>
           <div className="admin-stats__data">
             <div className="admin-stats__data admin-stats__data--main">
+              <h3 className="admin-stats__data--main__header">
+                Total for Date range
+              </h3>
+
               <DoughnutChart
                 data={[
                   {
@@ -102,20 +106,23 @@ export class AdminDashboard extends Component {
                 data-test="doughnut-all-users"
               />
             </div>
-            <div className="admin-stats__data--sub-container">
-              <div className="admin-stats__data admin-stats__data--sub">
-                <BarChart
-                  expenses={this.props.expenses}
-                  income={this.props.income}
-                  data-test="barchart-all-users"
-                />
-              </div>
-              <div className="admin-stats__data admin-stats__data--sub">
-                <LineChart
-                  expenses={this.props.expenses}
-                  income={this.props.income}
-                  data-test="linechart-all-users"
-                />
+            <div className="admin-stats__data--sub-section">
+              <h3 className="admin-stats__data--sub__header">Totals by Date</h3>
+              <div className="admin-stats__data--sub-container">
+                <div className="admin-stats__data admin-stats__data--sub">
+                  <BarChart
+                    expenses={this.props.expenses}
+                    income={this.props.income}
+                    data-test="barchart-all-users"
+                  />
+                </div>
+                <div className="admin-stats__data admin-stats__data--sub">
+                  <LineChart
+                    expenses={this.props.expenses}
+                    income={this.props.income}
+                    data-test="linechart-all-users"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -133,6 +140,10 @@ export class AdminDashboard extends Component {
                 <p className="admin-stats__username">Data for {name}</p>
                 <div className="admin-stats__data">
                   <div className="admin-stats__data admin-stats__data--main">
+                    <h3 className="admin-stats__data--main__header">
+                      Total for Date range
+                    </h3>
+
                     <DoughnutChart
                       data={[
                         { title: "Income", total: incomeTotal },
@@ -142,20 +153,25 @@ export class AdminDashboard extends Component {
                       data-test="doughnut-user"
                     />
                   </div>
-                  <div className="admin-stats__data--sub-container">
-                    <div className="admin-stats__data admin-stats__data--sub">
-                      <BarChart
-                        expenses={this.filterDataByUser()[index].expenses}
-                        income={this.filterDataByUser()[index].income}
-                        data-test="barchart-user"
-                      />
-                    </div>
-                    <div className="admin-stats__data admin-stats__data--sub">
-                      <LineChart
-                        expenses={this.filterDataByUser()[index].expenses}
-                        income={this.filterDataByUser()[index].income}
-                        data-test="linechart-user"
-                      />
+                  <div className="admin-stats__data--sub-section">
+                    <h3 className="admin-stats__data--sub__header">
+                      Totals by Date
+                    </h3>
+                    <div className="admin-stats__data--sub-container">
+                      <div className="admin-stats__data admin-stats__data--sub">
+                        <BarChart
+                          expenses={this.filterDataByUser()[index].expenses}
+                          income={this.filterDataByUser()[index].income}
+                          data-test="barchart-user"
+                        />
+                      </div>
+                      <div className="admin-stats__data admin-stats__data--sub">
+                        <LineChart
+                          expenses={this.filterDataByUser()[index].expenses}
+                          income={this.filterDataByUser()[index].income}
+                          data-test="linechart-user"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -215,13 +231,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  {
-    fetchAllExpenses,
-    fetchAllIncomes,
-    getTotal,
-    setEndDate,
-    setStartDate
-  }
-)(AdminDashboard);
+export default connect(mapStateToProps, {
+  fetchAllExpenses,
+  fetchAllIncomes,
+  getTotal,
+  setEndDate,
+  setStartDate
+})(AdminDashboard);

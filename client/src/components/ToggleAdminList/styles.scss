@@ -9,14 +9,22 @@
   }
 
   &__message-container {
-    height: 3em;
+    height: 2em;
     margin-bottom: $xs;
   }
 
   &__message {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-style: italic;
     text-align: center;
     animation: fadeInMsg 5s ease backwards;
+  }
+}
+
+@media (max-width: 28em) {
+  .adminList {
+    &__message-container {
+      height: 3em;
+    }
   }
 }

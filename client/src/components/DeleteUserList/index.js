@@ -12,7 +12,7 @@ export const DeleteUserList = ({
   return (
     <div data-test="user-list" className="adminList">
       <h2 data-test="header" className="adminList__header">
-        Current status
+        Current User List
       </h2>
       <div data-test="error-container" className="adminList__message-container">
         {(successMsg || errorMsg) && (

@@ -15,7 +15,7 @@ export const MenuForAdmin = props => {
           </h3>
         </header>
 
-        <p data-test="paragraph" className="menu__paragraph">
+        <p data-test="paragraph" className="menu__paragraph menu__paragraph--admin">
           What would you like to do?
         </p>
 

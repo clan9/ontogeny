@@ -57,6 +57,7 @@ export class Dashboard extends Component {
     ) : (
       <div data-test="content-to-show" className="user-stats__data">
         <div className="user-stats__data user-stats__data--main">
+          <h3 className='user-stats__data--main__header'>Total for Date range</h3>
           <DoughnutChart
             data={[
               {
@@ -73,6 +74,8 @@ export class Dashboard extends Component {
             data-test="doughnut-user"
           />
         </div>
+        <div className='user-stats__data--sub-section'>
+        <h3 className='user-stats__data--sub__header'>Totals by Date</h3>
         <div className="user-stats__data--sub-container">
           <div className="user-stats__data user-stats__data--sub">
             <BarChart
@@ -91,6 +94,7 @@ export class Dashboard extends Component {
             />
           </div>
         </div>
+       </div>       
       </div>
     );
   };
